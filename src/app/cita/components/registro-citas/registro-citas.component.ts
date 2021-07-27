@@ -13,7 +13,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -21,7 +21,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -29,7 +29,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -37,7 +37,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -45,7 +45,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -53,7 +53,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
     {
       codigo: '12314312',
@@ -61,7 +61,7 @@ export class RegistroCitasComponent implements OnInit {
       fecha: '12-02-21',
       hora: '12:30',
       codigo_doctor: '5432902',
-      estado: 'Programado',
+      estado: 'Citado',
     },
   ];
   constructor() {}
