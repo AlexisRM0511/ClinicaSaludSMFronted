@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-cita',
@@ -12,4 +13,11 @@ export class CrearCitaComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  CrearCita(){
+    Swal.fire(
+      'Good job!',
+      'You clicked the button!',
+      'success'
+    )
+  }
 }
