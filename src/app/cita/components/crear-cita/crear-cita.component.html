@@ -1,1 +1,44 @@
-<p>crear-cita works!</p>
+<h1 class="col-lg-2 mb-4 mt-5 mx-auto">Crear cita </h1>
+<div class="container">
+    <div class="abs-center">
+        <div class="row">
+            <div class="col-4 mx-auto">
+                <form action="" class="border p-3 form">
+                    <div class="col-lg-10 mx-auto">
+                        <label for="categoriaCurso">Elija su especialidad:</label>
+                        <select name="categoria_id" class="custom-select mb-4" id="categoriaCurso">
+                            <option value="" hidden>Seleccione</option>
+                            <!-- <option *ngFor="let c of categorias" [ngValue]="c?.categoria_id">
+            {{ c?.categoria_nombre }}
+          </option> -->
+                        </select>
+                    </div>
+
+                    <div class="col-lg-10 mx-auto">
+                        <label for="categoriaCurso">Elija su medico:</label>
+                        <select name="categoria_id" class="custom-select mb-4" id="categoriaCurso">
+                            <option value="" hidden>Seleccione</option>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-10 mx-auto">
+                        <label for="categoriaCurso">Elija su fecha de atenci&oacute;n:</label>
+                        <input type="date" class="form-control mb-4" />
+                    </div>
+                    <div class="col-lg-10 mx-auto">
+                        <label for="categoriaCurso">Elija su horario:</label>
+                        <select name="categoria_id" class="custom-select mb-4" id="categoriaCurso">
+                            <option value="" hidden>Seleccione</option>
+
+                        </select>
+                    </div>
+                    <div class="col-lg-6 mx-auto">
+                        <button type="button" class="btn btn-success" (click)="CrearCita()">
+                            Generar Cita
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
