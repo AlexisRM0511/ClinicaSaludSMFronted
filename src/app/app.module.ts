@@ -13,12 +13,14 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { Paciente } from './firebase/paciente';
 import { environment } from 'src/environments/environment';
+import { ListaCitasProgramadasComponent } from './cita/components/lista-citas-programadas/lista-citas-programadas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ListaCitasProgramadasComponent
   ],
   imports: [
     BrowserModule,
