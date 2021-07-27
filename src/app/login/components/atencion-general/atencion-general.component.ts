@@ -12,4 +12,8 @@ export class AtencionGeneralComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  validar():void{
+    console.log()
+  }
+
 }

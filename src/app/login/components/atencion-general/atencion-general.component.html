@@ -8,11 +8,11 @@
                 ATENCIÓN GENERAL
             </div>
         </div>
-        <div class="form">
+        <div class="form" onsubmit={validar()}>
             <h1 class="form-title">Código Asegurado</h1>
             <input id="usuario" placeholder="Ingrese su Codigo de Asegurado" type="text" class="form-control"/>
             <div class="button-group">
-                <button class="button-login" routerLink="login">
+                <button class="button-login" routerLink="login" onclick=validar>
                     Iniciar Sesión
                 </button>
             </div>
