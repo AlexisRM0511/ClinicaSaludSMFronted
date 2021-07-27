@@ -63,6 +63,46 @@ export class PacienteRegistradoComponent implements OnInit {
       telefono: '987654321',
       fecha_registro: 'Febrero 15, 2019',
     },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      dni: '71912481',
+      fecha: '12-02-21',
+      telefono: '987654321',
+      fecha_registro: 'Febrero 15, 2019',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      dni: '71912481',
+      fecha: '12-02-21',
+      telefono: '987654321',
+      fecha_registro: 'Febrero 15, 2019',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      dni: '71912481',
+      fecha: '12-02-21',
+      telefono: '987654321',
+      fecha_registro: 'Febrero 15, 2019',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      dni: '71912481',
+      fecha: '12-02-21',
+      telefono: '987654321',
+      fecha_registro: 'Febrero 15, 2019',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      dni: '71912481',
+      fecha: '12-02-21',
+      telefono: '987654321',
+      fecha_registro: 'Febrero 15, 2019',
+    },
   ];
   constructor() {}
 
