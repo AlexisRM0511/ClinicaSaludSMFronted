@@ -9,20 +9,33 @@ import { CitaService } from '../../services/cita.service';
 })
 export class CrearCitaComponent implements OnInit {
 
-  especialidad: any;
+  especialidad$= this.citasService.especialidad;
+  medico$= this.citasService.medico;
+  horario$= this.citasService.horario;
 
   constructor(
-    private citaService:CitaService
+    private citasService:CitaService
   ) { }
 
   ngOnInit(): void {
+    this.listarEspecialidad();
+    this.listarMedico();
+    this.listarHorario();
   }
 
   listarEspecialidad(){
-
+    this.especialidad$.subscribe(val => console.log(val))
   }
 
-  CrearCita(){
+  listarMedico(){
+    this.medico$.subscribe(val => console.log(val))
+  }
+
+  listarHorario(){
+    this.horario$.subscribe(val => console.log(val))
+  }
+
+  crearCita(){
     Swal.fire({
       icon: 'success',
       title: 'Cita generada',
@@ -31,4 +44,5 @@ export class CrearCitaComponent implements OnInit {
       confirmButtonColor: "#2FAF27"
     })
   }
+
 }

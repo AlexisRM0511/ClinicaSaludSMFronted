@@ -1,4 +1,3 @@
-export class Especialidad{
-    especialidad_id: number;
+export interface Especialidad{
     nombre: string;
 }
