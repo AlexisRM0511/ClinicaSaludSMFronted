@@ -7,16 +7,8 @@ import { CrearCitaComponent } from './components/crear-cita/crear-cita.component
 
 import { RegistroCitasComponent } from './components/registro-citas/registro-citas.component';
 
-
-
 @NgModule({
-  declarations: [
-    CrearCitaComponent,
-    RegistroCitasComponent
-  ],
-  imports: [
-    CommonModule,
-    CitaRoutingModule
-  ]
+  declarations: [CrearCitaComponent, RegistroCitasComponent],
+  imports: [CommonModule, CitaRoutingModule],
 })
-export class CitaModule { }
+export class CitaModule {}

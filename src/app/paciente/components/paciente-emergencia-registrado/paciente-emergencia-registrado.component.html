@@ -2,7 +2,9 @@
   <div class="card">
     <div class="container">
       <div class="row my-3">
-        <div class="col-12"><h4 class="d-inline">Citas registradas</h4></div>
+        <div class="col-12">
+          <h4 class="d-inline">Pacientes de emergencia registrados</h4>
+        </div>
       </div>
       <div class="row my-4">
         <div class="col-6">
@@ -11,7 +13,7 @@
             name=""
             class="form-control d-inline"
             id=""
-            placeholder="Buscar cita"
+            placeholder="Buscar pacientes de emergencia"
           />
         </div>
         <div class="col-6 d-flex justify-content-end">
@@ -35,28 +37,28 @@
                   <th scope="col"></th>
                   <th scope="col">Codigo</th>
                   <th scope="col">Nombre completo</th>
-                  <th scope="col" class="text-center">Fecha cita</th>
-                  <th scope="col" class="text-center">Hora cita</th>
-                  <th scope="col" class="text-center">Codigo doctor</th>
-                  <th scope="col" class="text-center">Estado de la cita</th>
+                  <th scope="col" class="text-center">DNI</th>
+                  <th scope="col" class="text-center">Fecha Registro</th>
+                  <th scope="col" class="text-center">Estado del paciente</th>
+                  <th scope="col" class="text-center">Monto a pagar</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let c of citas">
+                <tr *ngFor="let p of pacientes">
                   <td class="align-middle">
                     <input type="checkbox" name="" id="" />
                   </td>
-                  <td class="align-middle">{{ c.codigo }}</td>
-                  <td class="align-middle">{{ c.nombre }}</td>
-                  <td class="align-middle text-center">{{ c.fecha }}</td>
-                  <td class="align-middle text-center">{{ c.hora }}</td>
-                  <td class="align-middle text-center">
-                    {{ c.codigo_doctor }}
-                  </td>
+                  <td class="align-middle">{{ p.codigo }}</td>
+                  <td class="align-middle">{{ p.nombre }}</td>
+                  <td class="align-middle text-center">{{ p.dni }}</td>
+                  <td class="align-middle text-center">{{ p.fecha }}</td>
                   <td class="align-middle text-center">
                     <span class="badge bg-success p-2 text-white">{{
-                      c.estado
+                      p.estado
                     }}</span>
+                  </td>
+                  <td class="align-middle text-center">
+                    {{ p.monto }}
                   </td>
                 </tr>
               </tbody>
