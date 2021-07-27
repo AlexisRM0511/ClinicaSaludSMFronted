@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import { CitaService } from '../../services/cita.service';
 
 @Component({
   selector: 'app-crear-cita',
@@ -8,9 +9,17 @@ import Swal from 'sweetalert2';
 })
 export class CrearCitaComponent implements OnInit {
 
-  constructor() { }
+  especialidad: any;
+
+  constructor(
+    private citaService:CitaService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  listarEspecialidad(){
+
   }
 
   CrearCita(){
