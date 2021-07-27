@@ -1,8 +1,7 @@
 export interface Cita {
-    codigo: string;
-    nombre: string;
-    fecha: string;
-    hora: string;
-    codigo_doctor: string;
-    estado: string;
+    id?: any; 
+    especialidad: any;
+    medico: any; 
+    fecha: any;
+    horario: any;
 }

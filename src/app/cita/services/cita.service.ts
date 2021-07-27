@@ -33,6 +33,19 @@ export class CitaService {
     this.getCita();
   }
 
+  onSaveCitas(cita: Cita, citaId:string):Promise<void>{
+    return new Promise(async (resolve,reject)=>{
+      try {
+        const id= citaId || this.afs.createId();
+        const data = {id, ...cita}
+        const result = this.citaCollection.doc(id).set(data)
+        resolve(result);
+      } catch (error) {
+        reject(error.message);
+      }
+    })
+  }
+
   getEspecialidad():void{
     this.especialidad=this.especialidadCollection.snapshotChanges().pipe(
       map(actions => actions.map(a=>a.payload.doc.data() as Especialidad))
