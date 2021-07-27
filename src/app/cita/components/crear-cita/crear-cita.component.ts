@@ -14,10 +14,11 @@ export class CrearCitaComponent implements OnInit {
   }
 
   CrearCita(){
-    Swal.fire(
-      'Good job!',
-      'You clicked the button!',
-      'success'
-    )
+    Swal.fire({
+      icon: 'success',
+      title: 'Cita generada',
+      text: 'La cita de a generado con exito',
+      confirmButtonText: "OK"
+    })
   }
 }
