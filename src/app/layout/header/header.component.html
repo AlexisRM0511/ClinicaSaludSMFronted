@@ -1,1 +1,42 @@
-<p>header works!</p>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary py-3 mb-3">
+    <a class="navbar-brand" routerLink="/">ClinicaSaludSM</a>
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarCollapse"
+      aria-controls="navbarCollapse"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto align-items-center">
+        <li class="nav-item align-middle">
+          <a class="nav-link" routerLink="/">Panel de control</a>
+        </li>
+        <li class="nav-item align-middle">
+          <a class="nav-link" routerLink="/paciente">Paciente</a>
+        </li>
+        <li class="nav-item align-middle mr-3">
+          <a class="nav-link" routerLink="/citas">Citas</a>
+        </li>
+        <li class="nav-item align-middle" *ngIf="!usuarioRegistrado">
+          <a class="btn btn-success my-2 my-sm-0" routerLink="/admin/login">
+            Iniciar sesión
+          </a>
+        </li>
+        <li
+          class="nav-item dropdown align-middle mr-5"
+          *ngIf="usuarioRegistrado"
+        >
+          <a class="btn btn-success my-2 my-sm-0" routerLink="/admin/login">
+            Cerrar sesión
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
