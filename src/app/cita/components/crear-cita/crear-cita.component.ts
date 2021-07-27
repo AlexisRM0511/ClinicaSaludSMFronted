@@ -17,8 +17,9 @@ export class CrearCitaComponent implements OnInit {
     Swal.fire({
       icon: 'success',
       title: 'Cita generada',
-      text: 'La cita de a generado con exito',
-      confirmButtonText: "OK"
+      text: 'La cita de a generado con éxito',
+      confirmButtonText: "OK",
+      confirmButtonColor: "#2FAF27"
     })
   }
 }
