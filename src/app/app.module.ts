@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,10 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AngularFireModule } from '@angular/fire';
+import {AngularFirestore} from '@angular/fire/firestore';
+import { Paciente } from './firebase/paciente';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,9 +25,15 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule  implements OnInit{
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+  paciente: Paciente = null;
+ }
