@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-citas',
@@ -51,4 +52,44 @@ export class RegistroCitasComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  async open() {
+    /* const { value: codigo } = await Swal.fire({
+      title: 'Código del asegurado',
+      input: 'text',
+      inputLabel: 'Ingrese el código del asegurado',
+      inputPlaceholder: 'Ingrese el código del asegurado',
+      showCancelButton: true,
+      confirmButtonColor: '#158cba',
+      confirmButtonText: 'Crear cita',
+      cancelButtonColor: '#FF1D10',
+      cancelButtonText: 'Cancelar',
+    });
+
+    if (codigo) {
+      Swal.fire(`Codigo ingresado: ${codigo}`);
+    } */
+    let especialidad = 'Dermatologia';
+    let doctor = 'Doctor';
+    let fecha = '13/01/21';
+    let hora = '12:20';
+
+    Swal.fire({
+      title: 'VERIFICACIÓN',
+      showCancelButton: true,
+      confirmButtonColor: '#28B62C',
+      confirmButtonText: `Crear cita`,
+      cancelButtonColor: '#FF1D10',
+      html:
+        'Esta seguro de crear la cita con: </br></br>' +
+        `<p><b>Especialidad:</b> ${especialidad}</p>` +
+        `<p><b>Doctor(a):</b> ${doctor}</p>` +
+        `<p><b>Fecha:</b> ${fecha}</p>` +
+        `<p><b>Hora:</b> ${hora}</p>`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success');
+      }
+    });
+  }
 }
