@@ -31,7 +31,10 @@
           </select>
         </div>
         <div class="col-4 d-flex justify-content-end">
-          <button class="btn btn-outline-primary mx-1">
+          <button
+            class="btn btn-outline-primary mx-1"
+            (click)="descargarExcel()"
+          >
             <i class="fas fa-download"></i>
           </button>
           <button class="btn btn-outline-info mx-1">
@@ -61,7 +64,13 @@
                 <tr
                   *ngFor="
                     let p of pacientes
-                      | filter: { curso_nombre: pacientesFilter }
+                      | filter
+                        : {
+                            codigo: pacientesFilter,
+                            dni: pacientesFilter,
+                            name: pacientesFilter,
+                            lastname: pacientesFilter
+                          }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual }
                   "
@@ -74,7 +83,9 @@
                     {{ p?.name + " " + p?.lastname }}
                   </td>
                   <td class="align-middle text-center">{{ p?.dni }}</td>
-                  <td class="align-middle text-center">{{ p?.date }}</td>
+                  <td class="align-middle text-center">
+                    {{ p?.date }}
+                  </td>
                   <td class="align-middle text-center">{{ p?.number }}</td>
                   <td class="align-middle text-center">
                     {{ p.fecha_registro }}
@@ -85,7 +96,10 @@
           </div>
         </div>
       </div>
-      <div class="row d-flex flex-row-reverse m-3">
+      <div
+        class="row d-flex flex-row-reverse m-3"
+        *ngIf="pacientes?.length > items"
+      >
         <div>
           <ng-container>
             <pagination-controls
