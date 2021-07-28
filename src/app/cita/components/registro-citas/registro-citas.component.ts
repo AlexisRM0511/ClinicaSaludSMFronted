@@ -198,7 +198,7 @@ export class RegistroCitasComponent implements OnInit {
 
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
-    this.router.navigate(['edit'], this.navigationExtras);
+    this.router.navigate(['/citas/editar-cita'], this.navigationExtras);
   }
 
   onGoToSee(item: any): void {
