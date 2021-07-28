@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import Swal from 'sweetalert2';
+import { NavigationExtras, Router } from '@angular/router';
+import { CitaService } from '../../services/cita.service';
 
 @Component({
   selector: 'app-registro-citas',
@@ -7,6 +8,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro-citas.component.css'],
 })
 export class RegistroCitasComponent implements OnInit {
+  // citas$ = this.citasService.cita;
+
   citas = [
     {
       codigo: '12314312',
@@ -49,47 +52,34 @@ export class RegistroCitasComponent implements OnInit {
       estado: 'Citado',
     },
   ];
-  constructor() {}
+
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null,
+    },
+  };
+
+  constructor(private router: Router, private citasService: CitaService) {}
 
   ngOnInit(): void {}
 
-  async open() {
-    /* const { value: codigo } = await Swal.fire({
-      title: 'Código del asegurado',
-      input: 'text',
-      inputLabel: 'Ingrese el código del asegurado',
-      inputPlaceholder: 'Ingrese el código del asegurado',
-      showCancelButton: true,
-      confirmButtonColor: '#158cba',
-      confirmButtonText: 'Crear cita',
-      cancelButtonColor: '#FF1D10',
-      cancelButtonText: 'Cancelar',
-    });
+  onGoToEdit(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['edit'], this.navigationExtras);
+  }
 
-    if (codigo) {
-      Swal.fire(`Codigo ingresado: ${codigo}`);
-    } */
-    let especialidad = 'Dermatologia';
-    let doctor = 'Doctor';
-    let fecha = '13/01/21';
-    let hora = '12:20';
+  onGoToSee(item: any): void {
+    this.navigationExtras.state.value = item;
+    console.log(this.navigationExtras.state.value);
+    this.router.navigate(['/citas/detalle-cita'], this.navigationExtras);
+  }
 
-    Swal.fire({
-      title: 'VERIFICACIÓN',
-      showCancelButton: true,
-      confirmButtonColor: '#28B62C',
-      confirmButtonText: `Crear cita`,
-      cancelButtonColor: '#FF1D10',
-      html:
-        'Esta seguro de crear la cita con: </br></br>' +
-        `<p><b>Especialidad:</b> ${especialidad}</p>` +
-        `<p><b>Doctor(a):</b> ${doctor}</p>` +
-        `<p><b>Fecha:</b> ${fecha}</p>` +
-        `<p><b>Hora:</b> ${hora}</p>`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success');
-      }
-    });
+  async onGoToDelete(citaId: string): Promise<void> {
+    try {
+      await this.citasService.onDeleteCitaProgramada(citaId);
+      alert('Deleted');
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
