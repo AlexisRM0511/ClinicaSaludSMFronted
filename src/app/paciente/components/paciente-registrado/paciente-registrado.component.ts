@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from 'src/app/firebase/paciente';
+import { PacientesService } from 'src/app/firebase/pacientes.service';
 
 @Component({
   selector: 'app-paciente-registrado',
@@ -13,113 +15,22 @@ export class PacienteRegistradoComponent implements OnInit {
   //filtro de cursos
   pacientesFilter: string = '';
   items = 5;
-  pacientes = [
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-  ];
-  constructor() {}
+  pac = this.pacienteService.paciente;
+  pacientes: Paciente[];
+  constructor(private pacienteService: PacientesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listarPacientes();
+  }
   cambiarPagina() {
     this.pageActual = 1;
   }
   elementosSeleccionados(valor) {
-    console.log(valor.target);
-
     this.items = valor.target.value;
+  }
+
+  listarPacientes() {
+    this.pac.subscribe((val) => (this.pacientes = val));
+    console.log('doasvnoisdnav', this.pacientes);
   }
 }

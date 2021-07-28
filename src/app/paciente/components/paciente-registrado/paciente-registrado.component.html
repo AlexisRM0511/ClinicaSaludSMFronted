@@ -57,7 +57,7 @@
                   <th scope="col" class="text-center">Fecha de registro</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody *ngIf="pacientes?.length > 0">
                 <tr
                   *ngFor="
                     let p of pacientes
@@ -69,11 +69,13 @@
                   <td class="align-middle">
                     <input type="checkbox" name="" id="" />
                   </td>
-                  <td class="align-middle">{{ p.codigo }}</td>
-                  <td class="align-middle">{{ p.nombre }}</td>
-                  <td class="align-middle text-center">{{ p.dni }}</td>
-                  <td class="align-middle text-center">{{ p.fecha }}</td>
-                  <td class="align-middle text-center">{{ p.telefono }}</td>
+                  <td class="align-middle">{{ p?.codigo }}</td>
+                  <td class="align-middle">
+                    {{ p?.name + " " + p?.lastname }}
+                  </td>
+                  <td class="align-middle text-center">{{ p?.dni }}</td>
+                  <td class="align-middle text-center">{{ p?.date }}</td>
+                  <td class="align-middle text-center">{{ p?.number }}</td>
                   <td class="align-middle text-center">
                     {{ p.fecha_registro }}
                   </td>

@@ -5,7 +5,7 @@
     height: 100vh;
     left: 0px;
     top: 0px;
-    background-image: url(../../../../Imagen1.png);
+    background-image: url(src/assets/Imagen1.png);
     background-repeat: no-repeat;
     background-size: 100%;
     background-color: linear-gradient(0deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
