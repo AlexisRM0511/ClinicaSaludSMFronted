@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { HeaderComponent } from 'src/app/layout/header/header.component';
 
 @Component({
   selector: 'app-atencion-general',
