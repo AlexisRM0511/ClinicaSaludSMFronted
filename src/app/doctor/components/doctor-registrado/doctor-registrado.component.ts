@@ -17,15 +17,15 @@ export class DoctorRegistradoComponent implements OnInit {
   //filtro de cursos
   doctoresFilter: string = '';
   items = 5;
-  pac = this.doctoresService.doctores;
-  doctores:Doctores[]
+  doc = this.doctoresService.doctores;
+  doctores: Doctores[]
   constructor(
     private doctoresService: DoctoresService,
     private excelService: GenerarExcelService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.listarPacientes();
+    this.listarDoctores();
   }
   cambiarPagina() {
     this.pageActual = 1;
@@ -34,8 +34,8 @@ export class DoctorRegistradoComponent implements OnInit {
     this.items = valor.target.value;
   }
 
-  listarPacientes() {
-    this.pac.subscribe((val) => (this.doctores = val));
+  listarDoctores() {
+    this.doc.subscribe((val) => (this.doctores = val));
   }
 
   descargarExcel() {
