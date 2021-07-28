@@ -3,7 +3,7 @@
     height: 100vh;
     margin-top: -89px;
     margin-bottom: -50px;
-    background-image: url(src/assets/Imagen1.png);
+    background-image: url(src\assets\Imagen1.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
