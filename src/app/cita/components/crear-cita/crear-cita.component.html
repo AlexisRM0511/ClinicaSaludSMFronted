@@ -37,7 +37,7 @@
                 *ngFor="let m of medico$ | async | sort: 'asc':'nombre'"
                 [ngValue]="m?.nombre"
               >
-                {{ m?.nombre }}
+                {{ m?.lastName + ", " + m?.name }}
               </option>
             </select>
           </div>

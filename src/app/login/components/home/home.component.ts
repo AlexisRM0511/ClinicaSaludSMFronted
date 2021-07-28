@@ -14,17 +14,17 @@ export class HomeComponent implements OnInit {
   pacientes$ = this.pacienteSvc.doctores;
 
   ngOnInit(): void {
-    let paciente: Doctores;
-    paciente = {
-      codigo: "DOC - " + Math.floor((Math.random() * (999 - 100 + 1)) + 100),
-      dni: "" + Math.floor((Math.random() * (99999999 - 10000000 + 1)) + 10000000),
-      name: "Isabel Angelica",
-      lastName: "Garcia Molina",
-      specialty:"Obstetricia",
-      number: "9" + Math.floor((Math.random() * (99999999 - 10000000 + 1)) + 10000000)
-    }
-    this.pacienteSvc.onSaveDoctores(paciente, paciente.codigo)
-    this.pacientes$.subscribe(val => console.log(val))
+    // let paciente: Doctores;
+    // paciente = {
+    //   codigo: "DOC - " + Math.floor((Math.random() * (999 - 100 + 1)) + 100),
+    //   dni: "" + Math.floor((Math.random() * (99999999 - 10000000 + 1)) + 10000000),
+    //   name: "Isabel Angelica",
+    //   lastName: "Garcia Molina",
+    //   specialty:"Obstetricia",
+    //   number: "9" + Math.floor((Math.random() * (99999999 - 10000000 + 1)) + 10000000)
+    // }
+    // this.pacienteSvc.onSaveDoctores(paciente, paciente.codigo)
+    // this.pacientes$.subscribe(val => console.log(val))
   }
 
   onSave(): void {
