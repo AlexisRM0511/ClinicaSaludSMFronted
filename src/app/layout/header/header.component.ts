@@ -17,11 +17,9 @@ export class HeaderComponent implements OnInit {
     if(sessionStorage.getItem("userID")!==null){
       this.pacienteLogueado=true
       this.logueado=true
-      console.log("REGISTRAO")
     }else if(sessionStorage.getItem("adminID")!==null){
       this.doctorLogueado=true
       this.logueado=true
-      console.log("REGISTRAO")
     }
   }
 
