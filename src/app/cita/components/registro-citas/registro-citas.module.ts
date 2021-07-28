@@ -5,8 +5,9 @@ import { RegistroCitasRoutingModule } from './registro-citas-routing.module';
 
 
 @NgModule({
-  declarations: [RegistrarDoctorComponent],
+  declarations: [],
   imports: [
+    RegistrarDoctorComponent,
     CommonModule,
     RegistroCitasRoutingModule
   ]

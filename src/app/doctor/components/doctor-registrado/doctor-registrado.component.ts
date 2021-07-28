@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Doctores } from 'src/app/firebase/doctores';
+import { DoctoresService } from 'src/app/firebase/doctores.service';
+import { GenerarExcelService } from 'src/app/services/generar-excel.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-doctor-registrado',
@@ -6,65 +10,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./doctor-registrado.component.css'],
 })
 export class DoctorRegistradoComponent implements OnInit {
-  doctores = [
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      especialidad: 'Cardiologia',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-  ];
-  constructor() {}
+  pageActual: number;
+  previousLabel = 'Anterior';
+  nextLabel = 'Siguiente';
+  responsive: boolean = true;
+  //filtro de cursos
+  doctoresFilter: string = '';
+  items = 5;
+  pac = this.doctoresService.doctores;
+  doctores:Doctores[]
+  constructor(
+    private doctoresService: DoctoresService,
+    private excelService: GenerarExcelService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listarPacientes();
+  }
+  cambiarPagina() {
+    this.pageActual = 1;
+  }
+  elementosSeleccionados(valor) {
+    this.items = valor.target.value;
+  }
+
+  listarPacientes() {
+    this.pac.subscribe((val) => (this.doctores = val));
+  }
+
+  descargarExcel() {
+    this.excelService.exportAsExcelFile(this.doctores, 'Doctores');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Descargando...',
+    });
+  }
 }

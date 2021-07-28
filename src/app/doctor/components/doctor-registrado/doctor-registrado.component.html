@@ -38,7 +38,7 @@
                   <th scope="col" class="text-center">DNI</th>
                   <th scope="col" class="text-center">Especialidad</th>
                   <th scope="col" class="text-center">Teléfono</th>
-                  <th scope="col" class="text-center">Fecha de inscripción</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -46,16 +46,14 @@
                   <td class="align-middle">
                     <input type="checkbox" name="" id="" />
                   </td>
-                  <td class="align-middle">{{ d.codigo }}</td>
-                  <td class="align-middle">{{ d.nombre }}</td>
-                  <td class="align-middle text-center">{{ d.dni }}</td>
-                  <td class="align-middle text-center">{{ d.especialidad }}</td>
+                  <td class="align-middle">{{ d?.codigo }}</td>
+                  <td class="align-middle">{{ d?.lastName+", "+d?.name }}</td>
+                  <td class="align-middle text-center">{{ d?.dni }}</td>
+                  <td class="align-middle text-center">{{ d?.specialty }}</td>
                   <td class="align-middle text-center">
-                    {{ d.telefono }}
+                    {{ d?.number }}
                   </td>
-                  <td class="align-middle text-center">
-                    {{ d.fecha_registro }}
-                  </td>
+
                 </tr>
               </tbody>
             </table>
