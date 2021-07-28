@@ -51,7 +51,8 @@ export class PacientesService {
       );
   }
 
-  getOnePaciente(pacienteId:string){
-    return this.pacienteCollection.doc(pacienteId).snapshotChanges();
+  getOnePaciente(pacienteId: string) {
+    /* return this.pacienteCollection.doc(pacienteId).snapshotChanges(); */
+    return this.afs.doc<Paciente>(`pacientes/${pacienteId}`).valueChanges();
   }
 }
