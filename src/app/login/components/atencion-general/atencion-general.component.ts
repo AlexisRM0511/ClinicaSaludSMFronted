@@ -1,6 +1,11 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacientesService } from 'src/app/firebase/pacientes.service';
 import { HeaderComponent } from 'src/app/layout/header/header.component';
@@ -9,42 +14,46 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-atencion-general',
   templateUrl: './atencion-general.component.html',
-  styleUrls: ['./atencion-general.component.css']
+  styleUrls: ['./atencion-general.component.css'],
 })
-export class AtencionGeneralComponent{
+export class AtencionGeneralComponent {
   form: FormGroup;
   codigo: string;
   pacientes$ = this.pacienteSvc.paciente;
-  
-  constructor(private _builder :FormBuilder,private pacienteSvc: PacientesService,private router:Router) {
-    this.form=this._builder.group({
-      codigo:['',Validators.required]
-    })
+
+  constructor(
+    private _builder: FormBuilder,
+    private pacienteSvc: PacientesService,
+    private router: Router
+  ) {
+    this.form = this._builder.group({
+      codigo: ['', Validators.required],
+    });
   }
 
-  async validar(values){
-    console.log(values.codigo)
-    this.pacientes$.subscribe(val => {
-      val.forEach(element => {
+  async validar(values) {
+    console.log(values.codigo);
+    this.pacientes$.subscribe((val) => {
+      val.forEach((element) => {
         if (element.codigo === values.codigo) {
-          sessionStorage.setItem("userID", values.codigo);
+          sessionStorage.setItem('userID', values.codigo);
           this.Toast.fire({
             icon: 'success',
             title: 'Signed in successfully',
           });
-          
-          this.router.navigate(['paciente']);
+
+          this.router.navigate(['paciente']).then(() => {
+            window.location.reload();
+          });
         }
       });
-      if (sessionStorage.getItem("userID") === null) {
+      if (sessionStorage.getItem('userID') === null) {
         this.Toast.fire({
           icon: 'error',
           title: 'Signed Error',
         });
       }
-    }
-    )
-    
+    });
   }
 
   Toast = Swal.mixin({
@@ -58,7 +67,7 @@ export class AtencionGeneralComponent{
     },
   });
 }
-  //   form: FormGroup;
+//   form: FormGroup;
 
 //   constructor() {
 //     this.buildForm();
@@ -78,5 +87,4 @@ export class AtencionGeneralComponent{
 //     });
 //   }
 
-  
 // }

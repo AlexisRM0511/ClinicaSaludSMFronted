@@ -7,25 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   pacienteLogueado = false;
-  doctorLogueado =false;
-  logueado=false;
+  doctorLogueado = false;
+  logueado = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    if(sessionStorage.getItem("userID")!==null){
-      this.pacienteLogueado=true
-      this.logueado=true
-    }else if(sessionStorage.getItem("adminID")!==null){
-      this.doctorLogueado=true
-      this.logueado=true
+    if (sessionStorage.getItem('userID') !== null) {
+      this.pacienteLogueado = true;
+      this.logueado = true;
+    } else if (sessionStorage.getItem('adminID') !== null) {
+      this.doctorLogueado = true;
+      this.logueado = true;
     }
   }
 
-  logOut(){
-    sessionStorage.clear()
-    this.pacienteLogueado=false
-    this.logueado=false
+  logOut() {
+    sessionStorage.clear();
+    this.pacienteLogueado = false;
+    this.logueado = false;
   }
 }
