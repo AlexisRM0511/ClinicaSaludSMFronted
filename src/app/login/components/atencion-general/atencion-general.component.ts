@@ -20,21 +20,22 @@ export class AtencionGeneralComponent{
     })
   }
 
-  validar(values){
-    let data
+  async validar(values){
     console.log(values.codigo)
-    this.pacientes$.subscribe( val => val.forEach(element => {
-      if(element.codigo===values.codigo){
-        sessionStorage.setItem("userID",values.codigo)
+    this.pacientes$.subscribe(val => {
+      val.forEach(element => {
+        if (element.codigo === values.codigo) {
+          sessionStorage.setItem("userID", values.codigo);
+          alert("USTED SE HA LOGUEADO");
+          this.router.navigate(['paciente']);
+        }
+      });
+      if (sessionStorage.getItem("userID") === null) {
+        alert("ERROR");
       }
-    }))
-    data=sessionStorage.getItem("userID")
-    console.log(data)
-    if(data!==null){
-      alert("USTED SE HA LOGUEADO")
-      this.router.navigate([''])
     }
-    this.form.reset()
+    )
+    
   }
 }
   //   form: FormGroup;
