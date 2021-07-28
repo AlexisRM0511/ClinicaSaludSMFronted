@@ -1,0 +1,32 @@
+<div class="card mt-2">
+    <div class="card-header">
+        Detalles de la Cita
+    </div>
+    <div class="card-body">
+        <ul class="list-group list-grup-flush">
+            <li class="list-group-item">
+                ID: <h5>{{cita.id}}</h5>
+            </li>
+            <li class="list-group-item">
+                DNI: <h5>{{cita.DNI}}</h5>
+            </li>
+            <li class="list-group-item">
+                Nombre Paciente: <h5>{{cita.nombre}} {{cita.apellido}}</h5>
+            </li>
+            <li class="list-group-item">
+                Fecha de Cita: <h5>{{cita.fecha}}</h5>
+            </li>
+            <li class="list-group-item">
+                Hora de Cita: <h5>{{cita.hora}}</h5>
+            </li>
+            <li class="list-group-item">
+                Codigo del Doctor: <h5>{{cita.codigoDoctor}}</h5>
+            </li>
+        </ul>
+    </div>
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-outline-warning m-1 btn-sm" (click)="onGoToEdit()">Editar</button>
+        <button type="button" class="btn btn-outline-danger m-1 btn-sm" (click)="onGoToDelete()">Eliminar</button>
+    </div>
+</div>
+<button type="button" class="btn btn-secondary m-2" (click)="onGoBackToList()">Volver al listado</button>
