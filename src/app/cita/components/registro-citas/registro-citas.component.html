@@ -2,8 +2,8 @@
   <div class="card">
     <div class="container">
       <div class="row my-3">
-        <div class="col-3"><h4>Citas registradas</h4></div>
-        <div class="col-6">
+        <div class="col-2"><h4>Citas registradas</h4></div>
+        <div class="col-7">
           <input
             type="text"
             name=""
@@ -14,7 +14,7 @@
           />
         </div>
 
-        <div class="col-3 d-flex justify-content-end">
+        <div class="col-2 d-flex justify-content-end">
           <select
             name=""
             id=""
@@ -25,6 +25,14 @@
             <option value="10">10</option>
             <option value="15">15</option>
           </select>
+        </div>
+        <div class="col-1">
+          <button
+            class="btn btn-outline-primary mx-1"
+            (click)="descargarExcel()"
+          >
+            <i class="fas fa-download"></i>
+          </button>
         </div>
       </div>
 
@@ -41,40 +49,43 @@
                   <th scope="col" class="text-center">Hora cita</th>
                   <th scope="col" class="text-center">Codigo doctor</th>
                   <th scope="col" class="text-center">Estado de la cita</th>
-                  <th scope="col" class="text-left">Acciones</th>
+                  <th scope="col" class="text-center">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <!-- <tr *ngFor="let c of citas$ | async"> -->
+              <tbody *ngIf="citas?.length > 0">
                 <tr
                   *ngFor="
                     let c of citas
                       | filter: { curso_nombre: citaFilter }
                       | paginate
-                        : { itemsPerPage: items, currentPage: pageActual }
+                        : { itemsPerPage: items, currentPage: pageActual };
+                    let i = index
                   "
                 >
                   <td class="align-middle">
-                    <input type="checkbox" name="" id="" />
+                    {{ i + 1 }}
                   </td>
-                  <td class="align-middle">{{ c.DNI }}</td>
-                  <td class="align-middle">{{ c.nombre }}</td>
-                  <td class="align-middle text-center">{{ c.fecha }}</td>
-                  <td class="align-middle text-center">{{ c.hora }}</td>
+                  <td class="align-middle">{{ c?.codigo }}</td>
+                  <td class="align-middle">
+                    {{ c?.name + " " + c?.lastname }}
+                  </td>
+                  <td class="align-middle text-center">{{ c?.fecha }}</td>
+                  <td class="align-middle text-center">{{ c?.horario }}</td>
                   <td class="align-middle text-center">
-                    {{ c.codigo_doctor }}
+                    {{ c?.medico }}
                   </td>
                   <td class="align-middle text-center">
-                    <span class="badge bg-success p-2 text-white">{{
-                      c.estado
-                    }}</span>
+                    <span class="badge bg-success p-2 text-white">citado</span>
                   </td>
-                  <td class="btn-group d-none d-sm-block" role="group">
+                  <td
+                    class="btn-group d-flex justify-content-center"
+                    role="group"
+                  >
                     <button
                       class="btn btn-outline-primary mx-1"
                       (click)="onGoToSee(c)"
                     >
-                      <i class="fas fa-download"></i>
+                      <i class="fas fa-info"></i>
                     </button>
                     <button
                       class="btn btn-outline-info mx-1"

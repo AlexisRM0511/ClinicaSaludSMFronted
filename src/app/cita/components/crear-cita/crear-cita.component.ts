@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PacientesService } from 'src/app/firebase/pacientes.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
@@ -15,13 +16,15 @@ export class CrearCitaComponent implements OnInit {
   especialidad$ = this.citasService.especialidad;
   medico$ = this.citasService.medico;
   horario$ = this.citasService.horario;
+  paciente$ = this.pacienteService.paciente;
 
   citaForm: FormGroup;
 
   constructor(
     private citasService: CitaService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private pacienteService: PacientesService
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
@@ -32,10 +35,12 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
+    console.log(this.medico$);
   }
 
   initForm() {
     this.citaForm = this.fb.group({
+      codigo: ['', [Validators.required]],
       especialidad: ['', [Validators.required]],
       medico: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
@@ -43,20 +48,32 @@ export class CrearCitaComponent implements OnInit {
     });
   }
 
-  crearCita() {
+  async crearCita() {
+    /* let a = await this.pacienteService.getOnePaciente(
+      this.citaForm.get('codigo').value
+    ); */
+
+    /* console.log('asiodnvoisdav', a); */
+
     console.log('saved', this.citaForm.value);
 
     if (this.citaForm.valid) {
       const cita = this.citaForm.value;
       const citaId = this.cita?.id || null;
       this.citasService.onSaveCitas(cita, citaId);
+      Swal.fire({
+        icon: 'success',
+        title: 'Cita generada',
+        text: 'La cita de a generado con éxito',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#2FAF27',
+      });
+      this.citaForm.reset();
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+      });
     }
-    Swal.fire({
-      icon: 'success',
-      title: 'Cita generada',
-      text: 'La cita de a generado con éxito',
-      confirmButtonText: 'OK',
-      confirmButtonColor: '#2FAF27',
-    });
   }
 }

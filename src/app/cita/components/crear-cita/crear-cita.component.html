@@ -6,12 +6,23 @@
     <div class="row">
       <div class="col-md-6 col-lg-4 mx-auto">
         <form action="" class="border p-3 form" [formGroup]="citaForm">
-          <div class="col-12 mx-auto">
+          <div class="col-12 mx-auto my-2">
+            <label for="codigo_id">Codigo del asegurado:</label>
+            <input
+              type="text"
+              name=""
+              class="form-control"
+              id="codigo_id"
+              placeholder="Ingrese el código"
+              formControlName="codigo"
+            />
+          </div>
+          <div class="col-12 mx-auto my-2">
             <label for="especialidad_id">Elija su especialidad:</label>
             <select
               name="categoria_id"
               formControlName="especialidad"
-              class="custom-select mb-4"
+              class="custom-select"
               id="especialidad_id"
             >
               <option value="" hidden>Seleccione</option>
@@ -24,38 +35,38 @@
             </select>
           </div>
 
-          <div class="col-12 mx-auto">
+          <div class="col-12 mx-auto my-2">
             <label for="medico_id">Elija su medico:</label>
             <select
               name="categoria_id"
               formControlName="medico"
-              class="custom-select mb-4"
+              class="custom-select"
               id="medico_id"
             >
               <option value="" hidden>Seleccione</option>
               <option
-                *ngFor="let m of medico$ | async | sort: 'asc':'nombre'"
-                [ngValue]="m?.nombre"
+                *ngFor="let m of medico$ | async | sort: 'asc':'lastName'"
+                [ngValue]="m?.codigo"
               >
                 {{ m?.lastName + ", " + m?.name }}
               </option>
             </select>
           </div>
-          <div class="col-12 mx-auto">
+          <div class="col-12 mx-auto my-2">
             <label for="fecha_id">Elija su fecha de atenci&oacute;n:</label>
             <input
               type="date"
               formControlName="fecha"
-              class="form-control mb-4"
+              class="form-control"
               id="fecha_id"
             />
           </div>
-          <div class="col-12 mx-auto">
+          <div class="col-12 mx-auto my-2">
             <label for="horario_id">Elija su horario:</label>
             <select
               name="categoria_id"
               formControlName="horario"
-              class="custom-select mb-4"
+              class="custom-select"
               id="horario_id"
             >
               <option value="" hidden>Seleccione</option>
@@ -67,7 +78,7 @@
               </option>
             </select>
           </div>
-          <div class="col-12 d-flex flex-column">
+          <div class="col-12 d-flex flex-column mt-4">
             <button type="button" class="btn btn-success" (click)="crearCita()">
               Generar Cita
             </button>
