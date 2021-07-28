@@ -57,7 +57,7 @@
                   <th scope="col" class="text-center">DNI</th>
                   <th scope="col" class="text-center">Fecha Nacimiento</th>
                   <th scope="col" class="text-center">Teléfono</th>
-                  <th scope="col" class="text-center">Fecha de registro</th>
+                  <th scope="col" class="text-center">Fecha de Nacimiento</th>
                 </tr>
               </thead>
               <tbody *ngIf="pacientes?.length > 0">
@@ -80,7 +80,7 @@
                   </td>
                   <td class="align-middle">{{ p?.codigo }}</td>
                   <td class="align-middle">
-                    {{ p?.name + " " + p?.lastname }}
+                    {{  p?.lastName + ", " +p?.name}}
                   </td>
                   <td class="align-middle text-center">{{ p?.dni }}</td>
                   <td class="align-middle text-center">
@@ -88,7 +88,7 @@
                   </td>
                   <td class="align-middle text-center">{{ p?.number }}</td>
                   <td class="align-middle text-center">
-                    {{ p.fecha_registro }}
+                    {{ p.date }}
                   </td>
                 </tr>
               </tbody>
