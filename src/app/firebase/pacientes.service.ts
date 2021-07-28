@@ -6,8 +6,6 @@ import {
 import { Observable } from 'rxjs';
 import { Paciente } from './paciente';
 import { map } from 'rxjs/operators';
-import { reject, resolve } from 'q';
-import { async } from '@angular/core/testing';
 
 @Injectable({
   providedIn: 'root',

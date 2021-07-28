@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Paciente } from 'src/app/firebase/paciente';
+import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { GenerarExcelService } from 'src/app/services/generar-excel.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-paciente-registrado',
@@ -13,113 +17,44 @@ export class PacienteRegistradoComponent implements OnInit {
   //filtro de cursos
   pacientesFilter: string = '';
   items = 5;
-  pacientes = [
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-    {
-      codigo: '12314312',
-      nombre: 'Nombre Apellido Apellido',
-      dni: '71912481',
-      fecha: '12-02-21',
-      telefono: '987654321',
-      fecha_registro: 'Febrero 15, 2019',
-    },
-  ];
-  constructor() {}
+  pac = this.pacienteService.paciente;
+  pacientes: Paciente[];
+  constructor(
+    private pacienteService: PacientesService,
+    private excelService: GenerarExcelService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.listarPacientes();
+  }
   cambiarPagina() {
     this.pageActual = 1;
   }
   elementosSeleccionados(valor) {
-    console.log(valor.target);
-
     this.items = valor.target.value;
+  }
+
+  listarPacientes() {
+    this.pac.subscribe((val) => (this.pacientes = val));
+  }
+
+  descargarExcel() {
+    this.excelService.exportAsExcelFile(this.pacientes, 'Pacientes');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Descargando...',
+    });
   }
 }

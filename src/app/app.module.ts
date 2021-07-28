@@ -14,12 +14,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Paciente } from './firebase/paciente';
 import { environment } from 'src/environments/environment';
 import { DetalleCitaModule } from './cita/components/detalle-cita/detalle-cita.module';
-import { FilterPipe } from './pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, FilterPipe],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     CommonModule,
