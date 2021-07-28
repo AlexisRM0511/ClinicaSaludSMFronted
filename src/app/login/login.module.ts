@@ -6,7 +6,7 @@ import { AdministrativoComponent } from './components/administrativo/administrat
 import { AtencionGeneralComponent } from './components/atencion-general/atencion-general.component';
 import { HomeComponent } from './components/home/home.component';
 import { Paciente } from '../firebase/paciente';
-
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,9 @@ import { Paciente } from '../firebase/paciente';
   ],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class LoginModule implements OnInit{
