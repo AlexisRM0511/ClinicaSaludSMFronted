@@ -30,9 +30,8 @@ export class CrearCitaComponent implements OnInit {
 
   ngOnInit(): void {
     this.especialidad$;
-    this.listarEspecialidad();
-    this.listarMedico();
-    this.listarHorario();
+    this.medico$;
+    this.horario$;
     this.initForm();
   }
 
@@ -43,18 +42,6 @@ export class CrearCitaComponent implements OnInit {
       fecha: ['', [Validators.required]],
       horario: ['', [Validators.required]]
     })
-  }
-
-  listarEspecialidad(){
-    this.especialidad$.subscribe(val => console.log(val))
-  }
-
-  listarMedico(){
-    this.medico$.subscribe(val => console.log(val))
-  }
-
-  listarHorario(){
-    this.horario$.subscribe(val => console.log(val))
   }
 
   crearCita(){    
