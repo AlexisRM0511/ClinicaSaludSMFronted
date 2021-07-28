@@ -1,40 +1,63 @@
 <div class="container">
-    <div class="card mt-2">
-        <div class="card-header">
-            <h2>Detalles de la Cita</h2>
-        </div>
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-
-                <div class="row">
-                    <li class="list-group-item col-4">
-                        ID: <h5>{{cita.id}}</h5>
-                    </li>
-                    <li class="list-group-item col-4">
-                        DNI: <h5>{{cita.DNI}}</h5>
-                    </li>
-                    <li class="list-group-item col-4">
-                        Nombre Paciente: <h5>{{cita.nombre}} {{cita.apellidos}}</h5>
-                    </li> 
-                </div>
-
-                <div class="row">
-                    <li class="list-group-item col-4">
-                        Fecha de Cita: <h5>{{cita.fecha}}</h5>
-                    </li>
-                    <li class="list-group-item col-4">
-                        Hora de Cita: <h5>{{cita.hora}}</h5>
-                    </li>
-                    <li class="list-group-item col-4">
-                        Codigo del Doctor: <h5>{{cita.codigoDoctor}}</h5>
-                    </li>
-                </div>
-            </ul>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-outline-warning m-1 btn-lg" (click)="onGoToEdit()">Editar</button>
-            <button type="button" class="btn btn-outline-danger m-1 btn-lg" (click)="onGoToDelete()">Eliminar</button>
-        </div>
+  <div class="card mt-2">
+    <div class="card-header">
+      <h2>Detalles de la Cita</h2>
     </div>
-    <button type="button" class="btn btn-secondary m-2" (click)="onGoBackToList()">Volver al listado</button>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <div class="row">
+          <li class="list-group-item col-4">
+            ID:
+            <h5>{{ cita.id }}</h5>
+          </li>
+          <li class="list-group-item col-4">
+            DNI:
+            <h5>{{ cita.DNI }}</h5>
+          </li>
+          <li class="list-group-item col-4">
+            Nombre Paciente:
+            <h5>{{ cita.nombre }} {{ cita.apellido }}</h5>
+          </li>
+        </div>
+
+        <div class="row">
+          <li class="list-group-item col-4">
+            Fecha de Cita:
+            <h5>{{ cita.fecha }}</h5>
+          </li>
+          <li class="list-group-item col-4">
+            Hora de Cita:
+            <h5>{{ cita.hora }}</h5>
+          </li>
+          <li class="list-group-item col-4">
+            Codigo del Doctor:
+            <h5>{{ cita.codigoDoctor }}</h5>
+          </li>
+        </div>
+      </ul>
+    </div>
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        class="btn btn-outline-warning m-1 btn-lg"
+        (click)="onGoToEdit()"
+      >
+        Editar
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-danger m-1 btn-lg"
+        (click)="onGoToDelete()"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="btn btn-secondary m-2"
+    (click)="onGoBackToList()"
+  >
+    Volver al listado
+  </button>
 </div>

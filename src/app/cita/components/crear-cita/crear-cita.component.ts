@@ -8,22 +8,21 @@ import { CitaService } from '../../services/cita.service';
 @Component({
   selector: 'app-crear-cita',
   templateUrl: './crear-cita.component.html',
-  styleUrls: ['./crear-cita.component.css']
+  styleUrls: ['./crear-cita.component.css'],
 })
 export class CrearCitaComponent implements OnInit {
-
   cita: Cita;
-  especialidad$= this.citasService.especialidad;
-  medico$= this.citasService.medico;
-  horario$= this.citasService.horario;
+  especialidad$ = this.citasService.especialidad;
+  medico$ = this.citasService.medico;
+  horario$ = this.citasService.horario;
 
   citaForm: FormGroup;
 
   constructor(
-    private citasService:CitaService,
+    private citasService: CitaService,
     private fb: FormBuilder,
     private router: Router
-  ) { 
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
   }
@@ -40,12 +39,12 @@ export class CrearCitaComponent implements OnInit {
       especialidad: ['', [Validators.required]],
       medico: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
-      horario: ['', [Validators.required]]
-    })
+      horario: ['', [Validators.required]],
+    });
   }
 
-  crearCita(){    
-    console.log("saved", this.citaForm.value);
+  crearCita() {
+    console.log('saved', this.citaForm.value);
 
     if (this.citaForm.valid) {
       const cita = this.citaForm.value;
@@ -56,9 +55,8 @@ export class CrearCitaComponent implements OnInit {
       icon: 'success',
       title: 'Cita generada',
       text: 'La cita de a generado con éxito',
-      confirmButtonText: "OK",
-      confirmButtonColor: "#2FAF27"
-    })
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#2FAF27',
+    });
   }
-
 }
