@@ -1,49 +1,82 @@
-<h1 class="col-lg-2 mb-4 mt-4 mx-auto">Crear cita </h1>
-<div class="container">
-    <div class="abs-center">
-        <div class="row">
-            <div class="col-4 mx-auto">
-                <form action="" class="border p-3 form" [formGroup]="citaForm">
-                    <div class="col-lg-12 mx-auto">
-                        <label for="categoriaCurso">Elija su especialidad:</label>
-                        <select name="categoria_id" formControlName="especialidad" class="custom-select mb-4" id="categoriaCurso">
-                            <option value="" hidden>Seleccione</option>
-                            <option *ngFor="let e of especialidad$ | async | sort: 'asc':'nombre'" [ngValue]="e?.nombre">
-                                    {{ e?.nombre }}
-                            </option>
-                        </select>
-                    </div> 
-
-                    <div class="col-lg-12 mx-auto">
-                        <label for="categoriaCurso">Elija su medico:</label>
-                        <select name="categoria_id" formControlName="medico" class="custom-select mb-4" id="categoriaCurso">
-                            <option value="" hidden>Seleccione</option>
-                            <option *ngFor="let m of medico$ | async | sort: 'asc':'nombre' " [ngValue]="m?.nombre">
-                                    {{ m?.nombre }}
-                            </option>
-
-                        </select>
-                    </div>
-                    <div class="col-lg-12 mx-auto">
-                        <label for="categoriaCurso">Elija su fecha de atenci&oacute;n:</label>
-                        <input type="date" formControlName="fecha" class="form-control mb-4" />
-                    </div>
-                    <div class="col-lg-12 mx-auto">
-                        <label for="categoriaCurso">Elija su horario:</label>
-                        <select name="categoria_id" formControlName="horario" class="custom-select mb-4" id="categoriaCurso">
-                            <option value="" hidden>Seleccione</option>
-                            <option *ngFor="let h of horario$ | async | sort: 'asc':'nombre' " [ngValue]="h?.nombre">
-                                    {{ h?.nombre }}
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-lg-6 mx-auto">
-                        <button type="button" class="btn btn-success" (click)="crearCita()">
-                            Generar Cita
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="container mb-0 pb-0">
+  <div class="abs-center mb-0 pb-0">
+    <div class="row">
+      <h1 class="col-12 mt-4 mx-auto text-center">Crear cita</h1>
     </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-4 mx-auto">
+        <form action="" class="border p-3 form" [formGroup]="citaForm">
+          <div class="col-12 mx-auto">
+            <label for="especialidad_id">Elija su especialidad:</label>
+            <select
+              name="categoria_id"
+              formControlName="especialidad"
+              class="custom-select mb-4"
+              id="especialidad_id"
+            >
+              <option value="" hidden>Seleccione</option>
+              <option
+                *ngFor="let e of especialidad$ | async | sort: 'asc':'nombre'"
+                [ngValue]="e?.nombre"
+              >
+                {{ e?.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-12 mx-auto">
+            <label for="medico_id">Elija su medico:</label>
+            <select
+              name="categoria_id"
+              formControlName="medico"
+              class="custom-select mb-4"
+              id="medico_id"
+            >
+              <option value="" hidden>Seleccione</option>
+              <option
+                *ngFor="let m of medico$ | async | sort: 'asc':'nombre'"
+                [ngValue]="m?.nombre"
+              >
+                {{ m?.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 mx-auto">
+            <label for="fecha_id">Elija su fecha de atenci&oacute;n:</label>
+            <input
+              type="date"
+              formControlName="fecha"
+              class="form-control mb-4"
+              id="fecha_id"
+            />
+          </div>
+          <div class="col-12 mx-auto">
+            <label for="horario_id">Elija su horario:</label>
+            <select
+              name="categoria_id"
+              formControlName="horario"
+              class="custom-select mb-4"
+              id="horario_id"
+            >
+              <option value="" hidden>Seleccione</option>
+              <option
+                *ngFor="let h of horario$ | async | sort: 'asc':'nombre'"
+                [ngValue]="h?.nombre"
+              >
+                {{ h?.nombre }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 d-flex flex-column">
+            <button type="button" class="btn btn-success" (click)="crearCita()">
+              Generar Cita
+            </button>
+            <a type="button" class="btn btn-danger mt-2" routerLink="/paciente"
+              >Regresar</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
