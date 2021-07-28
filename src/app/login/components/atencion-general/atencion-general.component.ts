@@ -32,11 +32,15 @@ export class AtencionGeneralComponent{
             icon: 'success',
             title: 'Signed in successfully',
           });
+          
           this.router.navigate(['paciente']);
         }
       });
       if (sessionStorage.getItem("userID") === null) {
-        alert("ERROR");
+        this.Toast.fire({
+          icon: 'error',
+          title: 'Signed Error',
+        });
       }
     }
     )
