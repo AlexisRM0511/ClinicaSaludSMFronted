@@ -10,32 +10,33 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
-import {AngularFirestore} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Paciente } from './firebase/paciente';
 import { environment } from 'src/environments/environment';
-import { ListaCitasProgramadasComponent } from './cita/components/lista-citas-programadas/lista-citas-programadas.component';
+import { DetalleCitaModule } from './cita/components/detalle-cita/detalle-cita.module';
+import { FilterPipe } from './pipes/filter.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ListaCitasProgramadasComponent
-  ],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, FilterPipe],
   imports: [
     BrowserModule,
     CommonModule,
     RouterModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    DetalleCitaModule,
+    NgxPaginationModule,
   ],
   providers: [AngularFirestore],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule  implements OnInit{
+export class AppModule implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
   paciente: Paciente = null;
- }
+}
