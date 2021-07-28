@@ -6,8 +6,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  usuarioRegistrado = false;
-  constructor() {}
+  pacienteLogueado = false;
+  doctorLogueado =false;
+  logueado=false;
 
-  ngOnInit(): void {}
+  constructor() {
+  }
+
+  ngOnInit(): void {
+    if(sessionStorage.getItem("userID")!==null){
+      this.pacienteLogueado=true
+      this.logueado=true
+      console.log("REGISTRAO")
+    }else if(sessionStorage.getItem("adminID")!==null){
+      this.doctorLogueado=true
+      this.logueado=true
+      console.log("REGISTRAO")
+    }
+  }
+
+  logOut(){
+    sessionStorage.clear()
+    this.pacienteLogueado=false
+    this.logueado=false
+  }
 }

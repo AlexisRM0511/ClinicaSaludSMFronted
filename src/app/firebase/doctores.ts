@@ -3,6 +3,6 @@ export interface Doctores {
     dni:string;
     name:string;
     lastName:string;
-    date:String;
+    specialty:String;
     number:string;
 }
