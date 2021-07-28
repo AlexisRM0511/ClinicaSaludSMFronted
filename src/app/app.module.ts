@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { DetalleCitaModule } from './cita/components/detalle-cita/detalle-cita.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { EditarCitaComponent } from './cita/components/editar-cita/editar-cita.component';
+import { EditarCitaModule } from './cita/components/editar-cita/editar-cita.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -29,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     DetalleCitaModule,
     NgxPaginationModule,
+    EditarCitaModule,
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],
