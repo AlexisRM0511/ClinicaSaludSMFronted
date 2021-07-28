@@ -6,6 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./paciente-registrado.component.css'],
 })
 export class PacienteRegistradoComponent implements OnInit {
+  pageActual: number;
+  previousLabel = 'Anterior';
+  nextLabel = 'Siguiente';
+  responsive: boolean = true;
+  //filtro de cursos
+  pacientesFilter: string = '';
+  items = 5;
   pacientes = [
     {
       codigo: '12314312',
@@ -107,4 +114,12 @@ export class PacienteRegistradoComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+  cambiarPagina() {
+    this.pageActual = 1;
+  }
+  elementosSeleccionados(valor) {
+    console.log(valor.target);
+
+    this.items = valor.target.value;
+  }
 }

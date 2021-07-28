@@ -9,8 +9,141 @@ import { CitaService } from '../../services/cita.service';
 })
 export class RegistroCitasComponent implements OnInit {
   // citas$ = this.citasService.cita;
-
+  pageActual: number;
+  previousLabel = 'Anterior';
+  nextLabel = 'Siguiente';
+  responsive: boolean = true;
+  items = 5;
+  citaFilter = '';
   citas = [
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
+    {
+      codigo: '12314312',
+      nombre: 'Nombre Apellido Apellido',
+      fecha: '12-02-21',
+      hora: '12:30',
+      codigo_doctor: '5432902',
+      estado: 'Citado',
+    },
     {
       codigo: '12314312',
       nombre: 'Nombre Apellido Apellido',
@@ -81,5 +214,12 @@ export class RegistroCitasComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  cambiarPagina() {
+    this.pageActual = 1;
+  }
+  elementosSeleccionados(valor) {
+    this.items = valor.target.value;
   }
 }
