@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { RegistroCitasComponent } from "./registro-citas.component";
 
 const routes: Routes = [{ path: '', component: RegistroCitasComponent}];

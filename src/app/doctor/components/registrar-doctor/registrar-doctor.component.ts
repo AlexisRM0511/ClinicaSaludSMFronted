@@ -11,9 +11,7 @@ import { DoctorService } from '../../services/doctor.service';
   styleUrls: ['./registrar-doctor.component.css']
 })
 export class RegistrarDoctorComponent implements OnInit {
-
   doctor:Doctor;
-
   especialidad$= this.doctorService.especialidad;
   doctorForm: FormGroup;
 

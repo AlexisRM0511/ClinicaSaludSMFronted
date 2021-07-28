@@ -22,7 +22,7 @@ export class PacienteRegistradoComponent implements OnInit {
   constructor(
     private pacienteService: PacientesService,
     private excelService: GenerarExcelService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.listarPacientes();
