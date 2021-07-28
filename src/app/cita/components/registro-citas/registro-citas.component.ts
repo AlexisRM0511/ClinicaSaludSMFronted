@@ -73,7 +73,7 @@ onGoToEdit(item: any):void{
 onGoToSee(item: any):void{
   this.navigationExtras.state.value = item;
   console.log(this.navigationExtras.state.value)
-  this.router.navigate(['src/app/cita/components/detalle-cita'], this.navigationExtras)
+  this.router.navigate(['/citas/detalle-cita'], this.navigationExtras)
 }
 
 async onGoToDelete(citaId: string):Promise<void>{

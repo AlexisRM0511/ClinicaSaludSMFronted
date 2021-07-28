@@ -43,7 +43,7 @@ export class DetalleCitaComponent implements OnInit {
   }
 
   onGoBackToList(): void {
-    this.router.navigate(['registro-citas']);
+    this.router.navigate(['/citas/registro-citas']);
   }
 
 }
