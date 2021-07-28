@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Cita } from '../../model/cita';
+import { CitaService } from '../../services/cita.service';
 
 @Component({
   selector: 'app-crear-cita',
@@ -8,12 +12,59 @@ import Swal from 'sweetalert2';
 })
 export class CrearCitaComponent implements OnInit {
 
-  constructor() { }
+  cita: Cita;
+  especialidad$= this.citasService.especialidad;
+  medico$= this.citasService.medico;
+  horario$= this.citasService.horario;
 
-  ngOnInit(): void {
+  citaForm: FormGroup;
+
+  constructor(
+    private citasService:CitaService,
+    private fb: FormBuilder,
+    private router: Router
+  ) { 
+    const navigation = this.router.getCurrentNavigation();
+    this.cita = navigation?.extras?.state?.value;
   }
 
-  CrearCita(){
+  ngOnInit(): void {
+    this.especialidad$;
+    this.listarEspecialidad();
+    this.listarMedico();
+    this.listarHorario();
+    this.initForm();
+  }
+
+  initForm() {
+    this.citaForm = this.fb.group({
+      especialidad: ['', [Validators.required]],
+      medico: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+      horario: ['', [Validators.required]]
+    })
+  }
+
+  listarEspecialidad(){
+    this.especialidad$.subscribe(val => console.log(val))
+  }
+
+  listarMedico(){
+    this.medico$.subscribe(val => console.log(val))
+  }
+
+  listarHorario(){
+    this.horario$.subscribe(val => console.log(val))
+  }
+
+  crearCita(){    
+    console.log("saved", this.citaForm.value);
+
+    if (this.citaForm.valid) {
+      const cita = this.citaForm.value;
+      const citaId = this.cita?.id || null;
+      this.citasService.onSaveCitas(cita, citaId);
+    }
     Swal.fire({
       icon: 'success',
       title: 'Cita generada',
@@ -22,4 +73,5 @@ export class CrearCitaComponent implements OnInit {
       confirmButtonColor: "#2FAF27"
     })
   }
+
 }
