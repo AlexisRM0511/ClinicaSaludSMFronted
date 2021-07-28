@@ -5,5 +5,5 @@ export interface CitaProgramada{
     apellido: string;
     fecha: string;
     hora: string;
-    codigoDoctor: string;
+    codigo_doctor: string;
 }
