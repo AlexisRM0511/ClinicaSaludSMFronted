@@ -47,4 +47,8 @@ export class PacientesService {
       map(actions => actions.map(a=>a.payload.doc.data() as Paciente))
     )
   }
+
+  getOnePaciente(pacienteId:string){
+    return this.pacienteCollection.doc(pacienteId).snapshotChanges();
+  }
 }
