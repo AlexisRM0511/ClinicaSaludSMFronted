@@ -23,13 +23,13 @@ export class DetalleCitaComponent implements OnInit {
 
   ngOnInit(): void {
     if (typeof this.cita === 'undefined'){
-      this.router.navigate(['registro-citas']);
+      this.router.navigate(['/citas/registro-citas']);
     }
   }
 
   onGoToEdit():void{
     this.navigationExtras.state.value = this.cita;
-    this.router.navigate(['editar-cita'], this.navigationExtras)
+    this.router.navigate(['/citas/editar-cita'], this.navigationExtras)
   }
 
   async onGoToDelete():Promise<void>{

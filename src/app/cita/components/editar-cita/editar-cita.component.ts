@@ -54,6 +54,9 @@ export class EditarCitaComponent implements OnInit {
       DNI: ['', [Validators.required]],
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+      hora: ['', [Validators.required]],
+      codigo_doctor: ['', [Validators.required]],
     });  
   }
 
