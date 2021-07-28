@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacientesService } from 'src/app/firebase/pacientes.service';
 import { HeaderComponent } from 'src/app/layout/header/header.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-atencion-general',
@@ -27,7 +28,10 @@ export class AtencionGeneralComponent{
       val.forEach(element => {
         if (element.codigo === values.codigo) {
           sessionStorage.setItem("userID", values.codigo);
-          alert("USTED SE HA LOGUEADO");
+          this.Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully',
+          });
           this.router.navigate(['paciente']);
         }
       });
@@ -38,6 +42,17 @@ export class AtencionGeneralComponent{
     )
     
   }
+
+  Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1500,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
 }
   //   form: FormGroup;
 

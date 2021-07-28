@@ -19,9 +19,8 @@
                         <select name="categoria_id" formControlName="medico" class="custom-select mb-4" id="categoriaCurso">
                             <option value="" hidden>Seleccione</option>
                             <option *ngFor="let m of medico$ | async | sort: 'asc':'nombre' " [ngValue]="m?.nombre">
-                                    {{ m?.nombre }}
+                                    {{ m?.lastName + ", " + m?.name}}
                             </option>
-
                         </select>
                     </div>
                     <div class="col-lg-12 mx-auto">
