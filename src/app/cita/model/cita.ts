@@ -1,5 +1,6 @@
 export interface Cita {
   id?: any;
+  DNI: any;
   especialidad: any;
   medico: any;
   fecha: any;
