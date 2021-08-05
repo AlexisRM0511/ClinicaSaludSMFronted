@@ -1,9 +1,10 @@
 <div class="container mt-4">
   <div class="card">
     <div class="container">
+
       <div class="row my-3">
         <div class="col-2"><h4>Citas registradas</h4></div>
-        <div class="col-7">
+        <div class="col-6">
           <input
             type="text"
             name=""
@@ -14,7 +15,16 @@
           />
         </div>
 
-        <div class="col-2 d-flex justify-content-end">
+        <div class="col-2">
+          <button
+            class="btn btn-outline-warning"  
+            (click)="onGoToRegistrar()" 
+          >
+            Registrar Cita
+          </button>
+        </div>
+
+        <div class="col-1 d-flex justify-content-end">
           <select
             name=""
             id=""
@@ -26,6 +36,7 @@
             <option value="15">15</option>
           </select>
         </div>
+
         <div class="col-1">
           <button
             class="btn btn-outline-success mx-1"
@@ -43,7 +54,7 @@
               <thead class="thead-dark">
                 <tr>
                   <th scope="col"></th>
-                  <th scope="col">Codigo</th>
+                  <th scope="col">Codigo Asegurado</th>
                   <th scope="col">Nombre completo</th>
                   <th scope="col" class="text-center">Fecha cita</th>
                   <th scope="col" class="text-center">Hora cita</th>
@@ -77,11 +88,9 @@
                   </td>
                   <td class="align-middle text-center">{{ c?.fecha }}</td>
                   <td class="align-middle text-center">{{ c?.horario }}</td>
+                  <td class="align-middle text-center">{{ c?.medico }}</td>
                   <td class="align-middle text-center">
-                    {{ c?.medico }}
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="badge bg-success p-2 text-white">citado</span>
+                    <span class="badge bg-success p-2 text-white">Citado</span>
                   </td>
                   <td
                     class="btn-group d-flex justify-content-center"

@@ -66,6 +66,12 @@ export class RegistroCitasComponent implements OnInit {
     });
   }
 
+  onGoToRegistrar():void{
+    this.navigationExtras.state.value = this.citas;
+    this.router.navigate(['/citas/crear'], this.navigationExtras)
+  }
+
+
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
     this.router.navigate(['/citas/editar-cita'], this.navigationExtras);
