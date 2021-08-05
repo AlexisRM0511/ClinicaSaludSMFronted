@@ -10,7 +10,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
-  declarations: [FilterPipe, DoctorRegistradoComponent, RegistrarDoctorComponent, SortPipe],
+  declarations: [FilterPipe, DoctorRegistradoComponent, RegistrarDoctorComponent, SortPipe, FilterPipe],
   imports: [CommonModule,NgxPaginationModule, FormsModule, DoctorRoutingModule, ReactiveFormsModule],
 })
 export class DoctorModule { }
