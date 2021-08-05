@@ -41,20 +41,19 @@ export class RegistrarDoctorComponent implements OnInit {
 
   registrarDoctor(){
 
-    console.log(this.doctorForm.value);
     if (this.doctorForm.valid) {
       const doctor = this.doctorForm.value;
       const doctorId = this.doctor?.id || null;
       this.doctorService.onSaveCitas(doctor, doctorId);
     }
 
-    /* Swal.fire({
+    Swal.fire({
       icon: 'success',
       title: 'Doctor registrado',
       text: 'Se registro con éxito al doctor',
       confirmButtonText: "OK",
       confirmButtonColor: "#2FAF27"
-    }) */
+    })
   }
 
   /* Validaciones */
