@@ -1,82 +1,81 @@
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="card">
     <div class="container">
       <div class="row my-3">
-        <div class="col-12">
-          <h4 class="d-inline">Doctores Registrados</h4>
+        <div class="col-2">
+          <h5>Medicos Registrados</h5>
         </div>
-      </div>
-      <div class="row my-4">
         <div class="col-6">
-          <input type="text" name="" class="form-control d-inline" id="" placeholder="Buscar doctores"
-            [(ngModel)]="doctoresFilter" (keyup)="cambiarPagina()" />
+          <input type="text" name="" class="form-control d-inline" id="" placeholder="Buscar cita"
+            [(ngModel)]="doctoresFilter" />
         </div>
         <div class="col-2">
+          <button class="btn btn-outline-warning mx-2" routerLink="registrar">
+            Registrar Doctor
+          </button>
+        </div>
+
+        <div class="col-1 d-flex justify-content-end">
           <select name="" id="" class="custom-select" (change)="elementosSeleccionados($event)">
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
           </select>
         </div>
-        <div class="col-4 d-flex justify-content-end">
-          <button class="btn btn-outline-primary mx-1" (click)="descargarExcel()">
+        <div class="col-1">
+          <button class="btn btn-outline-success mx-1" (click)="descargarExcel()">
             <i class="fas fa-download"></i>
-          </button>
-          <button class="btn btn-outline-info mx-1">
-            <i class="far fa-edit"></i>
-          </button>
-          <button class="btn btn-outline-danger mx-1">
-            <i class="fas fa-trash-alt"></i>
           </button>
         </div>
       </div>
+
       <div class="row my-3">
         <div class="col-12">
           <div class="table-responsive table-hover no-wrap">
             <table class="table">
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col"></th>
                   <th scope="col">Codigo</th>
                   <th scope="col">Nombre completo</th>
                   <th scope="col" class="text-center">DNI</th>
+                  <th scope="col" class="text-center">Tel&eacute;fono</th>
                   <th scope="col" class="text-center">Especialidad</th>
-                  <th scope="col" class="text-center">Teléfono</th>
-
+                  <th scope="col" class="text-center">Acciones</th>
                 </tr>
               </thead>
-              <tbody *ngIf="doctores?.length > 0">
-                <tr *ngFor="let d of doctores
-                | filter
-                        : {
-                            codigo: doctoresFilter,
-                            dni: doctoresFilter,
-                            name: doctoresFilter,
-                            lastName: doctoresFilter,
-                            specialty: doctoresFilter,
-                            number:doctoresFilter
-                          }
+              <!-- <tbody *ngIf="citas?.length > 0"> -->
+              <tr *ngFor="
+                    let c of doc$ | async
+                      | filter: { curso_nombre: doctoresFilter }
                       | paginate
-                        : { itemsPerPage: items, currentPage: pageActual }
+                        : { itemsPerPage: items, currentPage: pageActual };
+                    let i = index
                   ">
-                  <td class="align-middle">
-                    <input type="checkbox" name="" id="" />
-                  </td>
-                  <td class="align-middle">{{ d?.codigo }}</td>
-                  <td class="align-middle">{{ d?.lastName+", "+d?.name }}</td>
-                  <td class="align-middle text-center">{{ d?.dni }}</td>
-                  <td class="align-middle text-center">{{ d?.specialty }}</td>
-                  <td class="align-middle text-center">
-                    {{ d?.number }}
-                  </td>
-
-                </tr>
-              </tbody>
+                <td class="align-middle">{{ c?.codigo }}</td>
+                <td class="align-middle">
+                  {{ c?.name + " " + c?.lastName }}
+                </td>
+                <td class="align-middle text-center">{{ c?.dni }}</td>
+                <td class="align-middle text-center">{{ c?.number }}</td>
+                <td class="align-middle text-center">{{ c?.specialty }}</td>
+                <td class="btn-group d-flex justify-content-center" role="group">
+                  <button class="btn btn-outline-primary mx-1" (click)="onGoToSee(c)">
+                    <i class="fas fa-info"></i>
+                  </button>
+                  <button class="btn btn-outline-info mx-1" (click)="onGoToEdit(c)">
+                    <i class="far fa-edit"></i>
+                  </button>
+                  <button class="btn btn-outline-danger mx-1" (click)="onGoToDelete(c.id)">
+                    <i class="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+              <!-- </tbody> -->
             </table>
           </div>
         </div>
       </div>
-      <div class="row d-flex flex-row-reverse m-3" *ngIf="doctores?.length > items">
+      <div class="row d-flex flex-row-reverse m-3">
         <div>
           <ng-container>
             <pagination-controls class="my-pagination" maxSize="5" [responsive]="responsive"

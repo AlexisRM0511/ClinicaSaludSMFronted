@@ -17,7 +17,7 @@ export class DoctorRegistradoComponent implements OnInit {
   //filtro de cursos
   doctoresFilter: string = '';
   items = 5;
-  doc = this.doctoresService.doctores;
+  doc$ = this.doctoresService.doctores;
   doctores: Doctores[]
   constructor(
     private doctoresService: DoctoresService,
@@ -35,7 +35,7 @@ export class DoctorRegistradoComponent implements OnInit {
   }
 
   listarDoctores() {
-    this.doc.subscribe((val) => (this.doctores = val));
+    this.doc$.subscribe((val) => (this.doctores = val));
   }
 
   descargarExcel() {
