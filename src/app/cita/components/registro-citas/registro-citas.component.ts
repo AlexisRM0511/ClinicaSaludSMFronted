@@ -42,6 +42,8 @@ export class RegistroCitasComponent implements OnInit {
   ngOnInit(): void {
     //console.log(this.citas$);
     this.esAdministrativo = false;
+    console.log(sessionStorage.getItem('adminID'));
+
     if (sessionStorage.getItem('adminID') != null) {
       this.esAdministrativo = true;
     }
