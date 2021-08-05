@@ -55,8 +55,7 @@ export class PacienteEditarComponent implements OnInit {
       lastName: ['', [Validators.required]],
       dni: ['', [Validators.required]],
       date: ['', [Validators.required]],
-      number: ['', [Validators.required]],
-      pariente: ['', [Validators.required]],
+      number: ['', [Validators.required]]
     });  
   }
 

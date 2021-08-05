@@ -65,13 +65,34 @@ export class PacienteRegistradoComponent implements OnInit {
   }
 
   async onGoToDelete(pacienteId: string): Promise<void> {
-    try {
-      await this.pacienteService.onDeletePacientes(pacienteId);
-      alert('Borrado: Paciente ID:' + pacienteId);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   await this.pacienteService.onDeletePacientes(pacienteId);
+    //   alert('Borrado: Paciente ID:' + pacienteId);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    Swal.fire({
+      title: 'Estas seguro de borrar este paciente?',
+      text: "Esta accion no se puede revertir!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar registro!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.pacienteService.onDeletePacientes(pacienteId);
+        Swal.fire(
+          'Borrado!',
+          'El registro del paciente ha sido borrado exitosamente.',
+          'success'
+        )
+      }
+    })
   }
+
+  
 
 
   descargarExcel() {
