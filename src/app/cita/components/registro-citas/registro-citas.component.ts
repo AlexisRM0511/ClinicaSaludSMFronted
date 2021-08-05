@@ -11,8 +11,7 @@ import { CitaService } from '../../services/cita.service';
   styleUrls: ['./registro-citas.component.css'],
 })
 export class RegistroCitasComponent implements OnInit {
-  citas$ = this.citasService.citaProgramada;
-  // citas$ = this.citasService.cita;
+  citas$ = this.citasService.cita;
   pageActual: number;
   previousLabel = 'Anterior';
   nextLabel = 'Siguiente';
@@ -51,7 +50,7 @@ export class RegistroCitasComponent implements OnInit {
 
   async onGoToDelete(citaId: string): Promise<void> {
     try {
-      await this.citasService.onDeleteCitaProgramada(citaId);
+      await this.citasService.onDeleteCita(citaId);
       alert('Deleted: Cita ID:' + citaId);
     } catch (error) {
       console.log(error);

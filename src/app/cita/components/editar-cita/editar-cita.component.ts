@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CitaProgramada } from '../../model/cita-programada';
+import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
 
 @Component({
@@ -11,30 +11,30 @@ import { CitaService } from '../../services/cita.service';
 })
 export class EditarCitaComponent implements OnInit {
 
-  citaProgramada: CitaProgramada;
-  citaProgramadaForm: FormGroup;
+  cita: Cita;
+  citaForm: FormGroup;
 
   constructor(private router: Router, private fb: FormBuilder, private citaService: CitaService) { 
     const navigation = this.router.getCurrentNavigation();
-    this.citaProgramada = navigation?.extras?.state?.value;
+    this.cita = navigation?.extras?.state?.value;
     this.initForm();
   }
 
   ngOnInit(): void {
-    if (typeof this.citaProgramada === 'undefined'){
+    if (typeof this.cita === 'undefined'){
       this.router.navigate(['/citas/crear']);
     }else{
-      this.citaProgramadaForm.patchValue(this.citaProgramada);
+      this.citaForm.patchValue(this.cita);
     }
   }
 
   onSave(): void{
-    console.log('Saved', this.citaProgramadaForm.value);
-    if (this.citaProgramadaForm.valid){
-      const citaProgramada = this.citaProgramadaForm.value;
-      const citaProgramadaId = this.citaProgramada?.id || null;
-      this.citaService.onSaveCitaProgramada(citaProgramada, citaProgramadaId)
-      this.citaProgramadaForm.reset();
+    console.log('Saved', this.citaForm.value);
+    if (this.citaForm.valid){
+      const cita = this.citaForm.value;
+      const citaId = this.cita?.id || null;
+      this.citaService.onSaveCita(cita, citaId)
+      this.citaForm.reset();
     }
   }
 
@@ -43,20 +43,20 @@ export class EditarCitaComponent implements OnInit {
   }
 
   isValidField(field: string):string{
-    const validatedField = this.citaProgramadaForm.get(field);
+    const validatedField = this.citaForm.get(field);
     return ( !validatedField.valid && validatedField.touched)
       ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
   }
 
 
   private initForm(): void{
-    this.citaProgramadaForm = this.fb.group({
+    this.citaForm = this.fb.group({
       DNI: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
-      apellido: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
-      hora: ['', [Validators.required]],
-      codigo_doctor: ['', [Validators.required]],
+      horario: ['', [Validators.required]],
+      codigo: ['', [Validators.required]],
     });  
   }
 

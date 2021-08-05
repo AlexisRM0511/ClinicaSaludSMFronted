@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { CitaProgramada } from '../../model/cita-programada';
+import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { CitaService } from '../../services/cita.service';
   styleUrls: ['./detalle-cita.component.css']
 })
 export class DetalleCitaComponent implements OnInit {
-  cita: CitaProgramada = null;
+  cita: Cita = null;
   navigationExtras: NavigationExtras = {
     state:{
       value: null
@@ -34,7 +34,7 @@ export class DetalleCitaComponent implements OnInit {
 
   async onGoToDelete():Promise<void>{
     try {
-      await this.citaService.onDeleteCitaProgramada(this.cita?.id);
+      await this.citaService.onDeleteCita(this.cita?.id);
       alert('Deleted');
       this.onGoBackToList();
     } catch (error) {
