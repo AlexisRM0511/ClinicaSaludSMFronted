@@ -63,6 +63,7 @@ export class CrearCitaComponent implements OnInit {
         if (x !== undefined) {
           cita.name = x?.name;
           cita.lastname = x?.lastName;
+          cita.DNI = x?.dni;
           this.citasService.onSaveCitas(cita, citaId);
           Swal.fire({
             icon: 'success',
