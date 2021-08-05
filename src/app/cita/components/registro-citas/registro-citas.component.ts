@@ -68,6 +68,12 @@ export class RegistroCitasComponent implements OnInit {
     });
   }
 
+  onGoToRegistrar():void{
+    this.navigationExtras.state.value = this.citas;
+    this.router.navigate(['/citas/crear'], this.navigationExtras)
+  }
+
+
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
     this.router.navigate(['/citas/editar-cita'], this.navigationExtras);
@@ -80,12 +86,31 @@ export class RegistroCitasComponent implements OnInit {
   }
 
   async onGoToDelete(citaId: string): Promise<void> {
-    try {
-      await this.citasService.onDeleteCita(citaId);
-      alert('Deleted: Cita ID:' + citaId);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   await this.citasService.onDeleteCita(citaId);
+    //   alert('Deleted: Cita ID:' + citaId);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    
+    Swal.fire({
+      title: 'Estas seguro de borrar este paciente?',
+      text: "Esta accion no se puede revertir!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar registro!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.citasService.onDeleteCita(citaId);
+        Swal.fire(
+          'Borrado!',
+          'El registro del paciente ha sido borrado exitosamente.',
+          'success'
+        )
+      }
+    })
   }
 
   cambiarPagina() {

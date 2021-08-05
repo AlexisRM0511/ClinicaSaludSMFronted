@@ -9,7 +9,7 @@ import { PanelPacienteComponent } from './components/panel-paciente/panel-pacien
 
 import { FilterPipe } from './pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     NgxPaginationModule,
     FormsModule,
     PacienteRoutingModule,

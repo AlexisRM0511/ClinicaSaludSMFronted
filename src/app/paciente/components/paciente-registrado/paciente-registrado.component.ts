@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Paciente } from 'src/app/firebase/paciente';
 import { PacientesService } from 'src/app/firebase/pacientes.service';
@@ -21,7 +22,14 @@ export class PacienteRegistradoComponent implements OnInit {
   pac = this.pacienteService.paciente;
   pacientes: Paciente[];
 
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null,
+    },
+  };
+
   constructor(
+    private router: Router,
     private pacienteService: PacientesService,
     private excelService: GenerarExcelService
   ) {}
@@ -39,6 +47,53 @@ export class PacienteRegistradoComponent implements OnInit {
   listarPacientes() {
     this.pac.subscribe((val) => (this.pacientes = val));
   }
+
+  onGoToRegistrarPaciente():void{
+    this.navigationExtras.state.value = this.pacientes;
+    this.router.navigate(['/paciente/registrar'], this.navigationExtras)
+  }
+
+  onGoToSee(item: any): void {
+    this.navigationExtras.state.value = item;
+    console.log(this.navigationExtras.state.value);
+    this.router.navigate(['/paciente/detalle'], this.navigationExtras);
+  }
+
+  onGoToEdit(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['/paciente/editar'], this.navigationExtras);
+  }
+
+  async onGoToDelete(pacienteId: string): Promise<void> {
+    // try {
+    //   await this.pacienteService.onDeletePacientes(pacienteId);
+    //   alert('Borrado: Paciente ID:' + pacienteId);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    Swal.fire({
+      title: 'Estas seguro de borrar este paciente?',
+      text: "Esta accion no se puede revertir!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar registro!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.pacienteService.onDeletePacientes(pacienteId);
+        Swal.fire(
+          'Borrado!',
+          'El registro del paciente ha sido borrado exitosamente.',
+          'success'
+        )
+      }
+    })
+  }
+
+  
+
 
   descargarExcel() {
     this.excelService.exportAsExcelFile(this.pacientes, 'Pacientes');

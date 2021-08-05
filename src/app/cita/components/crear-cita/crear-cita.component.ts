@@ -38,7 +38,7 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
-    /* console.log(this.medico$); */
+    console.log(this.medico$);
   }
 
   initForm() {
