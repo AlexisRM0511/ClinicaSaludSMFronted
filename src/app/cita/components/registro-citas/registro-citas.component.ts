@@ -46,7 +46,10 @@ export class RegistroCitasComponent implements OnInit {
 
     if (sessionStorage.getItem('adminID') != null) {
       this.esAdministrativo = true;
+      this.listarCitas2();
     }
+    console.log(this.esAdministrativo);
+
     this.informacionPaciente();
   }
 
@@ -68,11 +71,16 @@ export class RegistroCitasComponent implements OnInit {
     });
   }
 
-  onGoToRegistrar():void{
-    this.navigationExtras.state.value = this.citas;
-    this.router.navigate(['/citas/crear'], this.navigationExtras)
+  listarCitas2() {
+    this.citas$.subscribe((val) => {
+      this.citas = val;
+      console.log(this.citas);
+    });
   }
-
+  onGoToRegistrar(): void {
+    this.navigationExtras.state.value = this.citas;
+    this.router.navigate(['/citas/crear'], this.navigationExtras);
+  }
 
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
@@ -92,15 +100,15 @@ export class RegistroCitasComponent implements OnInit {
     // } catch (error) {
     //   console.log(error);
     // }
-    
+
     Swal.fire({
       title: 'Estas seguro de borrar este paciente?',
-      text: "Esta accion no se puede revertir!",
+      text: 'Esta accion no se puede revertir!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, borrar registro!'
+      confirmButtonText: 'Si, borrar registro!',
     }).then((result) => {
       if (result.isConfirmed) {
         this.citasService.onDeleteCita(citaId);
@@ -108,9 +116,9 @@ export class RegistroCitasComponent implements OnInit {
           'Borrado!',
           'El registro del paciente ha sido borrado exitosamente.',
           'success'
-        )
+        );
       }
-    })
+    });
   }
 
   cambiarPagina() {
@@ -146,6 +154,8 @@ export class RegistroCitasComponent implements OnInit {
     );
 
     await this.paciente$.subscribe(async (x) => {
+      console.log('oinoianboisnab', x);
+
       if (x !== undefined) {
         this.parientes = x?.parientes;
         if (!this.esAdministrativo) {
