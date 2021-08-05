@@ -56,7 +56,13 @@
                 <tr
                   *ngFor="
                     let c of citas$ | async
-                      | filter: { curso_nombre: citaFilter }
+                      | filter
+                      : {
+                          codigo: citaFilter,
+                          name: citaFilter,
+                          lastname: citaFilter,
+                          medico: citaFilter
+                        }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual };
                     let i = index
