@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Paciente } from 'src/app/firebase/paciente';
 import { PacientesService } from 'src/app/firebase/pacientes.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
@@ -19,10 +20,11 @@ export class PacienteRegistradoComponent implements OnInit {
   items = 5;
   pac = this.pacienteService.paciente;
   pacientes: Paciente[];
+
   constructor(
     private pacienteService: PacientesService,
     private excelService: GenerarExcelService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.listarPacientes();

@@ -60,9 +60,11 @@ export class CrearCitaComponent implements OnInit {
       const cita: Cita = this.citaForm.value;
       const citaId = this.cita?.id || null;
       await this.paciente$.subscribe(async (x) => {
+        console.log(x);
         if (x !== undefined) {
           cita.name = x?.name;
           cita.lastname = x?.lastName;
+          cita.DNI = x?.dni;
           this.citasService.onSaveCitas(cita, citaId);
           Swal.fire({
             icon: 'success',
