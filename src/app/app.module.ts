@@ -18,6 +18,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
 import { EditarCitaComponent } from './cita/components/editar-cita/editar-cita.component';
 import { EditarCitaModule } from './cita/components/editar-cita/editar-cita.module';
+import { PacienteDetalleComponent } from './paciente/components/paciente-detalle/paciente-detalle.component';
+import { PacienteDetalleModule } from './paciente/components/paciente-detalle/paciente-detalle.module';
+import { PacienteEditarComponent } from './paciente/components/paciente-editar/paciente-editar.component';
+import { PacienteEditarModule } from './paciente/components/paciente-editar/paciente-editar.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -31,7 +35,8 @@ import { EditarCitaModule } from './cita/components/editar-cita/editar-cita.modu
     AngularFireModule.initializeApp(environment.firebaseConfig),
     DetalleCitaModule,
     NgxPaginationModule,
-    EditarCitaModule,
+    EditarCitaModule,    
+    PacienteDetalleModule, PacienteEditarModule,
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],

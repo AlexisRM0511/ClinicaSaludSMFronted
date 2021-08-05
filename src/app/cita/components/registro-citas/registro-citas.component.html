@@ -79,43 +79,17 @@
                     let i = index
                   "
                 >
-                  <td class="align-middle">
-                    {{ i + 1 }}
-                  </td>
+                  <td class="align-middle">{{ i + 1 }}</td>
                   <td class="align-middle">{{ c?.codigo }}</td>
-                  <td class="align-middle">
-                    {{ c?.name + " " + c?.lastname }}
-                  </td>
+                  <td class="align-middle">{{ c?.name + " " + c?.lastname }}</td>
                   <td class="align-middle text-center">{{ c?.fecha }}</td>
                   <td class="align-middle text-center">{{ c?.horario }}</td>
                   <td class="align-middle text-center">{{ c?.medico }}</td>
-                  <td class="align-middle text-center">
-                    <span class="badge bg-success p-2 text-white">Citado</span>
-                  </td>
-                  <td
-                    class="btn-group d-flex justify-content-center"
-                    role="group"
-                  >
-                    <button
-                      class="btn btn-outline-primary mx-1"
-                      (click)="onGoToSee(c)"
-                    >
-                      <i class="fas fa-info"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-info mx-1"
-                      (click)="onGoToEdit(c)"
-                      *ngIf="esAdministrativo"
-                    >
-                      <i class="far fa-edit"></i>
-                    </button>
-                    <button
-                      class="btn btn-outline-danger mx-1"
-                      (click)="onGoToDelete(c.id)"
-                      *ngIf="esAdministrativo"
-                    >
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
+                  <td class="align-middle text-center"><span class="badge bg-success p-2 text-white">Citado</span></td>
+                  <td class="btn-group d-flex justify-content-center" role="group">
+                    <button class="btn btn-outline-primary mx-1" (click)="onGoToSee(c)"><i class="fas fa-info"></i></button>
+                    <button class="btn btn-outline-info mx-1" (click)="onGoToEdit(c)" *ngIf="esAdministrativo"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-outline-danger mx-1" (click)="onGoToDelete(c.id)" *ngIf="esAdministrativo"><i class="fas fa-trash-alt"></i></button>
                   </td>
                 </tr>
               </tbody>
