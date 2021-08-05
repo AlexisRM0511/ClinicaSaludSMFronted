@@ -99,7 +99,7 @@ export class CitaService {
   onDeleteCitaProgramada(citaProgramadaId: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.citaCollection.doc(citaProgramadaId).delete();
+        const result = await this.citaProgramadaCollection.doc(citaProgramadaId).delete();
         resolve(result);
       } catch (error) {
         reject(error.message);

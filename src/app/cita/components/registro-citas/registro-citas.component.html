@@ -48,7 +48,7 @@
                 <!-- <tr *ngFor="let c of citas$ | async"> -->
                 <tr
                   *ngFor="
-                    let c of citas
+                    let c of citas$ | async
                       | filter: { curso_nombre: citaFilter }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual }

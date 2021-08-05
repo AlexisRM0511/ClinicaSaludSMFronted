@@ -8,45 +8,45 @@ import { CitaService } from '../../services/cita.service';
   styleUrls: ['./registro-citas.component.css'],
 })
 export class RegistroCitasComponent implements OnInit {
-  // citas$ = this.citasService.cita;
+  citas$ = this.citasService.citaProgramada;
   pageActual: number;
   previousLabel = 'Anterior';
   nextLabel = 'Siguiente';
   responsive: boolean = true;
   items = 5;
   citaFilter = '';
-  citas = [
-    {
-      id: '1',
-      DNI: '12314312',
-      nombre: 'Nombre',
-      apellido: 'Apellido Apellido',
-      fecha: '12-02-21',
-      hora: '12:30',
-      codigo_doctor: '5432902',
-      estado: 'Citado',
-    },
-    {
-      id: '2',
-      DNI: '12314312',
-      nombre: 'Nombre',
-      apellido: 'Apellido Apellido',
-      fecha: '12-02-21',
-      hora: '12:30',
-      codigo_doctor: '5432902',
-      estado: 'Citado',
-    },
-    {
-      id: '3',
-      DNI: '12314312',
-      nombre: 'Nombre',
-      apellido: 'Apellido Apellido',
-      fecha: '12-02-21',
-      hora: '12:30',
-      codigo_doctor: '5432902',
-      estado: 'Citado',
-    },
-  ];
+  // citas = [
+  //   {
+  //     id: '1',
+  //     DNI: '12314312',
+  //     nombre: 'Nombre',
+  //     apellido: 'Apellido Apellido',
+  //     fecha: '12-02-21',
+  //     hora: '12:30',
+  //     codigo_doctor: '5432902',
+  //     estado: 'Citado',
+  //   },
+  //   {
+  //     id: '2',
+  //     DNI: '12314312',
+  //     nombre: 'Nombre',
+  //     apellido: 'Apellido Apellido',
+  //     fecha: '12-02-21',
+  //     hora: '12:30',
+  //     codigo_doctor: '5432902',
+  //     estado: 'Citado',
+  //   },
+  //   {
+  //     id: '3',
+  //     DNI: '12314312',
+  //     nombre: 'Nombre',
+  //     apellido: 'Apellido Apellido',
+  //     fecha: '12-02-21',
+  //     hora: '12:30',
+  //     codigo_doctor: '5432902',
+  //     estado: 'Citado',
+  //   },
+  // ];
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -72,7 +72,7 @@ export class RegistroCitasComponent implements OnInit {
   async onGoToDelete(citaId: string): Promise<void> {
     try {
       await this.citasService.onDeleteCitaProgramada(citaId);
-      alert('Deleted');
+      alert('Deleted: Cita ID:' + citaId);
     } catch (error) {
       console.log(error);
     }
