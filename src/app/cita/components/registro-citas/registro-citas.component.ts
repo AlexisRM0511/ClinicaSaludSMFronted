@@ -35,7 +35,15 @@ export class RegistroCitasComponent implements OnInit {
   ngOnInit(): void {
     // this.citas$.subscribe((val) => (this.citas = val));
     // console.log(this.citas$);
+    // Create a query against the collection
+    // const queryRef = doctor.where('state', '==', 'CA');
   }
+
+  onGoToRegistrar():void{
+    this.navigationExtras.state.value = this.citas;
+    this.router.navigate(['/citas/crear'], this.navigationExtras)
+  }
+
 
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
