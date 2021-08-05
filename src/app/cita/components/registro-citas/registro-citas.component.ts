@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { GenerarExcelService } from 'src/app/services/generar-excel.service';
+import Swal from 'sweetalert2';
+import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
 
 @Component({
@@ -9,44 +12,14 @@ import { CitaService } from '../../services/cita.service';
 })
 export class RegistroCitasComponent implements OnInit {
   citas$ = this.citasService.citaProgramada;
+  // citas$ = this.citasService.cita;
   pageActual: number;
   previousLabel = 'Anterior';
   nextLabel = 'Siguiente';
   responsive: boolean = true;
   items = 5;
   citaFilter = '';
-  // citas = [
-  //   {
-  //     id: '1',
-  //     DNI: '12314312',
-  //     nombre: 'Nombre',
-  //     apellido: 'Apellido Apellido',
-  //     fecha: '12-02-21',
-  //     hora: '12:30',
-  //     codigo_doctor: '5432902',
-  //     estado: 'Citado',
-  //   },
-  //   {
-  //     id: '2',
-  //     DNI: '12314312',
-  //     nombre: 'Nombre',
-  //     apellido: 'Apellido Apellido',
-  //     fecha: '12-02-21',
-  //     hora: '12:30',
-  //     codigo_doctor: '5432902',
-  //     estado: 'Citado',
-  //   },
-  //   {
-  //     id: '3',
-  //     DNI: '12314312',
-  //     nombre: 'Nombre',
-  //     apellido: 'Apellido Apellido',
-  //     fecha: '12-02-21',
-  //     hora: '12:30',
-  //     codigo_doctor: '5432902',
-  //     estado: 'Citado',
-  //   },
-  // ];
+  citas: Cita[];
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -54,9 +27,16 @@ export class RegistroCitasComponent implements OnInit {
     },
   };
 
-  constructor(private router: Router, private citasService: CitaService) {}
+  constructor(
+    private router: Router,
+    private citasService: CitaService,
+    private excelService: GenerarExcelService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.citas$.subscribe((val) => (this.citas = val));
+    // console.log(this.citas$);
+  }
 
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
@@ -83,5 +63,25 @@ export class RegistroCitasComponent implements OnInit {
   }
   elementosSeleccionados(valor) {
     this.items = valor.target.value;
+  }
+
+  descargarExcel() {
+    this.excelService.exportAsExcelFile(this.citas, 'Citas');
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Descargando...',
+    });
   }
 }

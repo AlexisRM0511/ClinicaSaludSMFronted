@@ -26,4 +26,4 @@ import { FormsModule } from '@angular/forms';
     PacienteRoutingModule,
   ],
 })
-export class PacienteModule {}
+export class PacienteModule { }
