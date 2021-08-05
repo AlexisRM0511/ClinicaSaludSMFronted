@@ -11,7 +11,8 @@ import { CitaService } from '../../services/cita.service';
   styleUrls: ['./registro-citas.component.css'],
 })
 export class RegistroCitasComponent implements OnInit {
-  citas$ = this.citasService.cita;
+  citas$ = this.citasService.citaProgramada;
+  // citas$ = this.citasService.cita;
   pageActual: number;
   previousLabel = 'Anterior';
   nextLabel = 'Siguiente';
@@ -33,8 +34,8 @@ export class RegistroCitasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.citas$.subscribe((val) => (this.citas = val));
-    console.log(this.citas$);
+    // this.citas$.subscribe((val) => (this.citas = val));
+    // console.log(this.citas$);
   }
 
   onGoToEdit(item: any): void {
@@ -51,7 +52,7 @@ export class RegistroCitasComponent implements OnInit {
   async onGoToDelete(citaId: string): Promise<void> {
     try {
       await this.citasService.onDeleteCitaProgramada(citaId);
-      alert('Deleted');
+      alert('Deleted: Cita ID:' + citaId);
     } catch (error) {
       console.log(error);
     }

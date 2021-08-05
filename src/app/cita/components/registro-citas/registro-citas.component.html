@@ -52,17 +52,11 @@
                   <th scope="col" class="text-center">Acciones</th>
                 </tr>
               </thead>
-              <tbody *ngIf="citas?.length > 0">
+              <!-- <tbody *ngIf="citas?.length > 0"> -->
                 <tr
                   *ngFor="
-                    let c of citas
-                      | filter
-                        : {
-                            codigo: citaFilter,
-                            name: citaFilter,
-                            lastname: citaFilter,
-                            medico: citaFilter
-                          }
+                    let c of citas$ | async
+                      | filter: { curso_nombre: citaFilter }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual };
                     let i = index
@@ -107,7 +101,7 @@
                     </button>
                   </td>
                 </tr>
-              </tbody>
+              <!-- </tbody> -->
             </table>
           </div>
         </div>
