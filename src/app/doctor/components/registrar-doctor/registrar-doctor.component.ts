@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Doctor } from '../../model/doctor';
+import { Doctores } from '../../model/doctor';
 import { DoctorService } from '../../services/doctor.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { DoctorService } from '../../services/doctor.service';
   styleUrls: ['./registrar-doctor.component.css']
 })
 export class RegistrarDoctorComponent implements OnInit {
-  doctor:Doctor;
+  doctor:Doctores;
   especialidad$= this.doctorService.especialidad;
   doctorForm: FormGroup;
 
@@ -43,7 +43,7 @@ export class RegistrarDoctorComponent implements OnInit {
 
     if (this.doctorForm.valid) {
       const doctor = this.doctorForm.value;
-      const doctorId = this.doctor?.id || null;
+      const doctorId = this.doctor?.codigo || null;
       this.doctorService.onSaveCitas(doctor, doctorId);
     }
 

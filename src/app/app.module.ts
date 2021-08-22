@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Paciente } from './firebase/paciente';
+import { Paciente } from './paciente/model/paciente';
 import { environment } from 'src/environments/environment';
 import { DetalleCitaModule } from './cita/components/detalle-cita/detalle-cita.module';
 import { NgxPaginationModule } from 'ngx-pagination';

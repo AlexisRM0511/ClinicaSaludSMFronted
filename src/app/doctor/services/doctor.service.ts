@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Especialidad } from 'src/app/cita/model/especialidad';
-import { Doctor } from '../model/doctor';
+import {Doctores} from '../model/doctor';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +11,54 @@ import { Doctor } from '../model/doctor';
 export class DoctorService {
 
   especialidad: Observable<Especialidad[]>;
-  doctor: Observable<Doctor[]>;
-
+  doctor: Observable<Doctores[]>;
   private especialidadCollection: AngularFirestoreCollection<Especialidad>;
-  private doctorCollection: AngularFirestoreCollection<Doctor>;
-
-  constructor(private readonly afs:AngularFirestore) {
-    this.especialidadCollection=afs.collection<Especialidad>('especialidad');
-    this.doctorCollection=afs.collection<Doctor>('doctor');
-
+  private doctorCollection: AngularFirestoreCollection<Doctores>;
+  
+  constructor(private readonly afs: AngularFirestore) {
+    this.especialidadCollection = afs.collection<Especialidad>('especialidad');
+    this.doctorCollection = afs.collection<Doctores>('doctor');
     this.getEspecialidad();
+    this.getDoctores();
   }
 
-  onSaveCitas(doctor: Doctor, doctorId:string):Promise<void>{
+  onDeleteDoctores(doctorID: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = this.doctorCollection.doc(doctorID).delete();
+        resolve(result);
+      } catch (error) {
+        reject(error.message);
+      }
+    });
+  }
+
+  onSaveDoctores(doctor: Doctores, doctorID: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = doctorID || this.afs.createId();
+        const data = { id, ...doctor };
+        const result = this.doctorCollection.doc(id).set(data);
+        resolve(result);
+      } catch (error) {
+        reject(error.message);
+      }
+    });
+  }
+
+  getDoctores(): void {
+    this.doctor = this.doctorCollection
+      .snapshotChanges()
+      .pipe(
+        map((actions) => actions.map((a) => a.payload.doc.data() as Doctores))
+      );
+  }
+
+  getOneDoctores(doctorID: string) {
+    return this.doctorCollection.doc(doctorID).snapshotChanges();
+  }
+
+  onSaveCitas(doctor: Doctores, doctorId:string):Promise<void>{
     return new Promise(async (resolve,reject)=>{
       try {
         const id= doctorId || this.afs.createId();

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Paciente } from 'src/app/firebase/paciente';
-import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { Paciente } from '../../model/paciente';
+import { PacienteService } from '../../services/paciente.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
 
@@ -30,7 +30,7 @@ export class PacienteRegistradoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private pacienteService: PacientesService,
+    private pacienteService: PacienteService,
     private excelService: GenerarExcelService
   ) {}
 
