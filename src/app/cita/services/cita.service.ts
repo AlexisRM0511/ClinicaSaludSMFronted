@@ -8,25 +8,25 @@ import { map } from 'rxjs/operators';
 import { Cita } from '../model/cita';
 import { Especialidad } from '../model/especialidad';
 import { Horario } from '../model/horario';
-import { Medico } from '../model/medico';
+import { Doctores } from 'src/app/doctor/model/doctor';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CitaService {
   especialidad: Observable<Especialidad[]>;
-  medico: Observable<Medico[]>;
-  horario: Observable<Medico[]>;
+  medico: Observable<Doctores[]>;
+  horario: Observable<Doctores[]>;
   cita: Observable<Cita[]>;
 
   private especialidadCollection: AngularFirestoreCollection<Especialidad>;
-  private medicoCollection: AngularFirestoreCollection<Especialidad>;
+  private doctorCollection: AngularFirestoreCollection<Doctores>;
   private horarioCollection: AngularFirestoreCollection<Horario>;
   private citaCollection: AngularFirestoreCollection<Cita>;
 
   constructor(private readonly afs: AngularFirestore) {
     this.especialidadCollection = afs.collection<Especialidad>('especialidad');
-    this.medicoCollection = afs.collection<Medico>('medico');
+    this.doctorCollection = afs.collection<Doctores>('doctor');
     this.horarioCollection = afs.collection<Horario>('horario');
     this.citaCollection = afs.collection<Cita>('cita');
     this.getEspecialidad();
@@ -59,10 +59,10 @@ export class CitaService {
   }
 
   getMedico(): void {
-    this.medico = this.medicoCollection
+    this.medico = this.doctorCollection
       .snapshotChanges()
       .pipe(
-        map((actions) => actions.map((a) => a.payload.doc.data() as Medico))
+        map((actions) => actions.map((a) => a.payload.doc.data() as Doctores))
       );
   }
 
