@@ -1,46 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/admin/services/admin.service';
+import { DoctorService } from 'src/app/doctor/services/doctor.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-administrativo',
-  templateUrl: './administrativo.component.html',
-  styleUrls: ['./administrativo.component.css'],
+  selector: 'app-doctor',
+  templateUrl: './doctor.component.html',
+  styleUrls: ['./doctor.component.css']
 })
-export class AdministrativoComponent {
+export class DoctorComponent{
   form: FormGroup;
   codigo: string;
-  admin$ = this.adminSvc.admin;
+  password: string;
+  doctores$ = this.doctoresSvc.doctor;
+  Doctor = false;
 
   constructor(
     private _builder: FormBuilder,
-    private adminSvc: AdminService,
+    private doctoresSvc: DoctorService,
     private router: Router
   ) {
     this.form = this._builder.group({
       codigo: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   async validar(values) {
     console.log(values.codigo, values.password);
-    this.admin$.subscribe((val) => {
+    this.doctores$.subscribe((val) => {
       val.forEach((element) => {
-        if (element.codigo === values.codigo) {
-          sessionStorage.setItem('adminID', values.codigo);
+        if (
+          element.codigo === values.codigo &&
+          element.dni === values.password
+        ) {
+          sessionStorage.setItem('doctorID', values.codigo);
           this.Toast.fire({
             icon: 'success',
             title: 'Signed in successfully',
           });
 
-          this.router.navigate(['admin']).then(() => {
+          this.router.navigate(['doctor']).then(() => {
             window.location.reload();
           });
         }
       });
-      if (sessionStorage.getItem('adminID') === null) {
+      if (sessionStorage.getItem('doctorID') === null) {
         this.Toast.fire({
           icon: 'error',
           title: 'Signed Error',
