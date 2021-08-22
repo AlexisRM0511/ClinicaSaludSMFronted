@@ -1,0 +1,24 @@
+<div class="container-login">
+    <div class="container-main">
+        <div class="title">
+            <div class="title-name">CLINICA SALUD SM</div>
+            <div class="title-title">DOCTORES</div>
+        </div>
+
+        <div class="form">
+            <form [formGroup]="form" (ngSubmit)="validar(form.value)">
+                <h1 class="form-title">Código de Doctor</h1>
+                <input id="usuario" placeholder="Ingrese su Codigo de Asegurado" type="text" class="form-control"
+                    formControlName="codigo"/>
+                <h1 class="form-title">DNI del Doctor</h1>
+                <input id="contraseña" placeholder="Ingrese su DNI" type="password" class="form-control"
+                    formControlName="password"/>
+                <div class="button-group">
+                    <button [disabled]="form.invalid" class="button-login">
+                        Iniciar Sesión
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

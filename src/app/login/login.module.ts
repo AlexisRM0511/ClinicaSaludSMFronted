@@ -7,25 +7,21 @@ import { AtencionGeneralComponent } from './components/atencion-general/atencion
 import { HomeComponent } from './components/home/home.component';
 import { Paciente } from '../paciente/model/paciente';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { DoctorComponent } from './components/doctor/doctor.component';
 
 @NgModule({
   declarations: [
     LoginComponent,
     AdministrativoComponent,
     AtencionGeneralComponent,
-    HomeComponent
+    HomeComponent,
+    DoctorComponent
   ],
   imports: [
     CommonModule,
     LoginRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
-export class LoginModule implements OnInit{
-  paciente: Paciente = null;
-
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  } 
-}
+export class LoginModule {}
