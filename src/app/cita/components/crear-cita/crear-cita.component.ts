@@ -50,7 +50,7 @@ export class CrearCitaComponent implements OnInit {
       horario: ['', [Validators.required]],
     });
     this.citaForm.get('codigo').disable();
-    this.citaForm.get('codigo').setValue('ASG - 761');
+    this.citaForm.get('codigo').setValue(sessionStorage.getItem('userID'));
   }
 
   async crearCita() {
@@ -67,21 +67,15 @@ export class CrearCitaComponent implements OnInit {
           cita.name = x?.name;
           cita.lastname = x?.lastName;
           cita.DNI = x?.dni;
-          /* this.citasService.onSaveCitas(cita, citaId); */
-          /* Swal.fire({
+          this.citasService.onSaveCitas(cita, citaId);
+          Swal.fire({
             icon: 'success',
             title: 'Cita generada',
             text: 'La cita de a generado con éxito',
             confirmButtonText: 'OK',
             confirmButtonColor: '#2FAF27',
-          }); */
-          Swal.fire({
-            icon: 'error',
-            // title: 'Cita generada',
-            text: 'Ya tiene una cita pendiente',
-            confirmButtonText: 'OK',
-            confirmButtonColor: 'red',
           });
+
           this.citaForm.reset();
         } else {
           Swal.fire({
