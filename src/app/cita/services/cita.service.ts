@@ -16,7 +16,7 @@ import { Doctores } from 'src/app/doctor/model/doctor';
 export class CitaService {
   especialidad: Observable<Especialidad[]>;
   medico: Observable<Doctores[]>;
-  horario: Observable<Doctores[]>;
+  horario: Observable<Horario[]>;
   cita: Observable<Cita[]>;
 
   private especialidadCollection: AngularFirestoreCollection<Especialidad>;
