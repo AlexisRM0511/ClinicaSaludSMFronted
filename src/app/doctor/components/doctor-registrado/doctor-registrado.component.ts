@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Doctores } from 'src/app/firebase/doctores';
-import { DoctoresService } from 'src/app/firebase/doctores.service';
+import { Doctores } from '../../model/doctor';
+import { DoctorService } from '../../services/doctor.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
 
@@ -17,10 +17,10 @@ export class DoctorRegistradoComponent implements OnInit {
   //filtro de cursos
   doctoresFilter: string = '';
   items = 5;
-  doc$ = this.doctoresService.doctores;
+  doc$ = this.doctoresService.doctor;
   doctores: Doctores[]
   constructor(
-    private doctoresService: DoctoresService,
+    private doctoresService: DoctorService,
     private excelService: GenerarExcelService
   ) { }
 

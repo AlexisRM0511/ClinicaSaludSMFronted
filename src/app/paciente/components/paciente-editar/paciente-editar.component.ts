@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Paciente } from 'src/app/firebase/paciente';
-import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { Paciente } from '../../model/paciente';
+import { PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-paciente-editar',
@@ -13,7 +13,7 @@ export class PacienteEditarComponent implements OnInit {
   paciente: Paciente;
   pacienteForm: FormGroup;
 
-  constructor(private router: Router, private fb: FormBuilder, private pacienteService: PacientesService) { 
+  constructor(private router: Router, private fb: FormBuilder, private pacienteService: PacienteService) { 
     const navigation = this.router.getCurrentNavigation();
     this.paciente = navigation?.extras?.state?.value;
     this.initForm();

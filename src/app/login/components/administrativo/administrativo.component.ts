@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DoctoresService } from 'src/app/firebase/doctores.service';
+import { DoctorService } from 'src/app/doctor/services/doctor.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,11 +13,11 @@ export class AdministrativoComponent {
   form: FormGroup;
   codigo: string;
   password: string;
-  doctores$ = this.doctoresSvc.doctores;
+  doctores$ = this.doctoresSvc.doctor;
 
   constructor(
     private _builder: FormBuilder,
-    private doctoresSvc: DoctoresService,
+    private doctoresSvc: DoctorService,
     private router: Router
   ) {
     this.form = this._builder.group({

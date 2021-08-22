@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import { HeaderComponent } from 'src/app/layout/header/header.component';
 import Swal from 'sweetalert2';
 
@@ -23,7 +23,7 @@ export class AtencionGeneralComponent {
 
   constructor(
     private _builder: FormBuilder,
-    private pacienteSvc: PacientesService,
+    private pacienteSvc: PacienteService,
     private router: Router
   ) {
     this.form = this._builder.group({
