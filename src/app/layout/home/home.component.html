@@ -23,14 +23,14 @@
 <main role="main" class="container">
   <div class="row my-5">
     <div class="col-4">
-      <div class="card">
+      <div class="card shadow">
         <div class="card-body">
           <div class="row">
             <div class="col-12 d-flex justify-content-center">
               <img
                 src="https://tramitesperu.net/wp-content/uploads/2021/02/descarga-1.png"
                 alt=""
-                class="mt-3"
+                class="mt-3 borderradious"
               />
             </div>
             <div class="col-12 my-4">
@@ -50,9 +50,13 @@
     </div>
     <div class="col-8">
       <div class="row">
-        <div class="card col-5 mb-3 mx-4" *ngFor="let c of categorias">
+        <div class="card col-5 mb-3 mx-4 shadow" *ngFor="let c of categorias">
           <h3 class="mt-4">{{ c?.nombre }}</h3>
-          <img src="{{ c?.img }}" alt="" class="mt-3 mb-4 maxsize" />
+          <img
+            src="{{ c?.img }}"
+            alt=""
+            class="mt-3 mb-4 maxsize borderradious"
+          />
         </div>
       </div>
     </div>

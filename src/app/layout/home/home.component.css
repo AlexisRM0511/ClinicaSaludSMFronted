@@ -1,3 +1,8 @@
-.maxsize{
-    max-height: 170px;
+.maxsize {
+  max-height: 170px;
+}
+
+.borderradious {
+  border-radius: 20px;
+  border: 1px solid gray;
 }
