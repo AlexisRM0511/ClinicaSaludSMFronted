@@ -106,31 +106,47 @@
       </div>
       <div class="modal-body">
         <form action="" [formGroup]="emergenciaForm">
-        <div class="row">
-            <div class="col-12 my-2">
+          <div >
+            <div class="form-row">
               <label for="">Codigo del asegurado</label>
-              <input type="text" class="form-control" formControlName="codigo" placeholder="Ingrese codigo de asegurado"  name="" id="" />
+              <br>
+              <div class="col-9 ">
+              <input type="text" class="form-control" formControlName="codigo"
+                placeholder="Ingrese codigo de asegurado" name="" id="" />
+              </div>
+                <div class="col-3">
+              <button type="button" class="btn btn-warning" (click)="onGetEmergencia()">Buscar asegurado</button>
             </div>
+            </div>
+          </div>
+          <div class="row">
             <div class="col-12 my-2">
               <label for="">Nombre del paciente</label>
-              <input type="text" class="form-control" pattern="[A-Za-z ]{1,49}" formControlName="nombre" placeholder="Ingrese nombre del paciente" [class.is-invalid]="nombreNoValido" name="" id="" />
+              <input type="text" class="form-control" pattern="[A-Za-z ]{1,49}" formControlName="nombre"
+                placeholder="Ingrese nombre del paciente" [class.is-invalid]="nombreNoValido" name="" id="" />
               <small class="text-danger mt-3 mt-lg-0" *ngIf="nombreNoValido">
-                Ingrese un nombre valido</small
-              >
+                Ingrese un nombre valido</small>
             </div>
             <div class="col-12 my-2">
               <label for="">DNI del paciente</label>
-              <input pattern="[0-9]{8}" type="text" class="form-control" formControlName="dni" placeholder="Ingrese DNI del paciente" name="" [class.is-invalid]="dniNoValido" id="" />
+              <input pattern="[0-9]{8}" type="text" class="form-control" formControlName="dni"
+                placeholder="Ingrese DNI del paciente" name="" [class.is-invalid]="dniNoValido" id="" />
               <small class="text-danger mt-3 mt-lg-0" *ngIf="dniNoValido">
-                Ingrese un DNI valido</small
-              >
+                Ingrese un DNI valido</small>
+            </div>
+            <div class="col-12 my-2">
+              <label for="">Teléfono</label>
+              <input pattern="[0-9]{9}" type="text" class="form-control" formControlName="telefono"
+                placeholder="Ingresar telefono" name="" [class.is-invalid]="telefonoNoValido" id="" />
+              <small class="text-danger mt-3 mt-lg-0" *ngIf="telefonoNoValido">
+                Ingrese un telefono valido</small>
             </div>
             <div class="col-12 my-2">
               <label for="">Monto</label>
-              <input type="text" class="form-control" pattern="[0-9]{1,8}" formControlName="monto" placeholder="Ingrese el monto" [class.is-invalid]="montoNoValido" name="" id="" />
+              <input type="text" class="form-control" pattern="[0-9]{1,8}" formControlName="monto"
+                placeholder="Ingrese el monto" [class.is-invalid]="montoNoValido" name="" id="" />
               <small class="text-danger mt-3 mt-lg-0" *ngIf="montoNoValido">
-                Ingrese un monto valido</small
-              >
+                Ingrese un monto valido</small>
             </div>
             <div class="col-12 my-2">
               <label for="fecha_id">Fecha de registro:</label>
@@ -138,17 +154,19 @@
             </div>
             <div class="col-12 my-3">
               <button type="button" class="btn btn-warning ml-2" (click)="pacienteCovid(1)">Paciente con Covid</button>
-              
-              <button type="button" class="btn btn-secondary ml-2" (click)="pacienteCovid(2)">Paciente sin Covid</button>
-              <br>  
+
+              <button type="button" class="btn btn-secondary ml-2" (click)="pacienteCovid(2)">Paciente sin
+                Covid</button>
+              <br>
               <small class="ml-2" style="color: rgb(12, 101, 185);">{{estadoPaciente}}</small>
             </div>
           </div>
         </form>
       </div>
       <div class="modal-footer m-0">
-        <button type="submit" class="btn btn-success mr-5" [disabled]="emergenciaForm.invalid" (click)="onSaveEmergencia()" >Registrar Emergencia</button>
-        <button class="btn btn-danger mr-5">Cancelar</button>
+        <button type="submit" class="btn btn-success mr-5" [disabled]="emergenciaForm.invalid"
+          (click)="onSaveEmergencia()">Registrar Emergencia</button>
+        <button class="btn btn-danger mr-5" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
