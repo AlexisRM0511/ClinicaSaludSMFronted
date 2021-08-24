@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { Emergencia } from '../../modal/emergencia';
 import { PacienteService } from '../../services/paciente.service';
 
@@ -56,7 +57,16 @@ export class EditarEmergenciaComponent implements OnInit {
       const emergencia = this.emergenciaForm.value;
       const emergenciaId = this.emergencia?.id || null;
       this.emergenciaService.onSaveEmergencia(emergencia,emergenciaId)
-      this.emergenciaForm.reset();
+      Swal.fire({
+        title: 'Paciente en emergencia actualizado',
+        icon: 'success',  
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/paciente/emergencia']);
+        }
+      });
     }
   }
 

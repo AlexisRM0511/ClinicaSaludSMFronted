@@ -59,6 +59,15 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
     this.router.navigate(['/paciente/detalle-emergencia'], this.navigationExtras);
   }
 
+  onGoToRegistrar(): void {
+    this.navigationExtras.state.value = this.emergencia;
+    this.router.navigate(['/citas/crear'], this.navigationExtras);
+  }
+
+  pacienteCovid(covid:number) {
+    
+  }
+
   async onGoToDelete(citaId: string): Promise<void> {
 
     Swal.fire({
