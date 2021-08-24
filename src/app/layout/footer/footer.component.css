@@ -1,14 +1,5 @@
-#footer {
-  background-color: black;
-  color: white;
-  margin-top: 20px;
-  height: 30px;
+div {
   position: absolute;
   bottom: 0;
   width: 100%;
-}
-
-#texto {
-  text-align: center;
-  align-items: center;
 }
