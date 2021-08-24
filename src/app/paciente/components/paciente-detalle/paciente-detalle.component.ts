@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { Paciente } from '../../../firebase/paciente';
-import { PacientesService } from '../../../firebase/pacientes.service';
+import { Paciente } from '../../model/paciente';
+import { PacienteService } from '../../services/paciente.service';
 
 @Component({
   selector: 'app-paciente-detalle',
@@ -16,7 +16,7 @@ export class PacienteDetalleComponent implements OnInit {
     }
   };
 
-  constructor(private router: Router, private pacienteService: PacientesService) {
+  constructor(private router: Router, private pacienteService: PacienteService) {
     const navigation = this.router.getCurrentNavigation();
     this.paciente = navigation?.extras?.state.value;
    }

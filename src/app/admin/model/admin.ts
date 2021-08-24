@@ -1,8 +1,8 @@
-export interface Doctores {
+export interface Admin {
     codigo: string;
     dni: string;
-    lastName: string;
     name: string;
+    lastName: string;
+    date: String;
     number: string;
-    specialty: String;
 }

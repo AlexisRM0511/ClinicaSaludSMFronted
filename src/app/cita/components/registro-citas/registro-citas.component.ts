@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Paciente } from 'src/app/firebase/paciente';
-import { PacientesService } from 'src/app/firebase/pacientes.service';
+import { Paciente } from 'src/app/paciente/model/paciente';
+import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
@@ -36,7 +36,7 @@ export class RegistroCitasComponent implements OnInit {
     private router: Router,
     private citasService: CitaService,
     private excelService: GenerarExcelService,
-    private pacienteService: PacientesService
+    private pacienteService: PacienteService
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class RegistroCitasComponent implements OnInit {
 
     this.informacionPaciente();
   }
-
+  
   listarCitas() {
     this.citas$.subscribe((val) => {
       this.citas = val;
