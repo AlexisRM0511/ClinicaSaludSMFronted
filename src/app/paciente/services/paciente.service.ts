@@ -33,12 +33,36 @@ export class PacienteService {
     });
   }
 
+  onDeleteEmergencia(doctorID: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = this.especialidadCollection.doc(doctorID).delete();
+        resolve(result);
+      } catch (error) {
+        reject(error.message);
+      }
+    });
+  }
+
   onSavePacientes(paciente: Paciente, pacienteId: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
         const id = pacienteId || this.afs.createId();
         const data = { id, ...paciente };
         const result = this.pacienteCollection.doc(id).set(data);
+        resolve(result);
+      } catch (error) {
+        reject(error.message);
+      }
+    });
+  }
+
+  onSaveEmergencia(emergencia: Emergencia, emergenciaId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = emergenciaId || this.afs.createId();
+        const data = { id, ...emergencia };
+        const result = this.especialidadCollection.doc(id).set(data);
         resolve(result);
       } catch (error) {
         reject(error.message);

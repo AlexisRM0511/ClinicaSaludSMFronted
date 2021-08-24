@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetalleEmergenciaComponent } from './components/detalle-emergencia/detalle-emergencia.component';
+import { EditarEmergenciaComponent } from './components/editar-emergencia/editar-emergencia.component';
 import { PacienteDetalleComponent } from './components/paciente-detalle/paciente-detalle.component';
 import { PacienteEditarComponent } from './components/paciente-editar/paciente-editar.component';
 import { PacienteEmergenciaRegistradoComponent } from './components/paciente-emergencia-registrado/paciente-emergencia-registrado.component';
@@ -31,6 +33,14 @@ const routes: Routes = [
   {
     path: 'editar',
     component: PacienteEditarComponent,
+  },
+  {
+    path: 'detalle-emergencia',
+    component: DetalleEmergenciaComponent,
+  },
+  {
+    path: 'editar-emergencia',
+    component: EditarEmergenciaComponent,
   }
 ];
 
