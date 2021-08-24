@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
@@ -20,22 +21,47 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
   emergencia$ = this.emergenciaService.emergencia;
   emergencia: Emergencia[];
   emergenciaFilter='';
-
+  estadoPaciente: any;
   navigationExtras: NavigationExtras = {
     state: {
       value: null,
     },
   };
+  
+  emergencias: Emergencia;
+  emergenciaForm: FormGroup;
   constructor(
     private emergenciaService: PacienteService,
     private excelService: GenerarExcelService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.emergencia$;
     console.log(this.emergencia$);
     this.listarCitas();
+    this.initForm();
+  }
+
+  private initForm(): void{
+    this.emergenciaForm = this.fb.group({
+      codigo: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+      estado: ['',[Validators.required]],
+      dni: ['', [Validators.required]],
+      monto: ['',[Validators.required]],
+    });  
+  }
+
+  onSaveEmergencia(): void{
+    if (this.emergenciaForm.valid){
+      const paciente = this.emergenciaForm.value;
+      const pacienteId = this.emergencias?.codigo || null;
+      this.emergenciaService.onSaveEmergencia(paciente, pacienteId)
+      this.emergenciaForm.reset();
+    }
   }
 
   listarCitas() {
@@ -65,7 +91,37 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
   }
 
   pacienteCovid(covid:number) {
-    
+    if(covid==1){
+      this.emergenciaForm.get('estado').setValue('con covid');
+      this.estadoPaciente="Paciente con Covid";
+    }else{
+      this.emergenciaForm.get('estado').setValue('sin covid');
+      this.estadoPaciente="Paciente sin Covid";
+    }
+
+  }
+
+  
+  /* Validaciones */
+  get nombreNoValido() {
+    return (
+      this.emergenciaForm.get('nombre').invalid &&
+      this.emergenciaForm.get('nombre').touched
+    ); 
+  }
+
+  get dniNoValido() {
+    return (
+      this.emergenciaForm.get('dni').invalid &&
+      this.emergenciaForm.get('dni').touched
+    );
+  }
+
+  get montoNoValido() {
+    return (
+      this.emergenciaForm.get('monto').invalid &&
+      this.emergenciaForm.get('monto').touched
+    );
   }
 
   async onGoToDelete(citaId: string): Promise<void> {

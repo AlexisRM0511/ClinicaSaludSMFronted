@@ -5,6 +5,8 @@ import { Paciente } from '../../model/paciente';
 import { PacienteService } from '../../services/paciente.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Emergencia } from '../../modal/emergencia';
 
 @Component({
   selector: 'app-paciente-registrado',
@@ -28,15 +30,20 @@ export class PacienteRegistradoComponent implements OnInit {
     },
   };
 
+  emergencia: Emergencia;
+  emergenciaForm: FormGroup;
+
   constructor(
     private router: Router,
     private pacienteService: PacienteService,
-    private excelService: GenerarExcelService
+    private excelService: GenerarExcelService,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.listarPacientes();
   }
+
   cambiarPagina() {
     this.pageActual = 1;
   }

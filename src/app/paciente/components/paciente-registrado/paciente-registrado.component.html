@@ -2,12 +2,11 @@
   <div class="card">
     <div class="container">
       <div class="row my-3">
-        <div class="col-12">
+        <div class="col-3">
           <h4 class="d-inline">Pacientes registrados</h4>
         </div>
-      </div>
-      <div class="row my-4">
-        <div class="col-8">
+      
+        <div class="col-5">
           <input type="text" name="" class="form-control d-inline" id="" placeholder="Buscar pacientes"
             [(ngModel)]="pacientesFilter" (keyup)="cambiarPagina()" />
         </div>
@@ -55,7 +54,7 @@
                             codigo: pacientesFilter,
                             dni: pacientesFilter,
                             name: pacientesFilter,
-                            lastname: pacientesFilter
+                            lastName: pacientesFilter
                           }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual };
