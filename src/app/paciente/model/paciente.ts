@@ -5,5 +5,5 @@ export interface Paciente {
     lastName: string;
     date: String;
     number: string;
-    parientes?: String[] ;
+    parientes: String[] ;
 }
