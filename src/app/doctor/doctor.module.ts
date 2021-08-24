@@ -9,9 +9,11 @@ import { SortPipe } from './pipe/sort.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from './pipes/filter.pipe';
 import { PanelDoctorComponent } from './components/panel-doctor/panel-doctor.component';
+import { DetalleDoctorComponent } from './components/detalle-doctor/detalle-doctor.component';
+import { EditarDoctorComponent } from './components/editar-doctor/editar-doctor.component';
 
 @NgModule({
-  declarations: [FilterPipe, DoctorRegistradoComponent, RegistrarDoctorComponent, SortPipe, FilterPipe, PanelDoctorComponent],
+  declarations: [FilterPipe, DoctorRegistradoComponent, RegistrarDoctorComponent, SortPipe, FilterPipe, PanelDoctorComponent, DetalleDoctorComponent, EditarDoctorComponent],
   imports: [CommonModule,NgxPaginationModule, FormsModule, DoctorRoutingModule, ReactiveFormsModule],
 })
 export class DoctorModule { }
