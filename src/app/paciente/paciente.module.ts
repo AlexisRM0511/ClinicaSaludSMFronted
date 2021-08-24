@@ -10,6 +10,8 @@ import { PanelPacienteComponent } from './components/panel-paciente/panel-pacien
 import { FilterPipe } from './pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetalleEmergenciaComponent } from './components/detalle-emergencia/detalle-emergencia.component';
+import { EditarEmergenciaComponent } from './components/editar-emergencia/editar-emergencia.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PacienteEmergenciaRegistradoComponent,
     PanelPacienteComponent,
     FilterPipe,
+    DetalleEmergenciaComponent,
+    EditarEmergenciaComponent,
   ],
   imports: [
     CommonModule,
