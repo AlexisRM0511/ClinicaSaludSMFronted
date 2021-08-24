@@ -3,6 +3,8 @@ import { Doctores } from '../../model/doctor';
 import { DoctorService } from '../../services/doctor.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
+import { NavigationExtras, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-doctor-registrado',
@@ -19,9 +21,16 @@ export class DoctorRegistradoComponent implements OnInit {
   items = 5;
   doc$ = this.doctoresService.doctor;
   doctores: Doctores[]
+
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null,
+    },
+  };
   constructor(
     private doctoresService: DoctorService,
-    private excelService: GenerarExcelService
+    private excelService: GenerarExcelService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +45,50 @@ export class DoctorRegistradoComponent implements OnInit {
 
   listarDoctores() {
     this.doc$.subscribe((val) => (this.doctores = val));
+  }
+
+/*   onGoToRegistrar(): void {
+    this.navigationExtras.state.value = this.citas;
+    this.router.navigate(['/citas/crear'], this.navigationExtras);
+  } */
+
+  onGoToEdit(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['/doctor/editar'], this.navigationExtras);
+  }
+
+  onGoToSee(item: any): void {
+    this.navigationExtras.state.value = item;
+    console.log(this.navigationExtras.state.value);
+    this.router.navigate(['/doctor/detalle'], this.navigationExtras);
+  }
+
+  async onGoToDelete(citaId: string): Promise<void> {
+    // try {
+    //   await this.citasService.onDeleteCita(citaId);
+    //   alert('Deleted: Cita ID:' + citaId);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    Swal.fire({
+      title: 'Estas seguro de borrar este doctor?',
+      text: 'Esta accion no se puede revertir!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borrar doctor!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.doctoresService.onDeleteDoctores(citaId);
+        Swal.fire(
+          'Borrado!',
+          'El doctor ha sido borrado exitosamente.',
+          'success'
+        );
+      }
+    });
   }
 
   descargarExcel() {
