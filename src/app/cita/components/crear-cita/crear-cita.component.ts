@@ -50,8 +50,8 @@ export class CrearCitaComponent implements OnInit {
   initForm() {
     this.citaForm = this.fb.group({
       codigo: ['', [Validators.required]],
-      especialidad: ['', [Validators.required]],
-      medico: ['', [Validators.required]],
+      especialidad: [0, [Validators.required]],
+      medico: [0, [Validators.required]],
       fecha: ['', [Validators.required]],
       horario: ['', [Validators.required]],
     });

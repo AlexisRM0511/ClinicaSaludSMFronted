@@ -8,7 +8,7 @@
       <div class="form-group col-md-4">
         <input
           type="text"
-          class="form-control"
+          class="form-control-lg"
           placeholder="Numero de DNI"
           formControlName="DNI"
           [class]="isValidField('DNI')"
@@ -22,7 +22,7 @@
       <div class="form-group col-md-4">
         <input
           type="text"
-          class="form-control"
+          class="form-control-lg"
           placeholder="Nombre"
           formControlName="name"
           [class]="isValidField('name')"
@@ -36,7 +36,7 @@
       <div class="form-group col-md-4">
         <input
           type="text"
-          class="form-control"
+          class="form-control-lg"
           placeholder="Apellidos"
           formControlName="lastname"
           [class]="isValidField('lastname')"
@@ -50,14 +50,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Fecha de la Cita"
-          formControlName="fecha"
-          [class]="isValidField('fecha')"
-        />
-        <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Elija la fecha</mat-label>
           <input
             matInput
@@ -72,7 +65,7 @@
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-datepicker #picker disabled="false"></mat-datepicker>
-        </mat-form-field> -->
+        </mat-form-field>
         <div class="invalid-feedback">
           <span *ngIf="citaForm.get('fecha').errors?.required"
             >La fecha de la cita es requerida</span
@@ -82,7 +75,7 @@
       <div class="form-group col-md-4">
         <input
           type="text"
-          class="form-control"
+          class="form-control-lg"
           placeholder="Hora de la Cita"
           formControlName="horario"
           [class]="isValidField('horario')"
@@ -96,7 +89,7 @@
       <div class="form-group col-md-4">
         <input
           type="text"
-          class="form-control"
+          class="form-control-lg"
           placeholder="Codigo del Doctor"
           formControlName="codigo"
           [class]="isValidField('codigo')"

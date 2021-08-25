@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panel-doctor',
   templateUrl: './panel-doctor.component.html',
-  styleUrls: ['./panel-doctor.component.css']
+  styleUrls: ['./panel-doctor.component.css'],
 })
 export class PanelDoctorComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor() { }
+  ngOnInit(): void {}
+  logOut() {
+    sessionStorage.clear();
 
-  ngOnInit(): void {
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
-
 }
