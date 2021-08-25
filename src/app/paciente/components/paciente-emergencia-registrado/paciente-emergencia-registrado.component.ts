@@ -13,7 +13,6 @@ import { PacienteService } from '../../services/paciente.service';
   styleUrls: ['./paciente-emergencia-registrado.component.css'],
 })
 export class PacienteEmergenciaRegistradoComponent implements OnInit {
-
   pageActual: number;
   previousLabel = 'Anterior';
   nextLabel = 'Siguiente';
@@ -37,11 +36,10 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
     private excelService: GenerarExcelService,
     private router: Router,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.emergencia$;
-    console.log(this.emergencia$);
     this.listarCitas();
     this.initForm();
     this.disables = true;
@@ -63,7 +61,7 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
     if (this.emergenciaForm.valid) {
       const paciente = this.emergenciaForm.value;
       const pacienteId = this.emergencias?.codigo || null;
-      this.emergenciaService.onSaveEmergencia(paciente, pacienteId)
+      this.emergenciaService.onSaveEmergencia(paciente, pacienteId);
       this.emergenciaForm.reset();
     }
   }
@@ -72,16 +70,20 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
     this.emergenciaForm.get('nombre').enable();
     this.emergenciaForm.get('dni').enable();
     this.emergenciaForm.get('telefono').enable();
-    this.emergenciaService.onGetEmergencia(this.emergenciaForm.get('codigo').value).subscribe(
-      x => {
-        let nombrePaciente = x.payload.data()['name'] + ' ' + x.payload.data()['lastName']
-        this.emergenciaForm.get('nombre').setValue(nombrePaciente);
-        this.emergenciaForm.get('dni').setValue(x.payload.data()['dni']);
-        this.emergenciaForm.get('telefono').setValue(x.payload.data()['number']);
-
-      }, error => {
-
-      });
+    this.emergenciaService
+      .onGetEmergencia(this.emergenciaForm.get('codigo').value)
+      .subscribe(
+        (x) => {
+          let nombrePaciente =
+            x.payload.data()['name'] + ' ' + x.payload.data()['lastName'];
+          this.emergenciaForm.get('nombre').setValue(nombrePaciente);
+          this.emergenciaForm.get('dni').setValue(x.payload.data()['dni']);
+          this.emergenciaForm
+            .get('telefono')
+            .setValue(x.payload.data()['number']);
+        },
+        (error) => {}
+      );
     this.disables = false;
   }
 
@@ -97,13 +99,18 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
 
   onGoToEdit(item: any): void {
     this.navigationExtras.state.value = item;
-    this.router.navigate(['/paciente/editar-emergencia'], this.navigationExtras);
+    this.router.navigate(
+      ['/paciente/editar-emergencia'],
+      this.navigationExtras
+    );
   }
 
   onGoToSee(item: any): void {
     this.navigationExtras.state.value = item;
-    console.log(this.navigationExtras.state.value);
-    this.router.navigate(['/paciente/detalle-emergencia'], this.navigationExtras);
+    this.router.navigate(
+      ['/paciente/detalle-emergencia'],
+      this.navigationExtras
+    );
   }
 
   onGoToRegistrar(): void {
@@ -114,14 +121,12 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
   pacienteCovid(covid: number) {
     if (covid == 1) {
       this.emergenciaForm.get('estado').setValue('con covid');
-      this.estadoPaciente = "Paciente con Covid";
+      this.estadoPaciente = 'Paciente con Covid';
     } else {
       this.emergenciaForm.get('estado').setValue('sin covid');
-      this.estadoPaciente = "Paciente sin Covid";
+      this.estadoPaciente = 'Paciente sin Covid';
     }
-
   }
-
 
   /* Validaciones */
   get nombreNoValido() {
@@ -153,7 +158,6 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
   }
 
   async onGoToDelete(citaId: string): Promise<void> {
-
     Swal.fire({
       title: 'Estas seguro de borrar al paciente en emergencia?',
       text: 'Esta accion no se puede revertir!',

@@ -55,14 +55,13 @@ export class PacienteRegistradoComponent implements OnInit {
     this.pac.subscribe((val) => (this.pacientes = val));
   }
 
-  onGoToRegistrarPaciente():void{
+  onGoToRegistrarPaciente(): void {
     this.navigationExtras.state.value = this.pacientes;
-    this.router.navigate(['/paciente/registrar'], this.navigationExtras)
+    this.router.navigate(['/paciente/registrar'], this.navigationExtras);
   }
 
   onGoToSee(item: any): void {
     this.navigationExtras.state.value = item;
-    console.log(this.navigationExtras.state.value);
     this.router.navigate(['/paciente/detalle'], this.navigationExtras);
   }
 
@@ -81,12 +80,12 @@ export class PacienteRegistradoComponent implements OnInit {
 
     Swal.fire({
       title: 'Estas seguro de borrar este paciente?',
-      text: "Esta accion no se puede revertir!",
+      text: 'Esta accion no se puede revertir!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, borrar registro!'
+      confirmButtonText: 'Si, borrar registro!',
     }).then((result) => {
       if (result.isConfirmed) {
         this.pacienteService.onDeletePacientes(pacienteId);
@@ -94,13 +93,10 @@ export class PacienteRegistradoComponent implements OnInit {
           'Borrado!',
           'El registro del paciente ha sido borrado exitosamente.',
           'success'
-        )
+        );
       }
-    })
+    });
   }
-
-  
-
 
   descargarExcel() {
     this.excelService.exportAsExcelFile(this.pacientes, 'Pacientes');

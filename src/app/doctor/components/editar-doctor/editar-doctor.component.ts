@@ -7,37 +7,37 @@ import { DoctorService } from '../../services/doctor.service';
 @Component({
   selector: 'app-editar-doctor',
   templateUrl: './editar-doctor.component.html',
-  styleUrls: ['./editar-doctor.component.css']
+  styleUrls: ['./editar-doctor.component.css'],
 })
 export class EditarDoctorComponent implements OnInit {
-
   doctor: Doctores;
   doctorForm: FormGroup;
 
   navigationExtras: NavigationExtras = {
-    state:{
-      value: null
-    }
+    state: {
+      value: null,
+    },
   };
 
-  constructor(private router: Router, private fb: FormBuilder, private doctorService: DoctorService) {
+  constructor(
+    private router: Router,
+    private fb: FormBuilder,
+    private doctorService: DoctorService
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.doctor = navigation?.extras?.state?.value;
   }
 
   ngOnInit(): void {
     this.initForm();
-    if (typeof this.doctor === 'undefined'){
+    if (typeof this.doctor === 'undefined') {
       this.router.navigate(['/doctor/registrar']);
-    }else{
+    } else {
       this.doctorForm.patchValue(this.doctor);
-      console.log("asdfdd");
-      
     }
-    
   }
 
-  private initForm(): void{
+  private initForm(): void {
     this.doctorForm = this.fb.group({
       codigo: ['', [Validators.required]],
       name: ['', [Validators.required]],
@@ -45,26 +45,28 @@ export class EditarDoctorComponent implements OnInit {
       number: ['', [Validators.required]],
       dni: ['', [Validators.required]],
       specialty: ['', [Validators.required]],
-    });  
+    });
   }
 
-  isValidField(field: string):string{
+  isValidField(field: string): string {
     const validatedField = this.doctorForm.get(field);
-    return ( !validatedField.valid && validatedField.touched)
-      ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
+    return !validatedField.valid && validatedField.touched
+      ? 'is-invalid'
+      : validatedField.touched
+      ? 'is-valid'
+      : '';
   }
 
-  onSave(): void{
-    console.log('Saved', this.doctorForm.value);
-    if (this.doctorForm.valid){
+  onSave(): void {
+    if (this.doctorForm.valid) {
       const doctor = this.doctorForm.value;
       const doctorId = this.doctor?.id || null;
-      this.doctorService.onSaveCitas(doctor, doctorId)
+      this.doctorService.onSaveCitas(doctor, doctorId);
       this.doctorForm.reset();
     }
   }
 
-  onGoBackToList():void{
+  onGoBackToList(): void {
     this.router.navigate(['/doctor/registrados']);
   }
 }
