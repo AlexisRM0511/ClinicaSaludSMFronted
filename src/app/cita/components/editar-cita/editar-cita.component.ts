@@ -15,6 +15,7 @@ export class EditarCitaComponent implements OnInit {
   cita: Cita;
   citaForm: FormGroup;
   minDate: Date;
+  horario$ = this.citaService.horario;
 
   constructor(
     private router: Router,
@@ -29,6 +30,8 @@ export class EditarCitaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.horario$;
+
     if (typeof this.cita === 'undefined') {
       this.router.navigate(['/citas/crear']);
     } else {
@@ -60,13 +63,16 @@ export class EditarCitaComponent implements OnInit {
 
   private initForm(): void {
     this.citaForm = this.fb.group({
-      DNI: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
+      DNI: [
+        { value: '', disabled: true },
+        [Validators.required, Validators.pattern('[0-9]{8}')],
+      ],
       name: [
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       lastname: [
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       fecha: [
@@ -86,7 +92,7 @@ export class EditarCitaComponent implements OnInit {
         ],
       ],
       codigo: [
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-z0-9- ]+$')],
       ],
     });
