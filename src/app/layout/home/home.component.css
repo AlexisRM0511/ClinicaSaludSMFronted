@@ -6,3 +6,11 @@
   border-radius: 20px;
   border: 1px solid gray;
 }
+
+.sizetext{
+  font-size: 3rem;
+}
+
+.sizep{
+  font-size: 1rem;
+}

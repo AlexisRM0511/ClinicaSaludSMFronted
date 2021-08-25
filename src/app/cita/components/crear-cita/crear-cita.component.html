@@ -63,12 +63,13 @@
                 [matDatepicker]="picker"
                 [min]="minDate"
                 formControlName="fecha"
+                disabled
               />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker"
               ></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
             </mat-form-field>
           </div>
           <div class="col-12 mx-auto mb-2">
