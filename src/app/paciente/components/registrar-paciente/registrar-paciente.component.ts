@@ -26,7 +26,7 @@ export class RegistrarPacienteComponent implements OnInit {
     this.initForm();
   }
   onSave(): void{
-    this.pacienteForm.get('id').setValue( this.pacienteForm.get('codigo').value);
+    /* this.pacienteForm.get('id').setValue( this.pacienteForm.get('codigo').value); */
 
     if (this.pacienteForm.valid){
       const emergencia = this.pacienteForm.value;
@@ -52,8 +52,7 @@ export class RegistrarPacienteComponent implements OnInit {
       lastName: ['', [Validators.required]],
       dni: ['', [Validators.required]],
       number: ['', [Validators.required]],
-      date: ['', [Validators.required]],
-      id: [''],
+      date: ['', [Validators.required]]
     });
   }
 
