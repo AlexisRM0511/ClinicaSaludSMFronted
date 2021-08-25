@@ -43,7 +43,9 @@ export class AtencionGeneralComponent {
           });
 
           this.router.navigate(['paciente']).then(() => {
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1400);
           });
         }
       });

@@ -36,7 +36,9 @@ export class AdministrativoComponent {
           });
 
           this.router.navigate(['admin']).then(() => {
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1400);
           });
         }
       });
