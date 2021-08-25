@@ -41,8 +41,8 @@ export class RegistroCitasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.informacionPaciente();
     this.esAdministrativo = false;
+    this.informacionPaciente();
   }
 
   listarCitasGeneral() {
@@ -162,6 +162,7 @@ export class RegistroCitasComponent implements OnInit {
     if (sessionStorage.getItem('adminID') != undefined) {
       this.esAdministrativo = true;
       this.listarCitasGeneral();
+      console.log('vaoidvnaoisvdn');
     } else if (sessionStorage.getItem('doctorID') != undefined) {
       this.listarCitasDoctor();
     } else if (sessionStorage.getItem('userID') != undefined) {
