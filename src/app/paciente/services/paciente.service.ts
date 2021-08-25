@@ -10,12 +10,13 @@ import { Paciente } from '../model/paciente';
 })
 export class PacienteService {
   emergencia: Observable<Emergencia[]>;
+  emergencias: Emergencia;
   paciente: Observable<Paciente[]>;
 
   private especialidadCollection: AngularFirestoreCollection<Emergencia>;
   private pacienteCollection: AngularFirestoreCollection<Paciente>;
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore) {
     this.especialidadCollection = afs.collection<Emergencia>('emergencia');
     this.getEmergencia();
     this.pacienteCollection = afs.collection<Paciente>('pacientes');
@@ -31,6 +32,11 @@ export class PacienteService {
         reject(error.message);
       }
     });
+  }
+
+  onGetEmergencia(emergenciaId: string) {
+    return this.afs.collection('pacientes').doc(emergenciaId).snapshotChanges();
+
   }
 
   onDeleteEmergencia(doctorID: string): Promise<void> {
