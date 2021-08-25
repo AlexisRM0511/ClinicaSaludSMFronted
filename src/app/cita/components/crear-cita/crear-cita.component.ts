@@ -7,11 +7,8 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
-<<<<<<< HEAD
 import { Asegurado } from '../../model/asegurado';
-=======
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
 
 @Component({
   selector: 'app-crear-cita',
@@ -43,11 +40,8 @@ export class CrearCitaComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private pacienteService: PacienteService,
-<<<<<<< HEAD
-    private aseguradoService: CitaService
-=======
+    private aseguradoService: CitaService,
     private _adapter: DateAdapter<any>
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
@@ -60,48 +54,43 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
-<<<<<<< HEAD
     this.listarAsegurado();
     console.log(this.medico$);
-=======
     this._adapter.setLocale('es');
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
   }
 
   listarAsegurado() {
     this.asegurados$.subscribe((val) => {
       this.asegurados = val;
-      console.log(typeof(this.arrayAsegurados));
-      
-      for(let i = 0; i < this.asegurados.length; i++){ 
+      console.log(typeof this.arrayAsegurados);
+
+      for (let i = 0; i < this.asegurados.length; i++) {
         console.log(this.asegurados[i].codigo);
-        this.arrayAsegurados.push(this.asegurados[i].codigo)
+        this.arrayAsegurados.push(this.asegurados[i].codigo);
       }
-      console.log(this.arrayAsegurados.length)
-    });    
+      console.log(this.arrayAsegurados.length);
+    });
   }
 
-  get codigoNoValido(){
-
+  get codigoNoValido() {
     // console.log('Invalid: ', this.citaForm.get('codigo').invalid)
     // console.log('Touched: ', this.citaForm.get('codigo').touched)
     // console.log('Existe: ', this.existeCodigo)
     // console.log(this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched  && !this.existeCodigo)
 
-    if(this.existeCodigo === undefined){
+    if (this.existeCodigo === undefined) {
       return false;
-    }else{
-      if (this.existeCodigo && this.citaForm.get('codigo').touched ){
-        return this.citaForm.get('codigo').invalid
-      }else{
+    } else {
+      if (this.existeCodigo && this.citaForm.get('codigo').touched) {
+        return this.citaForm.get('codigo').invalid;
+      } else {
         return true;
       }
     }
-   
   }
 
   onSearchChange(searchValue: string): void {
-    this.aseguradoIngresado = searchValue;  
+    this.aseguradoIngresado = searchValue;
     // console.log(this.aseguradoIngresado);
     this.existeCodigo = this.arrayAsegurados.includes(this.aseguradoIngresado);
     // console.log(this.existeCodigo);
