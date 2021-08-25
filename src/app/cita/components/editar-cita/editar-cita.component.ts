@@ -122,15 +122,12 @@ export class EditarCitaComponent implements OnInit {
     );
   }
 
-<<<<<<< HEAD
-=======
   get codigoNoValido() {
     return (
       this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched
     );
   }
 
->>>>>>> f47578215c3cc4247e9a812645b873953b03f46d
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
