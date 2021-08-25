@@ -50,14 +50,14 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <!-- <input
+        <input
           type="text"
           class="form-control"
           placeholder="Fecha de la Cita"
           formControlName="fecha"
           [class]="isValidField('fecha')"
-        /> -->
-        <mat-form-field class="example-full-width" appearance="fill">
+        />
+        <!-- <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Elija la fecha</mat-label>
           <input
             matInput
@@ -72,7 +72,7 @@
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-datepicker #picker disabled="false"></mat-datepicker>
-        </mat-form-field>
+        </mat-form-field> -->
         <div class="invalid-feedback">
           <span *ngIf="citaForm.get('fecha').errors?.required"
             >La fecha de la cita es requerida</span
