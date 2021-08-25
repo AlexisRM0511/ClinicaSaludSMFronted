@@ -16,10 +16,7 @@ export class EditarCitaComponent implements OnInit {
   citaForm: FormGroup;
   minDate: Date;
 
-<<<<<<< HEAD
 
-  constructor(private router: Router, private fb: FormBuilder, private citaService: CitaService) { 
-=======
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -27,7 +24,6 @@ export class EditarCitaComponent implements OnInit {
   ) {
     const today = Date.now();
     this.minDate = new Date(today);
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
     this.initForm();
@@ -65,7 +61,6 @@ export class EditarCitaComponent implements OnInit {
 
   private initForm(): void {
     this.citaForm = this.fb.group({
-<<<<<<< HEAD
       DNI: ['', [Validators.required, Validators.pattern("[0-9]{8}")]],
       name: ['', [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')]],
       lastname: ['', [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')]],
@@ -105,20 +100,9 @@ export class EditarCitaComponent implements OnInit {
             && this.citaForm.get('codigo').touched;
   }
 
-=======
-      DNI: [{ value: '', disabled: true }, [Validators.required]],
-      name: [{ value: '', disabled: true }, [Validators.required]],
-      lastname: [{ value: '', disabled: true }, [Validators.required]],
-      fecha: ['', [Validators.required]],
-      horario: ['', [Validators.required]],
-      codigo: [{ value: '', disabled: true }, [Validators.required]],
-    });
-  }
-
   myFilter = (d: Date | null): boolean => {
     const day = (d || new Date()).getDay();
     // Prevent Saturday and Sunday from being selected.
     return day !== 0 && day !== 6;
   };
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
 }

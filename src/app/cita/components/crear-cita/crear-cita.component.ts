@@ -7,11 +7,8 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
-<<<<<<< HEAD
 import { Asegurado } from '../../model/asegurado';
-=======
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
 
 @Component({
   selector: 'app-crear-cita',
@@ -43,11 +40,8 @@ export class CrearCitaComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private pacienteService: PacienteService,
-<<<<<<< HEAD
-    private aseguradoService: CitaService
-=======
+    private aseguradoService: CitaService,
     private _adapter: DateAdapter<any>
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
@@ -60,12 +54,9 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
-<<<<<<< HEAD
     this.listarAsegurado();
     console.log(this.medico$);
-=======
     this._adapter.setLocale('es');
->>>>>>> 0bb54e2ae8178ae919d282011896b9a08d801161
   }
 
   listarAsegurado() {
