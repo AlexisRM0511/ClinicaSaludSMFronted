@@ -4,48 +4,55 @@
       <div class="card mt-4">
         <div class="card-body">
           <div class="row my-2">
-            <div class="col-12 text-center"><h3>Registrar paciente</h3></div>
+            <div class="col-12 text-center">
+              <h3>Registrar paciente</h3>
+            </div>
           </div>
+          <form  [formGroup]="pacienteForm">
           <div class="row">
-            <div class="col-12 my-2">
-              <label for="">Codigo del asegurado</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Ingrese codigo de asegurado"
-                name=""
-                id=""
-              />
+              <div class="col-12 my-2">
+                <label for="">Codigo del asegurado</label>
+                <input type="text" class="form-control" formControlName="codigo" [class.is-invalid]="codigoNoValido" placeholder="Ingrese codigo de asegurado" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="codigoNoValido">
+                  Ingrese un codigo</small>
+              </div>
+              <div class="col-12 my-2">
+                <label for="">Nombre del paciente</label>
+                <input type="text" pattern="[A-Za-z ]{1,49}" class="form-control" formControlName="name" [class.is-invalid]="nombreNoValido" placeholder="Ingrese nombre del paciente" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="nombreNoValido">
+                  Ingrese un nombre valido</small>
+              </div>
+              <div class="col-12 my-2">
+                <label for="">Apellido del paciente</label>
+                <input type="text" pattern="[A-Za-z ]{1,49}" class="form-control" formControlName="lastName" [class.is-invalid]="apellidosNoValido" placeholder="Ingrese nombre del paciente" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="apellidosNoValido">
+                  Ingrese un apellido valido</small>
+              </div>
+              <div class="col-12 my-2">
+                <label for="">DNI del paciente</label>
+                <input type="text" pattern="[0-9]{8}" class="form-control" formControlName="dni" [class.is-invalid]="dniNoValido" placeholder="Ingrese DNI del paciente" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="dniNoValido">
+                  Ingrese un DNI valido</small>
+              </div>
+              <div class="col-12 my-2">
+                <label for="">Teléfono</label>
+                <input type="text" pattern="[0-9]{9}" class="form-control" formControlName="number" [class.is-invalid]="telefonoNoValido" placeholder="Ingrese el telefono" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="telefonoNoValido">
+                  Ingrese un telefono valido</small>
+              </div>
+              <div class="col-12 my-2">
+                <label for="">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" formControlName="date" [class.is-invalid]="fechaNoValido" placeholder="Ingrese el telefono" name="" id="" />
+                <small class="text-danger mt-3 mt-lg-0" *ngIf="fechaNoValido">
+                  Seleccione un fecha</small>
+              </div>
+              
+              <div class="col-12 d-flex flex-column">
+                <button class="btn btn-success my-1" [disabled]="pacienteForm.invalid" (click)="onSave()">Registrar Paciente</button>
+                <button class="btn btn-danger my-1" (click)="onGoBackToList()">Cancelar</button>
+              </div>
             </div>
-            <div class="col-12 my-2">
-              <label for="">Nombre del paciente</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Ingrese nombre del paciente"
-                name=""
-                id=""
-              />
-            </div>
-            <div class="col-12 my-2">
-              <label for="">DNI del paciente</label>
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Ingrese DNI del paciente"
-                name=""
-                id=""
-              />
-            </div>
-            <div class="col-12 my-3">
-              <input type="checkbox" name="" id="paciente_covid_id" />
-              <label for="paciente_covid_id" class="ml-3">Paciente covid</label>
-            </div>
-            <div class="col-12 d-flex flex-column">
-              <button class="btn btn-success my-1">Registrar Paciente</button>
-              <button class="btn btn-danger my-1">Cancelar</button>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
