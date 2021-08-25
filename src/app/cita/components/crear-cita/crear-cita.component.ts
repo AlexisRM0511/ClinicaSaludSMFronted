@@ -7,11 +7,7 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   selector: 'app-crear-cita',
@@ -70,9 +66,12 @@ export class CrearCitaComponent implements OnInit {
     this.paciente$ = await this.pacienteService.getOnePaciente(
       this.citaForm.get('codigo').value
     );
+    console.log(this.citaForm.value);
 
     if (this.citaForm.valid) {
       const cita: Cita = this.citaForm.value;
+      cita.codigo = this.citaForm.get('codigo').value;
+
       cita.fecha = this.citaForm.get('fecha').value.toLocaleDateString();
       const citaId = this.cita?.id || null;
       await this.paciente$.subscribe(async (x) => {

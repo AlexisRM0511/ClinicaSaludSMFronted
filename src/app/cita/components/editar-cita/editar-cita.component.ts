@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
@@ -8,16 +9,20 @@ import { CitaService } from '../../services/cita.service';
   selector: 'app-editar-cita',
   templateUrl: './editar-cita.component.html',
   styleUrls: ['./editar-cita.component.css'],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
 })
 export class EditarCitaComponent implements OnInit {
   cita: Cita;
   citaForm: FormGroup;
+  minDate: Date;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private citaService: CitaService
   ) {
+    const today = Date.now();
+    this.minDate = new Date(today);
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
     this.initForm();
@@ -63,4 +68,10 @@ export class EditarCitaComponent implements OnInit {
       codigo: [{ value: '', disabled: true }, [Validators.required]],
     });
   }
+
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 }

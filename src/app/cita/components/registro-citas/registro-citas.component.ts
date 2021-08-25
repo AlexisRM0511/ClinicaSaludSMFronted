@@ -72,6 +72,8 @@ export class RegistroCitasComponent implements OnInit {
     this.citas$.subscribe((val) => {
       this.citas = val;
       this.citas = this.citas.filter((c) => {
+        console.log(c);
+
         for (let i = 0; i < this.parientes.length; i++) {
           if (
             c.codigo === this.parientes[i] ||
@@ -134,6 +136,7 @@ export class RegistroCitasComponent implements OnInit {
   }
   elementosSeleccionados(valor) {
     this.items = valor.target.value;
+    this.pageActual = 1;
   }
 
   descargarExcel() {
