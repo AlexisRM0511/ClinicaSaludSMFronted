@@ -2,17 +2,28 @@
   <div class="card">
     <div class="container">
       <div class="row my-3">
-        <div class="col-12">
+        <div class="col-3">
           <h4 class="d-inline">Pacientes registrados</h4>
         </div>
-      </div>
-      <div class="row my-4">
-        <div class="col-8">
-          <input type="text" name="" class="form-control d-inline" id="" placeholder="Buscar pacientes"
-            [(ngModel)]="pacientesFilter" (keyup)="cambiarPagina()" />
+
+        <div class="col-5">
+          <input
+            type="text"
+            name=""
+            class="form-control d-inline"
+            id=""
+            placeholder="Buscar pacientes"
+            [(ngModel)]="pacientesFilter"
+            (keyup)="cambiarPagina()"
+          />
         </div>
         <div class="col-1">
-          <select name="" id="" class="custom-select" (change)="elementosSeleccionados($event)">
+          <select
+            name=""
+            id=""
+            class="custom-select"
+            (change)="elementosSeleccionados($event)"
+          >
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
@@ -21,22 +32,27 @@
 
         <div class="col-2">
           <button
-            class="btn btn-outline-warning"  
-            (click)="onGoToRegistrarPaciente()" 
+            class="btn btn-outline-warning"
+            (click)="onGoToRegistrarPaciente()"
           >
             Registrar Paciente
           </button>
         </div>
 
         <div class="col-1 d-flex justify-content-end">
-          <button class="btn btn-outline-primary mx-1" (click)="descargarExcel()"><i class="fas fa-download"></i></button>
+          <button
+            class="btn btn-outline-primary mx-1"
+            (click)="descargarExcel()"
+          >
+            <i class="fas fa-download"></i>
+          </button>
         </div>
       </div>
       <div class="row my-3">
         <div class="col-12">
           <div class="table-responsive table-hover no-wrap">
             <table class="table">
-              <thead class="thead-light">
+              <thead class="thead-dark">
                 <tr>
                   <th scope="col"></th>
                   <th scope="col">Codigo</th>
@@ -48,30 +64,51 @@
                 </tr>
               </thead>
               <tbody *ngIf="pacientes?.length > 0">
-                <tr *ngFor="
+                <tr
+                  *ngFor="
                     let p of pacientes
                       | filter
                         : {
                             codigo: pacientesFilter,
                             dni: pacientesFilter,
                             name: pacientesFilter,
-                            lastname: pacientesFilter
+                            lastName: pacientesFilter
                           }
                       | paginate
                         : { itemsPerPage: items, currentPage: pageActual };
-                        
-                        let i = index
-                  ">
+                    let i = index
+                  "
+                >
                   <td class="align-middle">{{ i + 1 }}</td>
                   <td class="align-middle">{{ p?.codigo }}</td>
-                  <td class="align-middle">{{ p?.lastName + ", " +p?.name}}</td>
+                  <td class="align-middle">
+                    {{ p?.lastName + ", " + p?.name }}
+                  </td>
                   <td class="align-middle text-center">{{ p?.dni }}</td>
                   <td class="align-middle text-center">{{ p?.date }}</td>
                   <td class="align-middle text-center">{{ p?.number }}</td>
-                  <td class="btn-group d-flex justify-content-center" role="group">
-                    <button class="btn btn-outline-primary mx-1" (click)="onGoToSee(p)"><i class="fas fa-info"></i></button>
-                    <button class="btn btn-outline-info mx-1" (click)="onGoToEdit(p) "><i class="far fa-edit"></i></button>
-                    <button class="btn btn-outline-danger mx-1" (click)="onGoToDelete(p.codigo)"><i class="fas fa-trash-alt"></i></button>
+                  <td
+                    class="btn-group d-flex justify-content-center"
+                    role="group"
+                  >
+                    <button
+                      class="btn btn-outline-primary mx-1"
+                      (click)="onGoToSee(p)"
+                    >
+                      <i class="fas fa-info"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-info mx-1"
+                      (click)="onGoToEdit(p)"
+                    >
+                      <i class="far fa-edit"></i>
+                    </button>
+                    <button
+                      class="btn btn-outline-danger mx-1"
+                      (click)="onGoToDelete(p.codigo)"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -79,11 +116,20 @@
           </div>
         </div>
       </div>
-      <div class="row d-flex flex-row-reverse m-3" *ngIf="pacientes?.length > items">
+      <div
+        class="row d-flex flex-row-reverse m-3"
+        *ngIf="pacientes?.length > items"
+      >
         <div>
           <ng-container>
-            <pagination-controls class="my-pagination" maxSize="5" [responsive]="responsive"
-              [previousLabel]="previousLabel" [nextLabel]="nextLabel" (pageChange)="pageActual = $event">
+            <pagination-controls
+              class="my-pagination"
+              maxSize="5"
+              [responsive]="responsive"
+              [previousLabel]="previousLabel"
+              [nextLabel]="nextLabel"
+              (pageChange)="pageActual = $event"
+            >
             </pagination-controls>
           </ng-container>
         </div>

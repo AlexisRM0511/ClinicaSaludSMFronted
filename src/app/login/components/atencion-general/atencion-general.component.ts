@@ -32,7 +32,6 @@ export class AtencionGeneralComponent {
   }
 
   async validar(values) {
-    console.log(values.codigo);
     this.pacientes$.subscribe((val) => {
       val.forEach((element) => {
         if (element.codigo === values.codigo) {
@@ -43,7 +42,9 @@ export class AtencionGeneralComponent {
           });
 
           this.router.navigate(['paciente']).then(() => {
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1400);
           });
         }
       });

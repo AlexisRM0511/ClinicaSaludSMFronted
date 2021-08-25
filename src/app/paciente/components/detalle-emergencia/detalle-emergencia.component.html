@@ -1,7 +1,7 @@
 <div class="container">
     <div class="card mt-2">
       <div class="card-header">
-        <h2>Detalles de la Cita</h2>
+        <h2>Detalle del paciente en emergencia</h2>
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">
@@ -12,30 +12,32 @@
             </li> -->
             <li class="list-group-item col-4">
               Codigo:
-              <h5>{{ doctor.codigo }}</h5>
+              <h5>{{ emergencia.codigo }}</h5>
             </li>
             <li class="list-group-item col-4">
               Nombre Completo:
-              <h5>{{ doctor.name }} {{ doctor.lastName }}</h5>
+              <h5>{{ emergencia.nombre }}</h5>
             </li>
             <li class="list-group-item col-4">
-              Especialidad:
-              <h5>{{ doctor.specialty }}</h5>
+              Estado:
+              <div *ngIf="emergencia.estado =='sin covid' "><span class="badge bg-success p-2 text-white">
+                Sin covid </span></div>
+            <div *ngIf="emergencia.estado =='con covid' "><span class="badge bg-danger p-2 text-white">
+                Con covid </span></div>
             </li>
           </div>
-  
           <div class="row">
             <li class="list-group-item col-4">
-              DNI:
-              <h5>{{ doctor.dni }}</h5>
+                DNI:
+              <h5>{{ emergencia.dni }}</h5>
             </li>
             <li class="list-group-item col-4">
-              Teléfono:
-              <h5>{{ doctor.number }}</h5>
+              Fecha:
+              <h5>{{ emergencia.fecha }}</h5>
             </li>
             <li class="list-group-item col-4">
-              <!-- Codigo del Doctor:
-              <h5>{{ cita.codigo }}</h5>   -->
+              Monto:
+              <h5>{{ emergencia.monto }}</h5>  
             </li>
           </div>
           <!-- <div class="row"> -->

@@ -9,11 +9,11 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  ngOnInit(): void {  }
- 
+  ngOnInit(): void {}
+
   /* AGREGAR PACIENTES */
   /* constructor(private pacienteSvc: PacienteService) { }
   paciente$ = this.pacienteSvc.paciente;
@@ -31,7 +31,6 @@ export class HomeComponent implements OnInit {
     this.pacienteSvc.onSavePacientes(paciente, paciente.codigo)
     this.paciente$.subscribe(val => console.log(val))
   } */
-
 
   /* AGREGAR DOCTORES */
   /* constructor(private doctorSvc: DoctorService) { }
@@ -51,7 +50,6 @@ export class HomeComponent implements OnInit {
     this.doctor$.subscribe(val => console.log(val))
   } */
 
-
   /* AGREGAR ADMINISTRADORES */
   /* constructor(private adminSvc: AdminService) { }
   admin$ = this.adminSvc.admin;
@@ -69,5 +67,4 @@ export class HomeComponent implements OnInit {
     this.adminSvc.onSaveAdmin(admin, admin.codigo)
     this.admin$.subscribe(val => console.log(val))
   } */
-
 }

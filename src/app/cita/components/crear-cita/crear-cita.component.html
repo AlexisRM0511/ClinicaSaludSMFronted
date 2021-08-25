@@ -1,7 +1,7 @@
 <div class="container mb-0 pb-0">
   <div class="abs-center mb-0 pb-0">
     <div class="row">
-      <h1 class="col-12 mt-4 mx-auto text-center">Crear cita</h1>
+      <h1 class="col-12 mt-3 mx-auto text-center">Crear cita</h1>
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 mx-auto">
@@ -57,16 +57,27 @@
               </option>
             </select>
           </div>
-          <div class="col-12 mx-auto my-2">
+          <div class="col-12 mx-auto mt-2">
             <label for="fecha_id">Elija su fecha de atenci&oacute;n:</label>
-            <input
-              type="date"
-              formControlName="fecha"
-              class="form-control"
-              id="fecha_id"
-            />
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Elija la fecha</mat-label>
+              <input
+                matInput
+                [matDatepickerFilter]="myFilter"
+                [matDatepicker]="picker"
+                [min]="minDate"
+                formControlName="fecha"
+                disabled
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker disabled="false"></mat-datepicker>
+            </mat-form-field>
           </div>
-          <div class="col-12 mx-auto my-2">
+          <div class="col-12 mx-auto mb-2">
             <label for="horario_id">Elija su horario:</label>
             <select
               name="categoria_id"

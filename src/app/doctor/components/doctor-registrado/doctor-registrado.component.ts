@@ -5,7 +5,6 @@ import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
 import { NavigationExtras, Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-doctor-registrado',
   templateUrl: './doctor-registrado.component.html',
@@ -20,7 +19,7 @@ export class DoctorRegistradoComponent implements OnInit {
   doctoresFilter: string = '';
   items = 5;
   doc$ = this.doctoresService.doctor;
-  doctores: Doctores[]
+  doctores: Doctores[];
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -31,7 +30,7 @@ export class DoctorRegistradoComponent implements OnInit {
     private doctoresService: DoctorService,
     private excelService: GenerarExcelService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.listarDoctores();
@@ -47,7 +46,7 @@ export class DoctorRegistradoComponent implements OnInit {
     this.doc$.subscribe((val) => (this.doctores = val));
   }
 
-/*   onGoToRegistrar(): void {
+  /*   onGoToRegistrar(): void {
     this.navigationExtras.state.value = this.citas;
     this.router.navigate(['/citas/crear'], this.navigationExtras);
   } */
@@ -59,7 +58,6 @@ export class DoctorRegistradoComponent implements OnInit {
 
   onGoToSee(item: any): void {
     this.navigationExtras.state.value = item;
-    console.log(this.navigationExtras.state.value);
     this.router.navigate(['/doctor/detalle'], this.navigationExtras);
   }
 

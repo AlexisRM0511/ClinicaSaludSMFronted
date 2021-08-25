@@ -7,9 +7,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-doctor',
   templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css']
+  styleUrls: ['./doctor.component.css'],
 })
-export class DoctorComponent{
+export class DoctorComponent {
   form: FormGroup;
   codigo: string;
   password: string;
@@ -28,7 +28,6 @@ export class DoctorComponent{
   }
 
   async validar(values) {
-    console.log(values.codigo, values.password);
     this.doctores$.subscribe((val) => {
       val.forEach((element) => {
         if (
@@ -42,7 +41,9 @@ export class DoctorComponent{
           });
 
           this.router.navigate(['doctor']).then(() => {
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1400);
           });
         }
       });

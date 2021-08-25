@@ -1,8 +1,12 @@
 <header>
   <nav class="navbar navbar-expand-md navbar-dark bg-primary py-3">
     <a class="navbar-brand" routerLink="/" *ngIf="!logueado">ClinicaSaludSM</a>
-    <a class="navbar-brand" routerLink="/paciente" *ngIf="pacienteLogueado">ClinicaSaludSM</a>
-    <a class="navbar-brand" routerLink="/admin" *ngIf="doctorLogueado">ClinicaSaludSM</a>
+    <a class="navbar-brand" routerLink="/paciente" *ngIf="pacienteLogueado"
+      >ClinicaSaludSM</a
+    >
+    <a class="navbar-brand" routerLink="/admin" *ngIf="doctorLogueado"
+      >ClinicaSaludSM</a
+    >
     <button
       class="navbar-toggler collapsed"
       type="button"
@@ -29,15 +33,16 @@
           <a class="nav-link" routerLink="/citas">Citas</a>
         </li>
         <li class="nav-item align-middle" *ngIf="!logueado">
-          <a class="btn btn-success my-2 my-sm-0" routerLink="/admin/login">
+          <a class="btn btn-success my-2 my-sm-0" routerLink="/profile">
             Iniciar sesión
           </a>
         </li>
-        <li
-          class="nav-item dropdown align-middle"
-          *ngIf="logueado"
-        >
-          <a class="btn btn-success my-2 my-sm-0" routerLink="/" (click)="logOut()">
+        <li class="nav-item dropdown align-middle" *ngIf="logueado">
+          <a
+            class="btn btn-danger my-2 my-sm-0 text-white"
+            routerLink="/"
+            (click)="logOut()"
+          >
             Cerrar sesión
           </a>
         </li>
