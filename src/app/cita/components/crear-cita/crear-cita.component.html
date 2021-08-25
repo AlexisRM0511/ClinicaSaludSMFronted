@@ -1,7 +1,7 @@
 <div class="container mb-0 pb-0">
   <div class="abs-center mb-0 pb-0">
     <div class="row">
-      <h1 class="col-12 mt-3 mx-auto text-center">Crear cita</h1>
+      <h1 class="col-12 mt-2 mx-auto text-center">Crear cita</h1>
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 mx-auto">
@@ -30,7 +30,7 @@
               class="custom-select"
               id="especialidad_id"
             >
-              <option value="" hidden>Seleccione</option>
+              <option value="0" hidden>Seleccione</option>
               <option
                 *ngFor="let e of especialidad$ | async | sort: 'asc':'nombre'"
                 [ngValue]="e?.nombre"
@@ -48,7 +48,7 @@
               class="custom-select"
               id="medico_id"
             >
-              <option value="" hidden>Seleccione</option>
+              <option value="0" hidden>Seleccione</option>
               <option
                 *ngFor="let m of medico$ | async | sort: 'asc':'lastName'"
                 [ngValue]="m?.codigo"

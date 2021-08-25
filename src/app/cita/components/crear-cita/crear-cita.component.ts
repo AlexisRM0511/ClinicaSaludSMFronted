@@ -62,37 +62,35 @@ export class CrearCitaComponent implements OnInit {
   listarAsegurado() {
     this.asegurados$.subscribe((val) => {
       this.asegurados = val;
-      console.log(typeof(this.arrayAsegurados));
-      
-      for(let i = 0; i < this.asegurados.length; i++){ 
+      console.log(typeof this.arrayAsegurados);
+
+      for (let i = 0; i < this.asegurados.length; i++) {
         console.log(this.asegurados[i].codigo);
-        this.arrayAsegurados.push(this.asegurados[i].codigo)
+        this.arrayAsegurados.push(this.asegurados[i].codigo);
       }
-      console.log(this.arrayAsegurados.length)
-    });    
+      console.log(this.arrayAsegurados.length);
+    });
   }
 
-  get codigoNoValido(){
-
+  get codigoNoValido() {
     // console.log('Invalid: ', this.citaForm.get('codigo').invalid)
     // console.log('Touched: ', this.citaForm.get('codigo').touched)
     // console.log('Existe: ', this.existeCodigo)
     // console.log(this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched  && !this.existeCodigo)
 
-    if(this.existeCodigo === undefined){
+    if (this.existeCodigo === undefined) {
       return false;
-    }else{
-      if (this.existeCodigo && this.citaForm.get('codigo').touched ){
-        return this.citaForm.get('codigo').invalid
-      }else{
+    } else {
+      if (this.existeCodigo && this.citaForm.get('codigo').touched) {
+        return this.citaForm.get('codigo').invalid;
+      } else {
         return true;
       }
     }
-   
   }
 
   onSearchChange(searchValue: string): void {
-    this.aseguradoIngresado = searchValue;  
+    this.aseguradoIngresado = searchValue;
     // console.log(this.aseguradoIngresado);
     this.existeCodigo = this.arrayAsegurados.includes(this.aseguradoIngresado);
     // console.log(this.existeCodigo);
@@ -101,8 +99,8 @@ export class CrearCitaComponent implements OnInit {
   initForm() {
     this.citaForm = this.fb.group({
       codigo: ['', [Validators.required]],
-      especialidad: ['', [Validators.required]],
-      medico: ['', [Validators.required]],
+      especialidad: [0, [Validators.required]],
+      medico: [0, [Validators.required]],
       fecha: ['', [Validators.required]],
       horario: ['', [Validators.required]],
     });
