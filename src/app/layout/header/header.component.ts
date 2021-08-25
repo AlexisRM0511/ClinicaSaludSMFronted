@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit {
   doctorLogueado = false;
   logueado = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     if (sessionStorage.getItem('userID') !== null) {
@@ -26,5 +27,8 @@ export class HeaderComponent implements OnInit {
     sessionStorage.clear();
     this.pacienteLogueado = false;
     this.logueado = false;
+    this.router.navigate(['/']).then(() => {
+      window.location.reload();
+    });
   }
 }
