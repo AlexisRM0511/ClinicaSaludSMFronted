@@ -3,10 +3,10 @@
     <h1 class="text-white my-3">Panel de control</h1>
   </div>
   <div class="row my-5">
-    <div class="col-12 col-sm-6 col-lg-3">
+    <div class="col-12 col-sm-6 col-lg-3" *ngFor="let item of categorias">
       <a
         class="
-          btn btn-outline-primary
+          btn {{ item.color }}
           p-5
           size-custom
           d-flex
@@ -15,68 +15,12 @@
           flex-column
           mx-auto
           mt-2 mt-lg-0
+          shadow
         "
-        routerLink="/citas"
+        routerLink="{{ item.ruta }}"
       >
-        <i class="fas fa-calendar-plus h1"></i>
-        <span class="h4 p-0 m-0 d-block">Citas</span>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <a
-        class="
-          btn btn-outline-warning
-          p-5
-          size-custom
-          d-flex
-          align-items-center
-          justify-content-center
-          flex-column
-          mx-auto
-          mt-2 mt-lg-0
-        "
-        routerLink="/paciente/registrado"
-      >
-        <i class="fas fa-users h1"></i>
-        <span class="h4 p-0 m-0 d-block">Pacientes</span>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <a
-        class="
-          btn btn-outline-info
-          p-5
-          size-custom
-          d-flex
-          align-items-center
-          justify-content-center
-          flex-column
-          mx-auto
-          mt-2 mt-lg-0
-        "
-        routerLink="/doctor/registrados"
-      >
-        <i class="fas fa-user-md h1"></i>
-        <span class="h4 p-0 m-0 d-block">Doctores</span>
-      </a>
-    </div>
-    <div class="col-12 col-sm-6 col-lg-3">
-      <a
-        class="
-          btn btn-outline-danger
-          p-5
-          size-custom
-          d-flex
-          align-items-center
-          justify-content-center
-          flex-column
-          mx-auto
-          mt-2 mt-lg-0
-        "
-        routerLink="/paciente/emergencia"
-      >
-        <i class="fas fa-ambulance h1"></i>
-        <span class="h4 p-0 m-0 d-block">Emergencia</span>
+        <i class="{{ item.icon }}"></i>
+        <span class="h4 p-0 m-0 d-block">{{ item.nombre }}</span>
       </a>
     </div>
   </div>
