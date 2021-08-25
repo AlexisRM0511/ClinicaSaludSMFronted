@@ -1,9 +1,10 @@
 export interface Paciente {
-    codigo: string;
+    codigo: any;
     dni: string;
     name: string;
     lastName: string;
     date: String;
     number: string;
-    parientes: String[] ;
+    parientes?: String[] ;
+    id: any;
 }
