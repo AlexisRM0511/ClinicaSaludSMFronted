@@ -7,11 +7,17 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 
 @Component({
   selector: 'app-crear-cita',
   templateUrl: './crear-cita.component.html',
   styleUrls: ['./crear-cita.component.css'],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
 })
 export class CrearCitaComponent implements OnInit {
   cita: Cita;
@@ -20,6 +26,7 @@ export class CrearCitaComponent implements OnInit {
   horario$ = this.citasService.horario;
   paciente$: Observable<Paciente>;
   /* paciente: Paciente; */
+  minDate: Date;
 
   citaForm: FormGroup;
 
@@ -27,10 +34,13 @@ export class CrearCitaComponent implements OnInit {
     private citasService: CitaService,
     private fb: FormBuilder,
     private router: Router,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private _adapter: DateAdapter<any>
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
+    const today = Date.now();
+    this.minDate = new Date(today);
   }
 
   ngOnInit(): void {
@@ -39,6 +49,7 @@ export class CrearCitaComponent implements OnInit {
     this.horario$;
     this.initForm();
     console.log(this.medico$);
+    this._adapter.setLocale('es');
   }
 
   initForm() {
@@ -49,6 +60,11 @@ export class CrearCitaComponent implements OnInit {
       fecha: ['', [Validators.required]],
       horario: ['', [Validators.required]],
     });
+
+    if (sessionStorage.getItem('userID') !== null) {
+      this.citaForm.get('codigo').disable();
+      this.citaForm.get('codigo').setValue(sessionStorage.getItem('userID'));
+    }
   }
 
   async crearCita() {
@@ -56,8 +72,14 @@ export class CrearCitaComponent implements OnInit {
       this.citaForm.get('codigo').value
     );
 
+    console.log(
+      this.citaForm.value,
+      this.citaForm.get('fecha').value.toLocaleDateString()
+    );
+
     if (this.citaForm.valid) {
       const cita: Cita = this.citaForm.value;
+      cita.fecha = this.citaForm.get('fecha').value.toLocaleDateString();
       const citaId = this.cita?.id || null;
       await this.paciente$.subscribe(async (x) => {
         console.log(x);
@@ -73,6 +95,7 @@ export class CrearCitaComponent implements OnInit {
             confirmButtonText: 'OK',
             confirmButtonColor: '#2FAF27',
           });
+
           this.citaForm.reset();
         } else {
           Swal.fire({
@@ -88,4 +111,9 @@ export class CrearCitaComponent implements OnInit {
       });
     }
   }
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return day !== 0 && day !== 6;
+  };
 }

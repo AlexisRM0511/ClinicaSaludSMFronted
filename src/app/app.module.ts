@@ -16,15 +16,14 @@ import { environment } from 'src/environments/environment';
 import { DetalleCitaModule } from './cita/components/detalle-cita/detalle-cita.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
-import { EditarCitaComponent } from './cita/components/editar-cita/editar-cita.component';
 import { EditarCitaModule } from './cita/components/editar-cita/editar-cita.module';
-import { PacienteDetalleComponent } from './paciente/components/paciente-detalle/paciente-detalle.component';
 import { PacienteDetalleModule } from './paciente/components/paciente-detalle/paciente-detalle.module';
-import { PacienteEditarComponent } from './paciente/components/paciente-editar/paciente-editar.component';
 import { PacienteEditarModule } from './paciente/components/paciente-editar/paciente-editar.module';
+import { HomeComponent } from './layout/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -35,8 +34,10 @@ import { PacienteEditarModule } from './paciente/components/paciente-editar/paci
     AngularFireModule.initializeApp(environment.firebaseConfig),
     DetalleCitaModule,
     NgxPaginationModule,
-    EditarCitaModule,    
-    PacienteDetalleModule, PacienteEditarModule,
+    EditarCitaModule,
+    PacienteDetalleModule,
+    PacienteEditarModule,
+    BrowserAnimationsModule,
   ],
   providers: [AngularFirestore],
   bootstrap: [AppComponent],

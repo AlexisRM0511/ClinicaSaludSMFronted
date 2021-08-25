@@ -5,4 +5,5 @@ export class Emergencia {
     dni: any;
     monto: any;
     estado: any;
+    codigo: any;
 } 

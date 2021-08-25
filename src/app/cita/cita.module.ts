@@ -10,6 +10,10 @@ import { SortPipe } from './pipe/sort.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FilterPipe } from './pipe/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxPaginationModule,
     FormsModule,
     CitaRoutingModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
   ],
+  providers: [MatDatepickerModule],
 })
 export class CitaModule {}
