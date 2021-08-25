@@ -7,6 +7,7 @@ import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import Swal from 'sweetalert2';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
+import { Asegurado } from '../../model/asegurado';
 
 @Component({
   selector: 'app-crear-cita',
@@ -22,12 +23,21 @@ export class CrearCitaComponent implements OnInit {
   /* paciente: Paciente; */
 
   citaForm: FormGroup;
+  aseguradoIngresado: any;
+  existeCodigo: any;
+
+  asegurados$ = this.aseguradoService.asegurado;
+  asegurados: Asegurado[];
+  arrayAsegurados: string[] = [];
+  elementoAsegurado: string;
+  indefinido: boolean;
 
   constructor(
     private citasService: CitaService,
     private fb: FormBuilder,
     private router: Router,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private aseguradoService: CitaService
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
@@ -38,7 +48,47 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
+    this.listarAsegurado();
     console.log(this.medico$);
+  }
+
+  listarAsegurado() {
+    this.asegurados$.subscribe((val) => {
+      this.asegurados = val;
+      console.log(typeof(this.arrayAsegurados));
+      
+      for(let i = 0; i < this.asegurados.length; i++){ 
+        console.log(this.asegurados[i].codigo);
+        this.arrayAsegurados.push(this.asegurados[i].codigo)
+      }
+      console.log(this.arrayAsegurados.length)
+    });    
+  }
+
+  get codigoNoValido(){
+
+    // console.log('Invalid: ', this.citaForm.get('codigo').invalid)
+    // console.log('Touched: ', this.citaForm.get('codigo').touched)
+    // console.log('Existe: ', this.existeCodigo)
+    // console.log(this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched  && !this.existeCodigo)
+
+    if(this.existeCodigo === undefined){
+      return false;
+    }else{
+      if (this.existeCodigo && this.citaForm.get('codigo').touched ){
+        return this.citaForm.get('codigo').invalid
+      }else{
+        return true;
+      }
+    }
+   
+  }
+
+  onSearchChange(searchValue: string): void {
+    this.aseguradoIngresado = searchValue;  
+    // console.log(this.aseguradoIngresado);
+    this.existeCodigo = this.arrayAsegurados.includes(this.aseguradoIngresado);
+    // console.log(this.existeCodigo);
   }
 
   initForm() {

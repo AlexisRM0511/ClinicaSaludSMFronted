@@ -9,6 +9,7 @@ import { Cita } from '../model/cita';
 import { Especialidad } from '../model/especialidad';
 import { Horario } from '../model/horario';
 import { Doctores } from 'src/app/doctor/model/doctor';
+import { Asegurado } from '../model/asegurado';
 
 @Injectable({
   providedIn: 'root',
@@ -18,21 +19,25 @@ export class CitaService {
   medico: Observable<Doctores[]>;
   horario: Observable<Horario[]>;
   cita: Observable<Cita[]>;
+  asegurado: Observable<Asegurado[]>;
 
   private especialidadCollection: AngularFirestoreCollection<Especialidad>;
   private doctorCollection: AngularFirestoreCollection<Doctores>;
   private horarioCollection: AngularFirestoreCollection<Horario>;
   private citaCollection: AngularFirestoreCollection<Cita>;
+  private aseguradoCollection: AngularFirestoreCollection<Asegurado>;
 
   constructor(private readonly afs: AngularFirestore) {
     this.especialidadCollection = afs.collection<Especialidad>('especialidad');
     this.doctorCollection = afs.collection<Doctores>('doctor');
     this.horarioCollection = afs.collection<Horario>('horario');
     this.citaCollection = afs.collection<Cita>('cita');
+    this.aseguradoCollection = afs.collection<Asegurado>('pacientes');
     this.getEspecialidad();
     this.getMedico();
     this.getHorario();
     this.getCita();
+    this.getAsegurado();
   }
 
   onSaveCitas(cita: Cita, citaId: string): Promise<void> {
@@ -63,6 +68,14 @@ export class CitaService {
       .snapshotChanges()
       .pipe(
         map((actions) => actions.map((a) => a.payload.doc.data() as Doctores))
+      );
+  }
+
+  getAsegurado(): void {
+    this.asegurado = this.aseguradoCollection
+      .snapshotChanges()
+      .pipe(
+        map((actions) => actions.map((a) => a.payload.doc.data() as Asegurado))
       );
   }
 
