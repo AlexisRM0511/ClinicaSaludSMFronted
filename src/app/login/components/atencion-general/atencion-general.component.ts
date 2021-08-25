@@ -32,7 +32,6 @@ export class AtencionGeneralComponent {
   }
 
   async validar(values) {
-    console.log(values.codigo);
     this.pacientes$.subscribe((val) => {
       val.forEach((element) => {
         if (element.codigo === values.codigo) {

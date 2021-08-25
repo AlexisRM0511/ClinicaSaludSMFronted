@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { DoctorService } from 'src/app/doctor/services/doctor.service';
 import { Paciente } from 'src/app/paciente/model/paciente';
 import { PacienteService } from 'src/app/paciente/services/paciente.service';
 import { GenerarExcelService } from 'src/app/services/generar-excel.service';
@@ -15,17 +14,18 @@ import { CitaService } from '../../services/cita.service';
   styleUrls: ['./registro-citas.component.css'],
 })
 export class RegistroCitasComponent implements OnInit {
-  pageActual: number
-  previousLabel = 'Anterior'
-  nextLabel = 'Siguiente'
-  responsive: boolean = true
-  items = 5
-  citaFilter = ''
-  citas: Cita[]
-  parientes: String[]
+  pageActual: number;
+  previousLabel = 'Anterior';
+  nextLabel = 'Siguiente';
+  responsive: boolean = true;
+  items = 5;
+  citaFilter = '';
+  citas: Cita[];
+  parientes: String[];
 
-  citas$ = this.citasService.cita
-  paciente$: Observable<Paciente>
+  citas$ = this.citasService.cita;
+  paciente$: Observable<Paciente>;
+  esAdministrativo: boolean;
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -38,12 +38,12 @@ export class RegistroCitasComponent implements OnInit {
     private citasService: CitaService,
     private excelService: GenerarExcelService,
     private pacienteService: PacienteService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.informacionPaciente();
+    this.esAdministrativo = false;
   }
-
 
   listarCitasGeneral() {
     this.citas$.subscribe((val) => {
@@ -54,33 +54,35 @@ export class RegistroCitasComponent implements OnInit {
   listarCitasDoctor() {
     this.citas$.subscribe((val) => {
       this.citas = val;
-      this.citas = this.citas.filter(c => c.medico === sessionStorage.getItem("doctorID"))
-    })
-    console.log(this.citas)
+      this.citas = this.citas.filter(
+        (c) => c.medico === sessionStorage.getItem('doctorID')
+      );
+    });
   }
 
   async listarCitasParientes() {
-    this.paciente$ = await this.pacienteService.getOnePaciente(sessionStorage.getItem('userID'))
+    this.paciente$ = await this.pacienteService.getOnePaciente(
+      sessionStorage.getItem('userID')
+    );
 
     await this.paciente$.subscribe(async (x) => {
-      this.parientes = x?.parientes
+      this.parientes = x?.parientes;
     });
-
 
     this.citas$.subscribe((val) => {
       this.citas = val;
-      console.log(val)
       this.citas = this.citas.filter((c) => {
         for (let i = 0; i < this.parientes.length; i++) {
-          console.log(this.parientes)
-          if (c.codigo === this.parientes[i] || c.codigo === sessionStorage.getItem("userID")) {
+          if (
+            c.codigo === this.parientes[i] ||
+            c.codigo === sessionStorage.getItem('userID')
+          ) {
             return true;
           } else {
             return false;
           }
         }
       });
-      console.log(this.citas);
     });
   }
 
@@ -96,7 +98,6 @@ export class RegistroCitasComponent implements OnInit {
 
   onGoToSee(item: any): void {
     this.navigationExtras.state.value = item;
-    console.log(this.navigationExtras.state.value);
     this.router.navigate(['/citas/detalle-cita'], this.navigationExtras);
   }
 
@@ -159,14 +160,12 @@ export class RegistroCitasComponent implements OnInit {
     //console.log(this.citas$);
 
     if (sessionStorage.getItem('adminID') != undefined) {
-      this.listarCitasGeneral()
+      this.esAdministrativo = true;
+      this.listarCitasGeneral();
     } else if (sessionStorage.getItem('doctorID') != undefined) {
-      this.listarCitasDoctor()
+      this.listarCitasDoctor();
     } else if (sessionStorage.getItem('userID') != undefined) {
-      this.listarCitasParientes()
+      this.listarCitasParientes();
     }
   }
 }
-
-
-

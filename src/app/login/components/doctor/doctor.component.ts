@@ -28,7 +28,6 @@ export class DoctorComponent {
   }
 
   async validar(values) {
-    console.log(values.codigo, values.password);
     this.doctores$.subscribe((val) => {
       val.forEach((element) => {
         if (

@@ -48,7 +48,6 @@ export class CrearCitaComponent implements OnInit {
     this.medico$;
     this.horario$;
     this.initForm();
-    console.log(this.medico$);
     this._adapter.setLocale('es');
   }
 
@@ -72,17 +71,11 @@ export class CrearCitaComponent implements OnInit {
       this.citaForm.get('codigo').value
     );
 
-    console.log(
-      this.citaForm.value,
-      this.citaForm.get('fecha').value.toLocaleDateString()
-    );
-
     if (this.citaForm.valid) {
       const cita: Cita = this.citaForm.value;
       cita.fecha = this.citaForm.get('fecha').value.toLocaleDateString();
       const citaId = this.cita?.id || null;
       await this.paciente$.subscribe(async (x) => {
-        console.log(x);
         if (x !== undefined) {
           cita.name = x?.name;
           cita.lastname = x?.lastName;

@@ -32,7 +32,6 @@ export class EditarCitaComponent implements OnInit {
   }
 
   onSave(): void {
-    console.log('Saved', this.citaForm.value);
     if (this.citaForm.valid) {
       const cita = this.citaForm.value;
       const citaId = this.cita?.id || null;

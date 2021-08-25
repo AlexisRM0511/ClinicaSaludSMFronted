@@ -25,7 +25,6 @@ export class AdministrativoComponent {
   }
 
   async validar(values) {
-    console.log(values.codigo, values.password);
     this.admin$.subscribe((val) => {
       val.forEach((element) => {
         if (element.codigo === values.codigo) {
