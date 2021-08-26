@@ -26,7 +26,7 @@ export class RegistroCitasComponent implements OnInit {
   citas$ = this.citasService.cita;
   paciente$: Observable<Paciente>;
   esAdministrativo: boolean;
-
+  today: Date;
   navigationExtras: NavigationExtras = {
     state: {
       value: null,
@@ -43,11 +43,13 @@ export class RegistroCitasComponent implements OnInit {
   ngOnInit(): void {
     this.esAdministrativo = false;
     this.informacionPaciente();
+    this.today = new Date(Date.now());
   }
 
   listarCitasGeneral() {
     this.citas$.subscribe((val) => {
       this.citas = val;
+      console.log(val);
     });
   }
 

@@ -84,7 +84,16 @@
                   <td class="align-middle text-center">{{ c?.horario }}</td>
                   <td class="align-middle text-center">{{ c?.medico }}</td>
                   <td class="align-middle text-center">
-                    <span class="badge bg-success p-2 text-white">Citado</span>
+                    <span
+                      class="badge bg-success p-2 text-white"
+                      *ngIf="c?.fecha > today.toLocaleDateString()"
+                      >Citado</span
+                    >
+                    <span
+                      class="badge bg-danger p-2 text-white"
+                      *ngIf="c?.fecha < today.toLocaleDateString()"
+                      >Atendido
+                    </span>
                   </td>
                   <td
                     class="btn-group d-flex justify-content-center"
