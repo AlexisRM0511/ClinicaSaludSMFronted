@@ -1,242 +1,110 @@
 <div class="container">
-  <form
-    class="mt-3 col-md-8 offset-md-2"
-    (ngSubmit)="onSave()"
-    [formGroup]="citaForm"
-  >
+    <form class="mt-3 col-md-8 offset-md-2" (ngSubmit)="onSave()" [formGroup]="citaForm">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" placeholder="Numero de DNI" formControlName="DNI" [class]="isValidField('DNI')"
+                    [class.is-invalid]="dniNoValido">
+                    <small *ngIf="dniNoValido" class="text-danger">
+                        El DNI ingresado es incorrecto.
+                    </small>
+                    <div class="invalid-feedback">
+                        <span *ngIf="citaForm.get('DNI').errors?.required">El numero de DNI es requerido</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" placeholder="Nombre" formControlName="name" [class]="isValidField('name')"
+                    [class.is-invalid]="nombreNoValido">
+                    <small *ngIf="nombreNoValido" class="text-danger">
+                        El nombre ingresado es incorrecto.
+                    </small>
+                    <div class="invalid-feedback">
+                        <span *ngIf="citaForm.get('name').errors?.required">El nombre es requerido</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" placeholder="Apellidos" formControlName="lastname" [class]="isValidField('lastname')"
+                    [class.is-invalid]="apellidoNoValido">
+                    <small *ngIf="apellidoNoValido" class="text-danger">
+                        El apellido ingresado es incorrecto.
+                    </small>
+                    <div class="invalid-feedback">
+                        <span *ngIf="citaForm.get('lastname').errors?.required">Los apellidos son requeridos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Elija la fecha</mat-label>
+                    <input
+                        matInput
+                        [matDatepickerFilter]="myFilter"
+                        [matDatepicker]="picker"
+                        [min]="minDate"
+                        formControlName="fecha"
+                        [class]="isValidField('fecha')"
+                        [class.is-invalid]="fechaNoValido"
+                        disabled
+                    />
+                    <mat-datepicker-toggle
+                        matSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                    </mat-form-field>
+                    <small *ngIf="fechaNoValido" class="text-danger">
+                    La fecha ingresada es incorrecta.
+                    </small>
+                    <div class="invalid-feedback">
+                    <span *ngIf="citaForm.get('fecha').errors?.required"
+                        >La fecha de la cita es requerida</span
+                    >
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <select
+                    name="categoria_id"
+                    formControlName="horario"
+                    class="custom-select"
+                    id="horario_id"
+                    [class]="isValidField('horario')"
+                    [class.is-invalid]="horarioNoValido"
+                    >
+                    <option value="" hidden>Seleccione</option>
+                    <option *ngFor="let h of horario$ | async" [ngValue]="h?.nombre">
+                        {{ h?.nombre }}
+                    </option>
+                    </select>
+                    <small *ngIf="horarioNoValido" class="text-danger">
+                    El horario ingresado es incorrecto.
+                    </small>
+                    <div class="invalid-feedback">
+                    <span *ngIf="citaForm.get('horario').errors?.required"
+                        >La hora de la cita es requerida</span
+                    >
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" placeholder="Codigo del Doctor" formControlName="medico" [class]="isValidField('medico')"
+                    [class.is-invalid]="medicoNoValido">
+                    <small *ngIf="medicoNoValido" class="text-danger">
+                        El codigo del medico ingresado es incorrecta.
+                    </small>
+                    <div class="invalid-feedback">
+                        <span *ngIf="citaForm.get('medico').errors?.required">El codigo del doctor es requerido</span>
+                    </div>
+                </div>
+            </div>
+
     <div class="form-row">
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Numero de DNI"
-          formControlName="DNI"
-          [class]="isValidField('DNI')"
-          [class.is-invalid]="dniNoValido"
-        />
-        <small *ngIf="dniNoValido" class="text-danger">
-          El DNI ingresado es incorrecto.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('DNI').errors?.required"
-            >El numero de DNI es requerido</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Nombre"
-          formControlName="name"
-          [class]="isValidField('name')"
-          [class.is-invalid]="nombreNoValido"
-        />
-        <small *ngIf="nombreNoValido" class="text-danger">
-          El nombre ingresado es incorrecto.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('name').errors?.required"
-            >El nombre es requerido</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Apellidos"
-          formControlName="lastname"
-          [class]="isValidField('lastname')"
-          [class.is-invalid]="apellidoNoValido"
-        />
-        <small *ngIf="apellidoNoValido" class="text-danger">
-          El apellido ingresado es incorrecto.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('lastname').errors?.required"
-            >Los apellidos son requeridos</span
-          >
-        </div>
-      </div>
+        <button type="submit" class="btn bg-dark btn-block text-light">
+        Actualizar Cita2
+        </button>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Fecha de la Cita"
-          formControlName="fecha"
-          [class]="isValidField('fecha')"
-          [class.is-invalid]="fechaNoValido"
-        />
-        <small *ngIf="fechaNoValido" class="text-danger">
-          La fecha ingresada es incorrecta.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('fecha').errors?.required"
-            >La fecha de la cita es requerida</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Hora de la Cita"
-          formControlName="horario"
-          [class]="isValidField('horario')"
-          [class.is-invalid]="horarioNoValido"
-        />
-        <small *ngIf="horarioNoValido" class="text-danger">
-          El horario ingresado es incorrecto.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('horario').errors?.required"
-            >La hora de la cita es requerida</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Codigo del Doctor"
-          formControlName="codigo"
-          [class]="isValidField('codigo')"
-          [class.is-invalid]="codigoNoValido"
-        />
-        <small *ngIf="codigoNoValido" class="text-danger">
-          El codigo ingresado es incorrecta.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('codigo').errors?.required"
-            >El codigo del doctor es requerido</span
-          >
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
-    <div class="form-group col-md-4">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Apellidos"
-        formControlName="lastname"
-        [class]="isValidField('lastname')"
-      />
-      <div class="invalid-feedback">
-        <span *ngIf="citaForm.get('lastname').errors?.required"
-          >Los apellidos son requeridos</span
-        >
-      </div>
-    </div>
-    <!-- </div> -->
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Fecha de la Cita"
-          formControlName="fecha"
-          [class]="isValidField('fecha')"
-        />
-        <!-- <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Elija la fecha</mat-label>
-            <input
-                matInput
-                [matDatepickerFilter]="myFilter"
-                [matDatepicker]="picker"
-                [min]="minDate"
-                formControlName="fecha"
-                disabled
-            />
-            <mat-datepicker-toggle
-                matSuffix
-                [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker #picker disabled="false"></mat-datepicker>
-            </mat-form-field> -->
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('fecha').errors?.required"
-            >La fecha de la cita es requerida</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Hora de la Cita"
-          formControlName="horario"
-          [class]="isValidField('horario')"
-        />
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('horario').errors?.required"
-            >La hora de la cita es requerida</span
-          >
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Elija la fecha</mat-label>
-          <input
-            matInput
-            [matDatepickerFilter]="myFilter"
-            [matDatepicker]="picker"
-            [min]="minDate"
-            formControlName="fecha"
-            [class]="isValidField('fecha')"
-            [class.is-invalid]="fechaNoValido"
-            disabled
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker disabled="false"></mat-datepicker>
-        </mat-form-field>
-        <small *ngIf="fechaNoValido" class="text-danger">
-          La fecha ingresada es incorrecta.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('fecha').errors?.required"
-            >La fecha de la cita es requerida</span
-          >
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <select
-          name="categoria_id"
-          formControlName="horario"
-          class="custom-select"
-          id="horario_id"
-          [class]="isValidField('horario')"
-          [class.is-invalid]="horarioNoValido"
-        >
-          <option value="" hidden>Seleccione</option>
-          <option *ngFor="let h of horario$ | async" [ngValue]="h?.nombre">
-            {{ h?.nombre }}
-          </option>
-        </select>
-        <small *ngIf="horarioNoValido" class="text-danger">
-          El horario ingresado es incorrecto.
-        </small>
-        <div class="invalid-feedback">
-          <span *ngIf="citaForm.get('horario').errors?.required"
-            >La hora de la cita es requerida</span
-          >
-        </div>
-      </div>
-    </div>
-    <button type="submit" class="btn bg-dark btn-block text-light">
-      Actualizar Cita
-    </button>
-  </form>
-  <br />
+    </form>
+    <br />
 
   <div class="row">
     <div class="col-md-2"></div>

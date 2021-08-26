@@ -12,9 +12,15 @@
           placeholder="Codigo"
           formControlName="codigo"
           [class]="isValidField('codigo')"
+          [class.is-invalid]="codigoNoValido"
         />
+        <small *ngIf="codigoNoValido" class="text-danger">
+          El codigo ingresado es incorrecto.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('DNI').errors?.required">El numero de DNI es requerido</span> -->
+          <span *ngIf="doctorForm.get('codigo').errors?.required"
+            >El codigo es requerido</span
+          >
         </div>
       </div>
       <div class="form-group col-md-4">
@@ -24,9 +30,15 @@
           placeholder="Nombres"
           formControlName="name"
           [class]="isValidField('name')"
+          [class.is-invalid]="nombreNoValido"
         />
+        <small *ngIf="nombreNoValido" class="text-danger">
+          El nombre ingresado es incorrecto.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('name').errors?.required">El nombre es requerido 2</span> -->
+          <span *ngIf="doctorForm.get('name').errors?.required"
+            >El nombre es requerido 2</span
+          >
         </div>
       </div>
       <div class="form-group col-md-4">
@@ -36,9 +48,15 @@
           placeholder="Apellidos"
           formControlName="lastName"
           [class]="isValidField('lastName')"
+          [class.is-invalid]="apellidoNoValido"
         />
+        <small *ngIf="apellidoNoValido" class="text-danger">
+          Los apellidos son incorrectos.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('lastname').errors?.required">Los apellidos son requeridos</span> -->
+          <span *ngIf="doctorForm.get('lastname').errors?.required"
+            >Los apellidos son requeridos</span
+          >
         </div>
       </div>
     </div>
@@ -50,9 +68,15 @@
           placeholder="Telefono"
           formControlName="number"
           [class]="isValidField('number')"
+          [class.is-invalid]="telefonoNoValido"
         />
+        <small *ngIf="telefonoNoValido" class="text-danger">
+          El numero ingresado es incorrecto.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('fecha').errors?.required">La fecha de la cita es requerida</span> -->
+          <span *ngIf="doctorForm.get('number').errors?.required"
+            >El numero es requerida</span
+          >
         </div>
       </div>
       <div class="form-group col-md-4">
@@ -62,9 +86,15 @@
           placeholder="Especialidad"
           formControlName="specialty"
           [class]="isValidField('specialty')"
+          [class.is-invalid]="especialidadNoValido"
         />
+        <small *ngIf="especialidadNoValido" class="text-danger">
+          La especialidad ingresada es incorrecta.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('horario').errors?.required">La hora de la cita es requerida</span> -->
+          <span *ngIf="doctorForm.get('specialty').errors?.required"
+            >La especialidad es requerida</span
+          >
         </div>
       </div>
       <div class="form-group col-md-4">
@@ -74,9 +104,15 @@
           placeholder="DNI"
           formControlName="dni"
           [class]="isValidField('dni')"
+          [class.is-invalid]="dniNoValido"
         />
+        <small *ngIf="dniNoValido" class="text-danger">
+          El DNI ingresado es incorrecto.
+        </small>
         <div class="invalid-feedback">
-          <!-- <span *ngIf="citaForm.get('horario').errors?.required">La hora de la cita es requerida</span> -->
+          <span *ngIf="doctorForm.get('dni').errors?.required"
+            >El DNI a es requerida</span
+          >
         </div>
       </div>
     </div>

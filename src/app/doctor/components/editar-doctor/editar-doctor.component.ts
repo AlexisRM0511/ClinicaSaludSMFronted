@@ -39,11 +39,22 @@ export class EditarDoctorComponent implements OnInit {
 
   private initForm(): void {
     this.doctorForm = this.fb.group({
-      codigo: ['', [Validators.required]],
+      codigo: [
+        '',
+        [Validators.required, Validators.minLength(9), Validators.maxLength(9)],
+      ],
       name: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      number: ['', [Validators.required]],
-      dni: ['', [Validators.required]],
+      number: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('[0-9]'),
+          Validators.minLength(7),
+          Validators.maxLength(9),
+        ],
+      ],
+      dni: ['', [Validators.required, Validators.pattern('[0-9]{8}')]],
       specialty: ['', [Validators.required]],
     });
   }
@@ -68,5 +79,57 @@ export class EditarDoctorComponent implements OnInit {
 
   onGoBackToList(): void {
     this.router.navigate(['/doctor/registrados']);
+  }
+
+  get dniNoValido() {
+    return (
+      this.doctorForm.get('dni').invalid && this.doctorForm.get('dni').touched
+    );
+  }
+
+  get nombreNoValido() {
+    return (
+      this.doctorForm.get('name').invalid && this.doctorForm.get('name').touched
+    );
+  }
+
+  get apellidoNoValido() {
+    return (
+      this.doctorForm.get('lastname').invalid &&
+      this.doctorForm.get('lastname').touched
+    );
+  }
+
+  get fechaNoValido() {
+    return (
+      this.doctorForm.get('fecha').invalid &&
+      this.doctorForm.get('fecha').touched
+    );
+  }
+
+  get horarioNoValido() {
+    return (
+      this.doctorForm.get('horario').invalid &&
+      this.doctorForm.get('horario').touched
+    );
+  }
+
+  get codigoNoValido() {
+    return (
+      this.doctorForm.get('codigo').invalid &&
+      this.doctorForm.get('codigo').touched
+    );
+  }
+  get telefonoNoValido() {
+    return (
+      this.doctorForm.get('number').invalid &&
+      this.doctorForm.get('number').touched
+    );
+  }
+  get especialidadNoValido() {
+    return (
+      this.doctorForm.get('specialty').invalid &&
+      this.doctorForm.get('specialty').touched
+    );
   }
 }
