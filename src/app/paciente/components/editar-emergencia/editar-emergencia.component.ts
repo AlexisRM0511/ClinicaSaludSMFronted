@@ -37,12 +37,12 @@ export class EditarEmergenciaComponent implements OnInit {
 
   private initForm(): void{
     this.emergenciaForm = this.fb.group({
-      codigo: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
-      fecha: ['', [Validators.required]],
+      codigo: [{value:'', disabled: true}, [Validators.required]],
+      nombre: [{value:'', disabled: true}, [Validators.required]],
+      fecha: [{value:'', disabled: true}, [Validators.required]],
       estado: ['', [Validators.required]],
-      dni: ['', [Validators.required]],
-      monto: ['', [Validators.required]],
+      dni: [{ value:'',disabled: true}, [Validators.required]],
+      monto: ['', [Validators.required]], 
     });  
   }
 

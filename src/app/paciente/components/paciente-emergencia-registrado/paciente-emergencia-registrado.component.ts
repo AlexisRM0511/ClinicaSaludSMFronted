@@ -50,7 +50,7 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
       codigo: ['', [Validators.required]],
       telefono: [{ value: '', disabled: true }, [Validators.required]],
       nombre: [{ value: '', disabled: true }, [Validators.required]],
-      fecha: ['', [Validators.required]],
+      fecha: [''],
       estado: ['', [Validators.required]],
       dni: [{ value: '', disabled: true }, [Validators.required]],
       monto: ['', [Validators.required]],
@@ -59,11 +59,17 @@ export class PacienteEmergenciaRegistradoComponent implements OnInit {
 
   onSaveEmergencia(): void {
     if (this.emergenciaForm.valid) {
+      let fechaActual= new Date();
+      let fecha= fechaActual.getDate()+'-'+(fechaActual.getMonth()+1)+'-'+fechaActual.getFullYear();
+      this.emergenciaForm.get('fecha').setValue(fecha);
       const paciente = this.emergenciaForm.value;
       const pacienteId = this.emergencias?.codigo || null;
+      
       this.emergenciaService.onSaveEmergencia(paciente, pacienteId);
       this.emergenciaForm.reset();
     }
+    
+    
   }
 
   onGetEmergencia() {
