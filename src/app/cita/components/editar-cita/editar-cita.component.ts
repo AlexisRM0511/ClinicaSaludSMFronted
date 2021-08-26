@@ -33,10 +33,9 @@ export class EditarCitaComponent implements OnInit {
     this.cita = navigation?.extras?.state?.value;
     this.initForm();
   }
-
+  
   ngOnInit(): void {
     this.horario$;
-
     if (typeof this.cita === 'undefined') {
       this.router.navigate(['/citas/crear']);
     } else {
@@ -46,17 +45,24 @@ export class EditarCitaComponent implements OnInit {
 
   onSave(): void {
     if (this.citaForm.valid) {
-
-    this.fechaFormateada =this.datepipe.transform(this.citaForm.value.fecha, 'dd/MM/yyyy');
-    this.citaForm.value.fecha = this.fechaFormateada;
-    console.log(this.citaForm.value.codigo);
+      this.citaForm.value.DNI = this.cita.DNI
+      this.citaForm.value.codigo = this.cita.codigo
+      this.citaForm.value.especialidad = this.cita.especialidad
+      this.citaForm.value.id = this.cita.id
+      this.citaForm.value.lastname = this.cita.lastname
+      this.citaForm.value.medico = this.cita.medico
+      this.citaForm.value.name = this.cita.name
+      this.fechaFormateada =this.datepipe.transform(this.citaForm.value.fecha, 'dd/MM/yyyy');
+      this.citaForm.value.fecha = this.fechaFormateada;
+      console.log(this.citaForm.value);
 
       const cita = this.citaForm.value;
       const citaId = this.cita?.id || null;
       console.log(cita);
-      
+        
       this.citaService.onSaveCita(cita, citaId);
       this.citaForm.reset();
+      this.router.navigate(['/citas/registro-citas']);
     }
   }
 
@@ -77,17 +83,14 @@ export class EditarCitaComponent implements OnInit {
     this.citaForm = this.fb.group({
       DNI: [
         { value: '', disabled: true },
-        // '',
         [Validators.required, Validators.pattern('[0-9]{8}')],
       ],
       name: [
-        // { value: '', disabled: true },
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       lastname: [
-        // { value: '', disabled: true },
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       fecha: [
@@ -104,8 +107,7 @@ export class EditarCitaComponent implements OnInit {
         ],
       ],
       medico: [
-        // { value: '', disabled: true },
-        '',
+        { value: '', disabled: true },
         [Validators.required, Validators.pattern('^[A-Za-z0-9- ]+$')],
       ],
     });
