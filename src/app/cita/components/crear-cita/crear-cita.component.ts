@@ -55,29 +55,20 @@ export class CrearCitaComponent implements OnInit {
     this.horario$;
     this.initForm();
     this.listarAsegurado();
-    console.log(this.medico$);
     this._adapter.setLocale('es');
   }
 
   listarAsegurado() {
     this.asegurados$.subscribe((val) => {
       this.asegurados = val;
-      console.log(typeof this.arrayAsegurados);
 
       for (let i = 0; i < this.asegurados.length; i++) {
-        /* console.log(this.asegurados[i].codigo); */
         this.arrayAsegurados.push(this.asegurados[i].codigo);
       }
-      console.log(this.arrayAsegurados.length);
     });
   }
 
   get codigoNoValido() {
-    // console.log('Invalid: ', this.citaForm.get('codigo').invalid)
-    // console.log('Touched: ', this.citaForm.get('codigo').touched)
-    // console.log('Existe: ', this.existeCodigo)
-    // console.log(this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched  && !this.existeCodigo)
-
     if (this.existeCodigo === undefined) {
       return false;
     } else {
@@ -91,9 +82,7 @@ export class CrearCitaComponent implements OnInit {
 
   onSearchChange(searchValue: string): void {
     this.aseguradoIngresado = searchValue;
-    // console.log(this.aseguradoIngresado);
     this.existeCodigo = this.arrayAsegurados.includes(this.aseguradoIngresado);
-    // console.log(this.existeCodigo);
   }
 
   initForm() {
@@ -115,7 +104,6 @@ export class CrearCitaComponent implements OnInit {
     this.paciente$ = await this.pacienteService.getOnePaciente(
       this.citaForm.get('codigo').value
     );
-    console.log(this.citaForm.value);
 
     if (this.citaForm.valid) {
       const cita: Cita = this.citaForm.value;

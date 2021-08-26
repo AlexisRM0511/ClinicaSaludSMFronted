@@ -8,37 +8,33 @@ import { PacienteService } from '../../services/paciente.service';
 @Component({
   selector: 'app-registrar-paciente',
   templateUrl: './registrar-paciente.component.html',
-  styleUrls: ['./registrar-paciente.component.css']
+  styleUrls: ['./registrar-paciente.component.css'],
 })
 export class RegistrarPacienteComponent implements OnInit {
-
   paciente: Paciente;
   pacienteForm: FormGroup;
   estadoPaciente: string;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private fb: FormBuilder,
-    private pacienteService: PacienteService) { 
-
-  }
+    private pacienteService: PacienteService
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
   }
-  onSave(): void{
+  onSave(): void {
     /* this.pacienteForm.get('id').setValue( this.pacienteForm.get('codigo').value); */
 
-    if (this.pacienteForm.valid){
+    if (this.pacienteForm.valid) {
       const emergencia = this.pacienteForm.value;
       const emergenciaId = this.paciente?.id || null;
-      console.log(emergencia);
-      console.log(emergenciaId);
-      
-      
-      this.pacienteService.onSavePacientes(emergencia,emergenciaId)
+
+      this.pacienteService.onSavePacientes(emergencia, emergenciaId);
       Swal.fire({
         title: 'Paciente registrado',
-        icon: 'success',  
+        icon: 'success',
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'OK',
       }).then((result) => {
@@ -56,8 +52,8 @@ export class RegistrarPacienteComponent implements OnInit {
       lastName: ['', [Validators.required]],
       dni: ['', [Validators.required]],
       number: ['', [Validators.required]],
-      date: ['', [Validators.required]], 
-      parientes: ['', [Validators.required]], 
+      date: ['', [Validators.required]],
+      parientes: ['', [Validators.required]],
     });
   }
 
@@ -112,5 +108,4 @@ export class RegistrarPacienteComponent implements OnInit {
   onGoBackToList(): void {
     this.router.navigate(['/paciente/registrado']);
   }
-
 }

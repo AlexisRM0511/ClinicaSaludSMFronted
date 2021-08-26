@@ -1,14 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PacienteService } from 'src/app/paciente/services/paciente.service';
-import { HeaderComponent } from 'src/app/layout/header/header.component';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -68,24 +61,3 @@ export class AtencionGeneralComponent {
     },
   });
 }
-//   form: FormGroup;
-
-//   constructor() {
-//     this.buildForm();
-//   }
-
-//   ngOnInit() {
-//   }
-
-//   private buildForm() {
-//     this.form = new FormGroup({
-//       codigo: new FormControl('', [Validators.required]),
-//     });
-
-//     this.form.valueChanges
-//     .subscribe(value => {
-//       console.log(value);
-//     });
-//   }
-
-// }

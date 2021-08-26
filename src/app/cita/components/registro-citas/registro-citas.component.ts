@@ -71,7 +71,6 @@ export class RegistroCitasComponent implements OnInit {
 
     this.citas$.subscribe((val) => {
       this.citas = val;
-      console.log(this.citas);
       this.citas = this.citas.filter((c) => {
         for (let i = 0; i < this.parientes.length; i++) {
           if (
@@ -84,7 +83,6 @@ export class RegistroCitasComponent implements OnInit {
           }
         }
       });
-      console.log(this.citas);
     });
   }
 
@@ -104,13 +102,6 @@ export class RegistroCitasComponent implements OnInit {
   }
 
   async onGoToDelete(citaId: string): Promise<void> {
-    // try {
-    //   await this.citasService.onDeleteCita(citaId);
-    //   alert('Deleted: Cita ID:' + citaId);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     Swal.fire({
       title: 'Estas seguro de borrar este paciente?',
       text: 'Esta accion no se puede revertir!',
@@ -160,12 +151,9 @@ export class RegistroCitasComponent implements OnInit {
   }
 
   async informacionPaciente() {
-    //console.log(this.citas$);
-
     if (sessionStorage.getItem('adminID') != undefined) {
       this.esAdministrativo = true;
       this.listarCitasGeneral();
-      console.log('vaoidvnaoisvdn');
     } else if (sessionStorage.getItem('doctorID') != undefined) {
       this.listarCitasDoctor();
     } else if (sessionStorage.getItem('userID') != undefined) {

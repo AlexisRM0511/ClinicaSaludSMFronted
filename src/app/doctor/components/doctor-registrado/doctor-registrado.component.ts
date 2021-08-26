@@ -62,13 +62,6 @@ export class DoctorRegistradoComponent implements OnInit {
   }
 
   async onGoToDelete(citaId: string): Promise<void> {
-    // try {
-    //   await this.citasService.onDeleteCita(citaId);
-    //   alert('Deleted: Cita ID:' + citaId);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     Swal.fire({
       title: 'Estas seguro de borrar este doctor?',
       text: 'Esta accion no se puede revertir!',
