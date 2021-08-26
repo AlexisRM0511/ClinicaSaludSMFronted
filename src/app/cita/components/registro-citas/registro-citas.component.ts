@@ -71,9 +71,8 @@ export class RegistroCitasComponent implements OnInit {
 
     this.citas$.subscribe((val) => {
       this.citas = val;
+      console.log(this.citas);
       this.citas = this.citas.filter((c) => {
-        console.log(c);
-
         for (let i = 0; i < this.parientes.length; i++) {
           if (
             c.codigo === this.parientes[i] ||
@@ -85,6 +84,7 @@ export class RegistroCitasComponent implements OnInit {
           }
         }
       });
+      console.log(this.citas);
     });
   }
 

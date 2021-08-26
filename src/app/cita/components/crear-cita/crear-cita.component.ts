@@ -65,7 +65,7 @@ export class CrearCitaComponent implements OnInit {
       console.log(typeof this.arrayAsegurados);
 
       for (let i = 0; i < this.asegurados.length; i++) {
-        console.log(this.asegurados[i].codigo);
+        /* console.log(this.asegurados[i].codigo); */
         this.arrayAsegurados.push(this.asegurados[i].codigo);
       }
       console.log(this.arrayAsegurados.length);
@@ -128,16 +128,16 @@ export class CrearCitaComponent implements OnInit {
           cita.name = x?.name;
           cita.lastname = x?.lastName;
           cita.DNI = x?.dni;
-          this.citasService.onSaveCitas(cita, citaId);
+          await this.citasService.onSaveCitas(cita, citaId);
           Swal.fire({
             icon: 'success',
             title: 'Cita generada',
             text: 'La cita de a generado con éxito',
             confirmButtonText: 'OK',
             confirmButtonColor: '#2FAF27',
+          }).then((res) => {
+            this.citaForm.reset();
           });
-
-          this.citaForm.reset();
         } else {
           Swal.fire({
             icon: 'error',
