@@ -104,14 +104,11 @@ export class CitaService {
     });
   }
 
-  onSaveCita(
-    cita: Cita,
-    citaId: string
-  ): Promise<void> {
+  onSaveCita(cita: Cita, citaId: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
         const id = citaId || this.afs.createId();
-        const data = { id, ...cita};
+        const data = { id, ...cita };
         const result = await this.citaCollection.doc(id).set(data);
         resolve(result);
       } catch (error) {

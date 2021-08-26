@@ -71,13 +71,6 @@ export class PacienteRegistradoComponent implements OnInit {
   }
 
   async onGoToDelete(pacienteId: string): Promise<void> {
-    // try {
-    //   await this.pacienteService.onDeletePacientes(pacienteId);
-    //   alert('Borrado: Paciente ID:' + pacienteId);
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
     Swal.fire({
       title: 'Estas seguro de borrar este paciente?',
       text: 'Esta accion no se puede revertir!',
