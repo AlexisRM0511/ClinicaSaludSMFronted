@@ -5,7 +5,11 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-lg-4 mx-auto">
-        <form action="" class="border p-3 form" [formGroup]="citaForm">
+        <form
+          class="border p-3 form"
+          (ngSubmit)="crearCita()"
+          [formGroup]="citaForm"
+        >
           <div class="col-12 mx-auto my-2">
             <label for="codigo_id">Codigo del asegurado:</label>
             <input
@@ -95,9 +99,7 @@
             </select>
           </div>
           <div class="col-12 d-flex flex-column mt-4">
-            <button type="button" class="btn btn-success" (click)="crearCita()">
-              Generar Cita
-            </button>
+            <button type="submit" class="btn btn-success">Generar Cita</button>
             <a type="button" class="btn btn-danger mt-2" routerLink="/paciente"
               >Regresar</a
             >
