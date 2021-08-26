@@ -49,7 +49,6 @@ export class RegistroCitasComponent implements OnInit {
   listarCitasGeneral() {
     this.citas$.subscribe((val) => {
       this.citas = val;
-      console.log(val);
     });
   }
 
@@ -73,7 +72,12 @@ export class RegistroCitasComponent implements OnInit {
 
     this.citas$.subscribe((val) => {
       this.citas = val;
+      console.log(this.citas, sessionStorage.getItem('userID'));
+
       this.citas = this.citas.filter((c) => {
+        if (c.codigo === sessionStorage.getItem('userID')) {
+          return true;
+        }
         for (let i = 0; i < this.parientes.length; i++) {
           if (
             c.codigo === this.parientes[i] ||

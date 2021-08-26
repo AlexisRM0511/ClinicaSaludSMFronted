@@ -91,7 +91,7 @@
                     >
                     <span
                       class="badge bg-danger p-2 text-white"
-                      *ngIf="c?.fecha < today.toLocaleDateString()"
+                      *ngIf="c?.fecha <= today.toLocaleDateString()"
                       >Atendido
                     </span>
                   </td>
