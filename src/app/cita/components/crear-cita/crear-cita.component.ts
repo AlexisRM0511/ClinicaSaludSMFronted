@@ -141,7 +141,7 @@ export class CrearCitaComponent implements OnInit {
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Ccodigo de asegurado incorrecto',
+            title: 'Código de asegurado incorrecto',
           });
         }
       });
