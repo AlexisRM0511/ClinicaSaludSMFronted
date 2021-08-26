@@ -53,6 +53,11 @@ export class EditarEmergenciaComponent implements OnInit {
   }
 
   onSave(): void{
+    this.emergenciaForm.value.dni = this.emergencia.dni
+    this.emergenciaForm.value.codigo = this.emergencia.codigo
+    this.emergenciaForm.value.nombre = this.emergencia.nombre
+    this.emergenciaForm.value.id = this.emergencia.id
+    this.emergenciaForm.value.fecha = this.emergencia.fecha
     if (this.emergenciaForm.valid){
       const emergencia = this.emergenciaForm.value;
       const emergenciaId = this.emergencia?.id || null;
