@@ -100,8 +100,8 @@ export class CrearCitaComponent implements OnInit {
     }
   }
 
-  async crearCita() {
-    this.paciente$ = await this.pacienteService.getOnePaciente(
+  crearCita() {
+    this.paciente$ = this.pacienteService.getOnePaciente(
       this.citaForm.get('codigo').value
     );
 
@@ -111,27 +111,39 @@ export class CrearCitaComponent implements OnInit {
 
       cita.fecha = this.citaForm.get('fecha').value.toLocaleDateString();
       const citaId = this.cita?.id || null;
-      await this.paciente$.subscribe(async (x) => {
-        if (x !== undefined) {
+      console.log(this.paciente$);
+
+      let validar = true;
+      this.paciente$.subscribe((x) => {
+        console.log(x);
+
+        if (x !== undefined && validar) {
+          validar = false;
           cita.name = x?.name;
           cita.lastname = x?.lastName;
           cita.DNI = x?.dni;
-          await this.citasService.onSaveCitas(cita, citaId);
-          Swal.fire({
-            icon: 'success',
-            title: 'Cita generada',
-            text: 'La cita de a generado con éxito',
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#2FAF27',
-          }).then((res) => {
-            this.citaForm.reset();
-          });
-        } else {
+          this.citasService
+            .onSaveCitas(cita, citaId)
+            .then((x) => {
+              console.log(x);
+
+              Swal.fire({
+                icon: 'success',
+                title: 'Cita generada',
+                text: 'La cita de a generado con éxito',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#2FAF27',
+              });
+            })
+            .then((res) => {
+              this.citaForm.reset();
+            });
+        } /* else {
           Swal.fire({
             icon: 'error',
             title: 'Código de asegurado incorrecto',
           });
-        }
+        } */
       });
     } else {
       Swal.fire({
