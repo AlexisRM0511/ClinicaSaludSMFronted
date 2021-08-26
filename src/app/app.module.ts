@@ -21,6 +21,7 @@ import { PacienteDetalleModule } from './paciente/components/paciente-detalle/pa
 import { PacienteEditarModule } from './paciente/components/paciente-editar/paciente-editar.module';
 import { HomeComponent } from './layout/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
@@ -39,7 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     PacienteEditarModule,
     BrowserAnimationsModule,
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule implements OnInit {

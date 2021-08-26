@@ -1,9 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { Cita } from '../../model/cita';
 import { CitaService } from '../../services/cita.service';
+
 
 @Component({
   selector: 'app-editar-cita',
@@ -15,15 +17,18 @@ export class EditarCitaComponent implements OnInit {
   cita: Cita;
   citaForm: FormGroup;
   minDate: Date;
+  fechaFormateada: string;
   horario$ = this.citaService.horario;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private citaService: CitaService
+    private citaService: CitaService,
+    public datepipe: DatePipe
   ) {
     const today = Date.now();
     this.minDate = new Date(today);
+    
     const navigation = this.router.getCurrentNavigation();
     this.cita = navigation?.extras?.state?.value;
     this.initForm();
@@ -41,8 +46,15 @@ export class EditarCitaComponent implements OnInit {
 
   onSave(): void {
     if (this.citaForm.valid) {
+
+    this.fechaFormateada =this.datepipe.transform(this.citaForm.value.fecha, 'dd/MM/yyyy');
+    this.citaForm.value.fecha = this.fechaFormateada;
+    console.log(this.citaForm.value.codigo);
+
       const cita = this.citaForm.value;
       const citaId = this.cita?.id || null;
+      console.log(cita);
+      
       this.citaService.onSaveCita(cita, citaId);
       this.citaForm.reset();
     }
@@ -65,23 +77,23 @@ export class EditarCitaComponent implements OnInit {
     this.citaForm = this.fb.group({
       DNI: [
         { value: '', disabled: true },
+        // '',
         [Validators.required, Validators.pattern('[0-9]{8}')],
       ],
       name: [
-        { value: '', disabled: true },
+        // { value: '', disabled: true },
+        '',
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       lastname: [
-        { value: '', disabled: true },
+        // { value: '', disabled: true },
+        '',
         [Validators.required, Validators.pattern('^[A-Za-zñÑáéíóúÁÉÍÓÚ ]+$')],
       ],
       fecha: [
         '',
         [
-          Validators.required,
-          Validators.pattern(
-            /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/
-          ),
+          Validators.required
         ],
       ],
       horario: [
@@ -91,8 +103,9 @@ export class EditarCitaComponent implements OnInit {
           Validators.pattern(/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/),
         ],
       ],
-      codigo: [
-        { value: '', disabled: true },
+      medico: [
+        // { value: '', disabled: true },
+        '',
         [Validators.required, Validators.pattern('^[A-Za-z0-9- ]+$')],
       ],
     });
@@ -128,9 +141,9 @@ export class EditarCitaComponent implements OnInit {
     );
   }
 
-  get codigoNoValido() {
+  get medicoNoValido() {
     return (
-      this.citaForm.get('codigo').invalid && this.citaForm.get('codigo').touched
+      this.citaForm.get('medico').invalid && this.citaForm.get('medico').touched
     );
   }
 

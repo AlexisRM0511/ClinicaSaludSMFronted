@@ -35,6 +35,8 @@ export class PacienteEditarComponent implements OnInit {
     if (this.pacienteForm.valid) {
       const paciente = this.pacienteForm.value;
       const pacienteId = this.paciente?.codigo || null;
+      console.log(paciente);
+      
       this.pacienteService.onSavePacientes(paciente, pacienteId);
       this.pacienteForm.reset();
     }
