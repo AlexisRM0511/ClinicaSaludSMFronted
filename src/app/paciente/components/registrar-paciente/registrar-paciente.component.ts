@@ -31,6 +31,10 @@ export class RegistrarPacienteComponent implements OnInit {
     if (this.pacienteForm.valid){
       const emergencia = this.pacienteForm.value;
       const emergenciaId = this.paciente?.id || null;
+      console.log(emergencia);
+      console.log(emergenciaId);
+      
+      
       this.pacienteService.onSavePacientes(emergencia,emergenciaId)
       Swal.fire({
         title: 'Paciente registrado',
@@ -52,7 +56,8 @@ export class RegistrarPacienteComponent implements OnInit {
       lastName: ['', [Validators.required]],
       dni: ['', [Validators.required]],
       number: ['', [Validators.required]],
-      date: ['', [Validators.required]]
+      date: ['', [Validators.required]], 
+      parientes: ['', [Validators.required]], 
     });
   }
 
@@ -94,6 +99,13 @@ export class RegistrarPacienteComponent implements OnInit {
     return (
       this.pacienteForm.get('date').invalid &&
       this.pacienteForm.get('date').touched
+    );
+  }
+
+  get parienteNoValido() {
+    return (
+      this.pacienteForm.get('parientes').invalid &&
+      this.pacienteForm.get('parientes').touched
     );
   }
 
