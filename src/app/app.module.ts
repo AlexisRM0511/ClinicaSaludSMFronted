@@ -19,12 +19,11 @@ import { FormsModule } from '@angular/forms';
 import { EditarCitaModule } from './cita/components/editar-cita/editar-cita.module';
 import { PacienteDetalleModule } from './paciente/components/paciente-detalle/paciente-detalle.module';
 import { PacienteEditarModule } from './paciente/components/paciente-editar/paciente-editar.module';
-import { HomeComponent } from './layout/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FooterComponent, HomeComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     CommonModule,

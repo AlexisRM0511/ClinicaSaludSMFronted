@@ -1,53 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DoctorService } from 'src/app/doctor/services/doctor.service';
+import { AdminService } from 'src/app/admin/services/admin.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-doctor',
-  templateUrl: './doctor.component.html',
-  styleUrls: ['./doctor.component.css'],
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css'],
 })
-export class DoctorComponent {
+export class SignInComponent {
   form: FormGroup;
   codigo: string;
-  password: string;
-  doctores$ = this.doctoresSvc.doctor;
-  Doctor = false;
+  admin$ = this.adminSvc.admin;
 
   constructor(
     private _builder: FormBuilder,
-    private doctoresSvc: DoctorService,
+    private adminSvc: AdminService,
     private router: Router
   ) {
     this.form = this._builder.group({
       codigo: ['', Validators.required],
-      password: ['', Validators.required],
     });
   }
 
   async validar(values) {
-    this.doctores$.subscribe((val) => {
+    this.admin$.subscribe((val) => {
       val.forEach((element) => {
-        if (
-          element.codigo === values.codigo &&
-          element.dni === values.password
-        ) {
-          sessionStorage.setItem('doctorID', values.codigo);
+        if (element.codigo === values.codigo) {
+          sessionStorage.setItem('adminID', values.codigo);
           this.Toast.fire({
             icon: 'success',
             title: 'Signed in successfully',
           });
 
-          this.router.navigate(['doctor']).then(() => {
+          this.router.navigate(['admin']).then(() => {
             setTimeout(() => {
               window.location.reload();
             }, 1400);
           });
         }
       });
-      if (sessionStorage.getItem('doctorID') === null) {
+      if (sessionStorage.getItem('adminID') === null) {
         this.Toast.fire({
           icon: 'error',
           title: 'Signed Error',

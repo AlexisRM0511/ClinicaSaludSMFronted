@@ -28,7 +28,7 @@
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "file-saver": "^2.0.5",
-    "firebase": "^7.13.2",
+    "firebase": "^7.24.0",
     "ngx-pagination": "^5.1.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
