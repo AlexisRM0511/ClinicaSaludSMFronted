@@ -2,24 +2,24 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UsersInterface } from 'src/app/models/users';
+import { UploadsInterface } from 'src/app/models/uploads';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  users: Observable<UsersInterface[]>
-  private userCollection: AngularFirestoreCollection<UsersInterface>;
+export class UploadService {
+  uploads: Observable<UploadsInterface[]>
+  private uploadCollection: AngularFirestoreCollection<UploadsInterface>;
 
   constructor(private readonly afs: AngularFirestore) {
-    this.userCollection = afs.collection<UsersInterface>('Users');
-    this.getUsers();
+    this.uploadCollection = afs.collection<UploadsInterface>('Uploads');
+    this.getUploads();
   }
 
-  onDeleteUser(uid: string): Promise<void> {
+  onDeleteUpload(uid: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.userCollection.doc(uid).delete();
+        const result = await this.uploadCollection.doc(uid).delete();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -27,10 +27,10 @@ export class UserService {
     })
   }
 
-  onSaveUser(uid: string, userNew: UsersInterface): Promise<void> {
+  onSaveUpload(uid: string, uploadNew: UploadsInterface): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.userCollection.doc(uid).set(userNew)
+        const result = await this.uploadCollection.doc(uid).set(uploadNew)
         resolve(result)
       } catch (error) {
         reject(error)
@@ -38,8 +38,8 @@ export class UserService {
     })
   }
 
-  private getUsers(): void {
-    this.users = this.userCollection.snapshotChanges().pipe(
+  private getUploads(): void {
+    this.uploads = this.uploadCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => a.payload.doc.data())
       )
     )

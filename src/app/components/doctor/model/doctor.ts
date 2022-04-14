@@ -5,5 +5,5 @@ export interface Doctores {
     lastName: string;
     name: string;
     number: string;
-    specialty: String;
+    specialty: string;
 }

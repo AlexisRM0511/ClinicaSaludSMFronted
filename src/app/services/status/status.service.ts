@@ -2,24 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UsersInterface } from 'src/app/models/users';
-
+import { StatusInterface } from 'src/app/models/status';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
-  users: Observable<UsersInterface[]>
-  private userCollection: AngularFirestoreCollection<UsersInterface>;
+export class StatusService {
+  statuss: Observable<StatusInterface[]>
+  private statusCollection: AngularFirestoreCollection<StatusInterface>;
 
   constructor(private readonly afs: AngularFirestore) {
-    this.userCollection = afs.collection<UsersInterface>('Users');
-    this.getUsers();
+    this.statusCollection = afs.collection<StatusInterface>('Status');
+    this.getStatus();
   }
 
-  onDeleteUser(uid: string): Promise<void> {
+  onDeleteStatus(uid: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.userCollection.doc(uid).delete();
+        const result = await this.statusCollection.doc(uid).delete();
         resolve(result);
       } catch (error) {
         reject(error);
@@ -27,10 +26,10 @@ export class UserService {
     })
   }
 
-  onSaveUser(uid: string, userNew: UsersInterface): Promise<void> {
+  onSaveStatus(uid: string, statusNew: StatusInterface): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.userCollection.doc(uid).set(userNew)
+        const result = await this.statusCollection.doc(uid).set(statusNew)
         resolve(result)
       } catch (error) {
         reject(error)
@@ -38,8 +37,8 @@ export class UserService {
     })
   }
 
-  private getUsers(): void {
-    this.users = this.userCollection.snapshotChanges().pipe(
+  private getStatus(): void {
+    this.statuss = this.statusCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => a.payload.doc.data())
       )
     )

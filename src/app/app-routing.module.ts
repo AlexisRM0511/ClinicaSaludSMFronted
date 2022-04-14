@@ -5,21 +5,22 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-    import('./login/login.module').then((m) => m.LoginModule),
+    import('./components/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'citas',
-    loadChildren: () => import('./cita/cita.module').then((m) => m.CitaModule),
-  },
-  {
-    path: 'doctor',
+    path: 'home',
     loadChildren: () =>
-      import('./doctor/doctor.module').then((m) => m.DoctorModule),
+      import('./components/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'paciente',
+    path: 'courses',
     loadChildren: () =>
-      import('./paciente/paciente.module').then((m) => m.PacienteModule),
+      import('./components/course/course.module').then((m) => m.CourseModule),
+  },
+  {
+    path: 'documents',
+    loadChildren: () =>
+      import('./components/document/document.module').then((m) => m.DocumentModule),
   },
   {
     path: '**',
