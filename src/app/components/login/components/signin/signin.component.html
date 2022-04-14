@@ -1,0 +1,23 @@
+<div class="container-login">
+  <div class="container-main">
+    <div class="font-weight-bold sm display-4 text-center">ColesRoom</div>
+    <div class="font-weight-bold sm h3 text-center mb-3">Inicio de Sesión</div>
+    <div class="form">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="email"><strong>Correo Institucional</strong></label>
+          <input type="email" class="form-control" formControlName="email"
+            placeholder="Ingrese su correo institucional">
+        </div>
+        <div class="form-group">
+          <label for="pswd"><strong>Contraseña</strong></label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+        </div>
+        <button type="button" class="btn btn-primary mt-3 d-flex mx-auto" (click)="validar()">
+          Iniciar Sesión
+        </button>
+      </form>
+      <div class="font-weight-bold sm text-center mb-3 mt-3"><a [routerLink]="['/register']">¿Nuevo Estudiante?
+          Registrate Aqui!</a></div>
+    </div>
+  </div>

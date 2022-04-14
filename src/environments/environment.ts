@@ -6,13 +6,13 @@ export const environment = {
   production: false,
 
   firebaseConfig: {
-    apiKey: "AIzaSyAy9kto9LXsOTlOMQrqS3RcLcaOIgmuOok",
-    authDomain: "clinicasaludsm.firebaseapp.com",
-    projectId: "clinicasaludsm",
-    storageBucket: "clinicasaludsm.appspot.com",
-    messagingSenderId: "51819425453",
-    appId: "1:51819425453:web:c74f405f252b174a93a024",
-    measurementId: "G-CV23SGPV6B"
+    apiKey: "AIzaSyCJMiHHbpfkY8KBndIF0wIQfYmPje8B1CI",
+    authDomain: "colesroom-2020.firebaseapp.com",
+    projectId: "colesroom-2020",
+    storageBucket: "colesroom-2020.appspot.com",
+    messagingSenderId: "346901919682",
+    appId: "1:346901919682:web:8328fefec28363e34dc85b",
+    measurementId: "G-YEHK6913TS"
   }
 };
 

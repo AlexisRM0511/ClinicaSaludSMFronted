@@ -1,35 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './layout/home/home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'profile',
     loadChildren: () =>
-      import('./login/login.module').then((m) => m.LoginModule),
+    import('./components/login/login.module').then((m) => m.LoginModule),
   },
   {
-    path: 'admin',
+    path: 'home',
     loadChildren: () =>
-      import('./admin/admin.module').then((m) => m.AdminModule),
+      import('./components/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'citas',
-    loadChildren: () => import('./cita/cita.module').then((m) => m.CitaModule),
-  },
-  {
-    path: 'doctor',
+    path: 'courses',
     loadChildren: () =>
-      import('./doctor/doctor.module').then((m) => m.DoctorModule),
+      import('./components/course/course.module').then((m) => m.CourseModule),
   },
   {
-    path: 'paciente',
+    path: 'documents',
     loadChildren: () =>
-      import('./paciente/paciente.module').then((m) => m.PacienteModule),
+      import('./components/document/document.module').then((m) => m.DocumentModule),
   },
   {
     path: '**',

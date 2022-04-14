@@ -1,5 +1,5 @@
 {
-  "name": "clinica-salud-sm",
+  "name": "coles-room",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -25,9 +25,10 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
+    "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "file-saver": "^2.0.5",
-    "firebase": "^7.13.2",
+    "firebase": "^7.24.0",
     "ngx-pagination": "^5.1.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",
@@ -54,7 +55,7 @@
     "tslint": "~6.1.0"
   },
   "engines": {
-    "node": "12.4.0",
-    "npm": "6.9.0"
+    "node": "16.14.2",
+    "npm": "8.6.0"
   }
 }
