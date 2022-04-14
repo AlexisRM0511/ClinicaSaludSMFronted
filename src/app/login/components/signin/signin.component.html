@@ -1,34 +1,23 @@
 <div class="container-login">
   <div class="container-main">
-    <div class="title">
-      <div class="title-name">CLINICA SALUD SM</div>
-      <div class="title-title">ADMINISTRATIVO</div>
-    </div>
-
+    <div class="font-weight-bold sm display-4 text-center">ColesRoom</div>
+    <div class="font-weight-bold sm h3 text-center mb-3">Inicio de Sesión</div>
     <div class="form">
-      <form [formGroup]="form" (ngSubmit)="validar(form.value)">
-        <h1 class="form-title">Código Administrativo</h1>
-        <input
-          id="usuario"
-          placeholder="Ingrese su Codigo Administrativo"
-          type="text"
-          class="form-control"
-          formControlName="codigo"
-        />
-        <h1 class="form-title">Contraseña</h1>
-
-        <input
-          id="contraseña"
-          placeholder="Ingrese su contraseña"
-          type="password"
-          class="form-control"
-        />
-        <div class="button-group">
-          <button [disabled]="form.invalid" class="button-login">
-            Iniciar Sesión
-          </button>
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="email"><strong>Correo Institucional</strong></label>
+          <input type="email" class="form-control" formControlName="email"
+            placeholder="Ingrese su correo institucional">
         </div>
+        <div class="form-group">
+          <label for="pswd"><strong>Contraseña</strong></label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Password">
+        </div>
+        <button type="button" class="btn btn-primary mt-3 d-flex mx-auto" (click)="validar()">
+          Iniciar Sesión
+        </button>
       </form>
+      <div class="font-weight-bold sm text-center mb-3 mt-3"><a [routerLink]="['/register']">¿Nuevo Estudiante?
+          Registrate Aqui!</a></div>
     </div>
   </div>
-</div>

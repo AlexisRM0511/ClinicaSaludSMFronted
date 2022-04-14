@@ -50,7 +50,7 @@ export class DoctorService {
     this.doctor = this.doctorCollection
       .snapshotChanges()
       .pipe(
-        map((actions) => actions.map((a) => a.payload.doc.data() as Doctores))
+        map((actions) => actions.map((a) => a.payload.doc.data() ))
       );
   }
 
@@ -73,7 +73,7 @@ export class DoctorService {
 
   getEspecialidad():void{
     this.especialidad=this.especialidadCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a=>a.payload.doc.data() as Especialidad))
+      map(actions => actions.map(a=>a.payload.doc.data() ))
     )
   }
 }

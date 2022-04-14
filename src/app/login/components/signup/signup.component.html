@@ -1,1 +1,44 @@
-<p>register works!</p>
+<div class="container-login">
+  <div class="container-main">
+    <div class="font-weight-bold sm display-4 text-center">ColesRoom</div>
+    <div class="font-weight-bold sm h3 text-center mb-3">Registro de Estudiante</div>
+    <div class="form">
+      <form [formGroup]="form">
+        <div class="form-group">
+          <label for="nombre"><strong>Nombre(s)</strong></label>
+          <input type="text" class="form-control" formControlName="name" placeholder="Ingrese su nombre o nombres">
+        </div>
+        <div class="form-group">
+          <label for="apellido"><strong>Apellido Paterno y Materno</strong></label>
+          <input type="text" class="form-control" formControlName="lastname"
+            placeholder="Ingrese su apellido paterno y materno">
+        </div>
+        <div class="form-group">
+          <label for="number"><strong>Código de Estudiante</strong></label>
+          <input type="number" class="form-control" formControlName="code"
+            placeholder="Ingrese su código de estudiante">
+        </div>
+        <label for="email"><strong>Correo Institucional</strong></label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" formControlName="email" placeholder="Recipient's username" aria-label="Recipient's username"
+            aria-describedby="basic-addon2">
+          <span class="input-group-text" id="basic-addon2">@unmsm.edu.pe</span>
+        </div>
+
+        <div class="form-group">
+          <label for="pswd"><strong>Contraseña</strong></label>
+          <input type="password" class="form-control" formControlName="password" placeholder="Introduce tu contraseña">
+        </div>
+        <div class="form-group">
+          <label for="pswd"><strong>Contraseña</strong></label>
+          <input type="password" class="form-control" formControlName="passwordTwo"
+            placeholder="Introduce tu contraseña otra vez">
+        </div>
+        <button type="button" class="btn btn-primary mt-3 d-flex mx-auto" (click)="validar()">
+          Iniciar Sesión
+        </button>
+      </form>
+      <div class="font-weight-bold sm text-center mb-3 mt-3"><a [routerLink]="['/']">¿Tienes Cuenta? Inicia
+          Sesión Aquí</a></div>
+    </div>
+  </div>

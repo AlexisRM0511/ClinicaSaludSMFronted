@@ -1,8 +1,8 @@
-import { Component} from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/admin/services/admin.service';
 import Swal from 'sweetalert2';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-signin',
@@ -11,53 +11,47 @@ import Swal from 'sweetalert2';
 })
 export class SignInComponent {
   form: FormGroup;
-  codigo: string;
-  admin$ = this.adminSvc.admin;
+  login$ = this.loginSvc;
 
   constructor(
     private _builder: FormBuilder,
-    private adminSvc: AdminService,
+    private loginSvc: LoginService,
     private router: Router
   ) {
     this.form = this._builder.group({
-      codigo: ['', Validators.required],
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
     });
+
+    if (sessionStorage.getItem('userID')) {
+      this.router.navigate(['/home']);
+    }
   }
 
-  async validar(values) {
-    this.admin$.subscribe((val) => {
-      val.forEach((element) => {
-        if (element.codigo === values.codigo) {
-          sessionStorage.setItem('adminID', values.codigo);
-          this.Toast.fire({
-            icon: 'success',
-            title: 'Signed in successfully',
-          });
-
-          this.router.navigate(['admin']).then(() => {
-            setTimeout(() => {
-              window.location.reload();
-            }, 1400);
-          });
-        }
+  async validar() {
+    if (this.form.invalid) {
+      console.log(this.form);
+      Swal.fire({
+        icon: 'error',
+        title: 'Datos Inválidos',
+        text: 'Usuario o contraseña Inválidos',
       });
-      if (sessionStorage.getItem('adminID') === null) {
-        this.Toast.fire({
+    }
+    else {
+      await this.login$.loginEmailUser(this.form.get('email').value, this.form.get('password').value)
+      if (sessionStorage.getItem('userID')) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Inicio de Sesion Exitoso',
+        });
+        this.router.navigate(['/home']);
+      } else {
+        Swal.fire({
           icon: 'error',
-          title: 'Signed Error',
+          title: 'Datos Inválidos',
+          text: 'Usuario o contbebeberaseña Inválidos',
         });
       }
-    });
+    }
   }
-
-  Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 1500,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    },
-  });
 }

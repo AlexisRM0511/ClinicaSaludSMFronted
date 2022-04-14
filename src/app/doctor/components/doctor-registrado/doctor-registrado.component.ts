@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Doctores } from '../../model/doctor';
 import { DoctorService } from '../../services/doctor.service';
-import { GenerarExcelService } from 'src/app/services/generar-excel.service';
 import Swal from 'sweetalert2';
 import { NavigationExtras, Router } from '@angular/router';
 
@@ -28,7 +27,6 @@ export class DoctorRegistradoComponent implements OnInit {
   };
   constructor(
     private doctoresService: DoctorService,
-    private excelService: GenerarExcelService,
     private router: Router
   ) {}
 
@@ -79,26 +77,6 @@ export class DoctorRegistradoComponent implements OnInit {
           'success'
         );
       }
-    });
-  }
-
-  descargarExcel() {
-    this.excelService.exportAsExcelFile(this.doctores, 'Doctores');
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 1000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer);
-        toast.addEventListener('mouseleave', Swal.resumeTimer);
-      },
-    });
-
-    Toast.fire({
-      icon: 'success',
-      title: 'Descargando...',
     });
   }
 }

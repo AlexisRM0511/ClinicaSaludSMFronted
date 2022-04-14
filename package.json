@@ -1,5 +1,5 @@
 {
-  "name": "clinica-salud-sm",
+  "name": "coles-room",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -55,7 +55,7 @@
     "tslint": "~6.1.0"
   },
   "engines": {
-    "node": "12.4.0",
-    "npm": "6.9.0"
+    "node": "16.14.2",
+    "npm": "8.6.0"
   }
 }
