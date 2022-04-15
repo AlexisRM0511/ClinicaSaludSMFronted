@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersInterface } from 'src/app/models/users';
+import { UserService } from 'src/app/services/users/user.service';
 import Swal from 'sweetalert2';
 import { LoginService } from '../../services/login.service';
 
@@ -11,18 +13,18 @@ import { LoginService } from '../../services/login.service';
 })
 export class SignInComponent {
   form: FormGroup;
-  login$ = this.loginSvc;
+  users: UsersInterface[]
 
   constructor(
     private _builder: FormBuilder,
+    private router: Router,
     private loginSvc: LoginService,
-    private router: Router
+    private userSvc: UserService
   ) {
     this.form = this._builder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
-
     if (sessionStorage.getItem('userID')) {
       this.router.navigate(['/home']);
     }
@@ -30,7 +32,6 @@ export class SignInComponent {
 
   async validar() {
     if (this.form.invalid) {
-      console.log(this.form);
       Swal.fire({
         icon: 'error',
         title: 'Datos Inválidos',
@@ -38,20 +39,29 @@ export class SignInComponent {
       });
     }
     else {
-      await this.login$.loginEmailUser(this.form.get('email').value, this.form.get('password').value)
-      if (sessionStorage.getItem('userID')) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Inicio de Sesion Exitoso',
-        });
-        this.router.navigate(['/home']);
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Datos Inválidos',
-          text: 'Usuario o contbebeberaseña Inválidos',
-        });
-      }
+      await this.loginSvc.login(this.form.get('email').value, this.form.get('password').value)
+        .then(() => {
+          this.userSvc.getUser(sessionStorage.getItem("userID"))
+            .subscribe(resUser => {
+              sessionStorage.setItem("typeUser",resUser.type)
+            })
+
+          if (sessionStorage.getItem('userID')) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Inicio de Sesion Exitoso',
+            });
+            this.router.navigate(['/home']);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Datos Inválidos',
+              text: 'Usuario o contbebeberaseña Inválidos',
+            });
+          }
+
+        })
+
     }
   }
 }

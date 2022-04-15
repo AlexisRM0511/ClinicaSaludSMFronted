@@ -1,47 +1,64 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { UploadsInterface } from 'src/app/models/uploads';
 
 @Injectable({
   providedIn: 'root'
 })
+  
 export class UploadService {
-  uploads: Observable<UploadsInterface[]>
-  private uploadCollection: AngularFirestoreCollection<UploadsInterface>;
 
-  constructor(private readonly afs: AngularFirestore) {
-    this.uploadCollection = afs.collection<UploadsInterface>('Uploads');
-    this.getUploads();
-  }
+  constructor(private readonly afs: AngularFirestore) { }
 
-  onDeleteUpload(uid: string): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.uploadCollection.doc(uid).delete();
-        resolve(result);
-      } catch (error) {
-        reject(error);
-      }
+  onSaveUpload(uploadNew: UploadsInterface): Promise<void> {
+    return new Promise<any>(async (resolve, reject) => {
+      await this.afs
+        .collection("Uploads")
+        .add(uploadNew)
+        .then(async response => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        })
     })
   }
 
-  onSaveUpload(uid: string, uploadNew: UploadsInterface): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.uploadCollection.doc(uid).set(uploadNew)
-        resolve(result)
-      } catch (error) {
-        reject(error)
-      }
+  onUpdateUpload(uid: string, uploadNew: UploadsInterface): Promise<void> {
+    return new Promise<any>(async (resolve, reject) => {
+      await this.afs
+        .collection("Uploads")
+        .doc(uid)
+        .update(uploadNew)
+        .then(async response => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        })
     })
   }
 
-  private getUploads(): void {
-    this.uploads = this.uploadCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => a.payload.doc.data())
-      )
-    )
+  onDeleteUpload(uid: string) {
+    return this.afs
+      .collection("Uploads")
+      .doc(uid)
+      .delete()
+  }
+
+  getUploads(): Observable<UploadsInterface[]> {
+    return this.afs.collection("Uploads").snapshotChanges()
+  }
+
+  getUpload(uid: string): Observable<UploadsInterface> {
+    return this.afs
+      .collection("Uploads")
+      .doc(uid)
+      .valueChanges()
   }
 }

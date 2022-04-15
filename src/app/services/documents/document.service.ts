@@ -8,40 +8,59 @@ import { DocumentsInterface } from 'src/app/models/documents';
   providedIn: 'root'
 })
 export class DocumentService {
-  documents: Observable<DocumentsInterface[]>
-  private documentCollection: AngularFirestoreCollection<DocumentsInterface>;
+  
+  constructor(private readonly afs: AngularFirestore) { }
 
-  constructor(private readonly afs: AngularFirestore) {
-    this.documentCollection = afs.collection<DocumentsInterface>('Documents');
-    this.getDocuments();
-  }
-
-  onDeleteDocument(uid: string): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.documentCollection.doc(uid).delete();
-        resolve(result);
-      } catch (error) {
-        reject(error);
-      }
+  onSaveDocument(documentNew: DocumentsInterface): Promise<void> {
+    return new Promise<any>(async (resolve, reject) => {
+      await this.afs
+        .collection("Documents")
+        .add(documentNew)
+        .then(async response => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        })
     })
   }
 
-  onSaveDocument(uid: string, documentNew: DocumentsInterface): Promise<void> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const result = await this.documentCollection.doc(uid).set(documentNew)
-        resolve(result)
-      } catch (error) {
-        reject(error)
-      }
+  onUpdateDocument(uid: string, documentNew: DocumentsInterface): Promise<void> {
+    return new Promise<any>(async (resolve, reject) => {
+      await this.afs
+        .collection("Documents")
+        .doc(uid)
+        .update(documentNew)
+        .then(async response => {
+          console.log(response);
+          resolve(response);
+        })
+        .catch(error => {
+          console.log(error);
+          reject(error);
+        })
     })
   }
 
-  private getDocuments(): void {
-    this.documents = this.documentCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => a.payload.doc.data())
-      )
-    )
+  onDeleteDocument(uid: string) {
+    return this.afs
+      .collection("Documents")
+      .doc(uid)
+      .delete()
+  }
+
+  getDocuments(): Observable<DocumentsInterface[]> {
+    return this.afs
+      .collection("Documents")
+      .snapshotChanges()
+  }
+
+  getDocument(uid: string): Observable<DocumentsInterface> {
+    return this.afs
+      .collection("Documents")
+      .doc(uid)
+      .valueChanges()
   }
 }

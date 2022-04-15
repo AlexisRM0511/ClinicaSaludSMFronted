@@ -40,7 +40,7 @@ export class SignUpComponent {
         text: 'Revise los campos e intente nuevamente',
       });
     } else {
-      await this.login$.registerUser(this.form.get('email').value+"@unmsm.edu.pe",this.form.get('password').value,  this.form.get('name').value, this.form.get('lastname').value, this.form.get('code').value)
+      await this.login$.registerUser(this.form.get('email').value+"@unmsm.edu.pe",this.form.get('password').value)
       if (sessionStorage.getItem('userID')) {
         Swal.fire({
           icon: 'success',

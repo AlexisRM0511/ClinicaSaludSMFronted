@@ -1,58 +1,34 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
 import { UsersInterface } from 'src/app/models/users';
-import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/users/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
 
-  users: Observable<UsersInterface[]>
-  private userCollection: AngularFirestoreCollection<UsersInterface>;
+  users: UsersInterface[]
 
-  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.userCollection = afs.collection<UsersInterface>('Users');
-    this.getUsers();
+  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore, private userSvc: UserService) {
+
   }
 
-  async loginEmailUser(email: string, pass: string) {
+  async login(email: string, pass: string) {
     await this.afsAuth.signInWithEmailAndPassword(email, pass)
-      .then(data => {
-        console.log(data);
-        if (data.user != null) {
-          console.log("Usuario logueado")
-          console.log(this.users)
-        }
+      .then(res => {
+        sessionStorage.setItem('userID', res.user.uid)
       })
-      .catch(err => {
-        console.log(err);
-      })
-    console.log("DAAA")
+      .catch(err => { return err })
   }
 
-  async registerUser(email: string, pass: string, name: string, lastname: string, code: string) {
+  async registerUser(email: string, pass: string) {
     await this.afsAuth.createUserWithEmailAndPassword(email, pass)
-      .then(async data => {
-        console.log(data);
-        const userRef: AngularFirestoreDocument<any> = this.afs.doc(`Users/${data.user.uid}`);
-        const dataUser: UsersInterface = {
-          id: data.user.uid,
-          email: data.user.email,
-          password: pass,
-          name: name,
-          lastname: lastname,
-          code: code,
-          type: '1',
-          status: '1'
-        };
-        await userRef.set(dataUser, { merge: true })
-      }).catch(err => console.log(err))
-      .finally(async () => {
-        await this.loginEmailUser(email, pass)
-      });
+      .then(res => { return res })
+      .catch(err => { return err })
   }
 
   logoutUser() {
@@ -61,13 +37,6 @@ export class LoginService {
 
   isAuth() {
     return this.afsAuth.authState.pipe(map(auth => auth));
-  }
-
-
-  getUsers() {
-    this.users = this.userCollection.snapshotChanges().pipe(
-      map(actions => actions.map(a => a.payload.doc.data()))
-    )
   }
 }
 
