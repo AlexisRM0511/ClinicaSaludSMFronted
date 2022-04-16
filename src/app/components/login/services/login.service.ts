@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map } from 'rxjs/operators';
-import { UsersInterface } from 'src/app/models/users';
 import { UserService } from 'src/app/services/users/user.service';
 
 @Injectable({
@@ -11,11 +10,7 @@ import { UserService } from 'src/app/services/users/user.service';
 
 export class LoginService {
 
-  users: UsersInterface[]
-
-  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore, private userSvc: UserService) {
-
-  }
+  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore) { }
 
   async login(email: string, pass: string) {
     await this.afsAuth.signInWithEmailAndPassword(email, pass)
@@ -27,7 +22,9 @@ export class LoginService {
 
   async registerUser(email: string, pass: string) {
     await this.afsAuth.createUserWithEmailAndPassword(email, pass)
-      .then(res => { return res })
+      .then(res => {
+        sessionStorage.setItem('userID', res.user.uid)
+      })
       .catch(err => { return err })
   }
 

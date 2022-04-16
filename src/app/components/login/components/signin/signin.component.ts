@@ -34,34 +34,31 @@ export class SignInComponent {
     if (this.form.invalid) {
       Swal.fire({
         icon: 'error',
-        title: 'Datos Inválidos',
-        text: 'Usuario o contraseña Inválidos',
-      });
-    }
-    else {
+        title: 'Formulario inválido',
+        text: 'Revise los campos e intente nuevamente'
+      })
+    }else {
       await this.loginSvc.login(this.form.get('email').value, this.form.get('password').value)
         .then(() => {
           this.userSvc.getUser(sessionStorage.getItem("userID"))
             .subscribe(resUser => {
-              sessionStorage.setItem("typeUser",resUser.type)
+              sessionStorage.setItem("typeUser", resUser.type)
+              Swal.fire({
+                icon: 'success',
+                title: 'Inicio de Sesión Exitoso',
+              }).then(() => {
+                this.router.navigate(['/home'])
+                window.location.reload()
+              })
             })
-
-          if (sessionStorage.getItem('userID')) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Inicio de Sesion Exitoso',
-            });
-            this.router.navigate(['/home']);
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Datos Inválidos',
-              text: 'Usuario o contbebeberaseña Inválidos',
-            });
-          }
-
         })
-
+        .catch(() => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Datos Inválidos',
+            text: 'Usuario o contraseña Inválidos',
+          });
+        })
     }
   }
 }

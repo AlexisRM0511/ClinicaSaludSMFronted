@@ -14,7 +14,8 @@ export class UserService {
     return new Promise<any>(async (resolve, reject) => {
       await this.afs
         .collection("Users")
-        .add(userNew)
+        .doc(userNew.id)
+        .set(userNew)
         .then(async response => {
           console.log(response);
           resolve(response);
