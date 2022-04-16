@@ -51,7 +51,9 @@ export class CourseService {
   }
 
   getCourses(): Observable<CoursesInterface[]> {
-    return this.afs.collection("Courses").snapshotChanges()
+    return this.afs
+      .collection("Courses")
+      .valueChanges()
   }
 
   getCourse(uid: string): Observable<CoursesInterface> {

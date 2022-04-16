@@ -50,11 +50,13 @@ export class StatusService {
       .delete()
   }
 
-  getState(): Observable<StatusInterface[]> {
-    return this.afs.collection("Status").snapshotChanges()
+  getStatus(): Observable<StatusInterface[]> {
+    return this.afs
+      .collection("Status")
+      .valueChanges()
   }
 
-  getStatus(uid: string): Observable<StatusInterface> {
+  getState(uid: string): Observable<StatusInterface> {
     return this.afs
       .collection("Status")
       .doc(uid)

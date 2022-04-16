@@ -1,1 +1,15 @@
-<p>home works!</p>
+<div class="container bg-secondary mt-3">
+  <div class="row">
+    <div class="col-sm-3 m-2" *ngFor="let course of courses">
+      <div class="card " style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{course.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{course.code}} - {{course.status}}</h6>
+          <p class="card-text">{{course.description}}</p>
+          <a href="#" class="btn btn-primary" *ngIf="course.status==='En linea'">Más Detalle</a>
+          <a href="#" class="btn btn-primary disabled" *ngIf="course.status!=='En linea'">Más Detalle</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
