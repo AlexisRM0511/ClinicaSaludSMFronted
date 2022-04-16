@@ -48,7 +48,7 @@ export class SignUpComponent {
             name: this.form.get('name').value,
             lastname: this.form.get('lastname').value,
             code: this.form.get('code').value,
-            email: this.form.get('email').value,
+            email: this.form.get('email').value+"@unmsm.edu.pe",
             password: this.form.get('password').value,
             type: "1",
             status: "1"

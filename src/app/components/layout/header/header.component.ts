@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from '../../login/services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +13,10 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('userID') !== null) {
+    if (sessionStorage.getItem('userID')) {
       this.logueado = true;
     }
-    if (sessionStorage.getItem('type') === '1') {
+    if (sessionStorage.getItem('type') === '0') {
       this.adminLogueado = true;
     }
   }
